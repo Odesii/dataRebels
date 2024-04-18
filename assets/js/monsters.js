@@ -91,3 +91,13 @@ class stuxnet extends hacks{
 const stuxNet= new stuxnet('Stuxnet',20,10,10,10,'Destroy centrifuge')
 
 stuxNet.hack()
+
+
+module.exports={
+    stuxnet,
+    spider,
+    iloveyou,
+    stormWorm,
+    codeRed,
+    myDoom
+}
