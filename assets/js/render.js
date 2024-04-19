@@ -1,6 +1,13 @@
 import * as THREE from 'three';
 import { Reflector } from 'three/addons/objects/Reflector.js';
 import { DragControls } from 'three/addons/controls/DragControls.js';
+import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
+import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
+import { ShaderPass } from 'three/addons/postprocessing/ShaderPass.js';
+
+import { RGBShiftShader } from 'three/addons/shaders/RGBShiftShader.js';
+import { DotScreenShader } from 'three/addons/shaders/DotScreenShader.js';
+import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
 
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
@@ -47,6 +54,20 @@ const card = new THREE.Mesh( geometry, cardMaterial );
 scene.add(card);
 // card position
 card.position.set( 2.5,-1.5, 2,0)
+
+
+// enemy card texture
+const EcardTextureLoader = new THREE.TextureLoader();
+const EcardTexture = EcardTextureLoader.load('assets/imgs/placeholder.png')
+const EcardMaterial = new THREE.MeshToonMaterial( {map: EcardTexture, transparent: true});
+cardMaterial.side = THREE.DoubleSide;
+//card geo
+const Egeometry = new THREE.BoxGeometry( 3.5, 4.5, 0.1 );
+// card mesh
+const Ecard = new THREE.Mesh( Egeometry, EcardMaterial );
+scene.add(Ecard);
+// card position
+Ecard.position.set( -5.5,-1.5, -10.0)
 const startPoint = new THREE.Vector3(card.position.x, card.position.y, card.position.z)
 
 
@@ -62,19 +83,25 @@ controls.addEventListener('dragend', event =>{
 })
 
 
-// lights
-// const ambiLight = new THREE.AmbientLight(0x404040)
-// scene.add(ambiLight);
 
-const light = new THREE.DirectionalLight(0xffffff, .5)
-light.position.set(-4, 1, 1)
-scene.add(light)
 
+
+scene.add( new THREE.AmbientLight( 0xcccccc ) );
+
+const light = new THREE.DirectionalLight( 0xffffff, .5 );
+light.position.set( 1, 1, 1 );
+scene.add( light );
 // Enable shadows
 light.castShadow = true;
 card.castShadow = true;
+Ecard.castShadow = true;
 floor.receiveShadow = true;
 camera.position.z = 7.5;
+
+
+
+
+
 
 function animate() {
 	requestAnimationFrame( animate );

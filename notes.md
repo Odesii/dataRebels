@@ -17,6 +17,7 @@
     - NODE
         - THREE.JS
         - GSAP
+        - Anime JS
         - DAY JS?
         - TBD
     - HTML
@@ -103,3 +104,18 @@
 ## TBD
     what does the back side of a window look like?
     dialog appears as terminal
+- Card Art
+  - SPIDER
+  - iloveyou
+  - myDoom
+  - Stuxnet
+  - StormWorm
+  - codeRed
+- Enemies
+  - so as ascii art in a terminal 
+- Taskbar
+  - startmenu 
+  - store 
+- Ecard 
+  - on click it dodges courser
+  - or draga
