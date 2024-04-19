@@ -1,3 +1,44 @@
 body{
     margin: 0;
 }
+
+
+.taskbar {
+  z-index: 20;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 30px;
+    background-color: #4682B4;
+    color: #FFFFFF;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 0 10px;
+  }
+  
+  .start-button {
+    z-index: 19;
+    background-color: #3377B5;
+    color: #FFFFFF;
+    border: none;
+    padding: 5px 10px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .start-button:hover {
+    background-color: #2E6CA3;
+  }
+
+  .start-menu {
+    z-index: 1;
+    position: absolute;
+    top: -92px; /* Adjust the top position to 30px, which is the height of the taskbar */
+    left: 0;
+    width: 200px;
+    background-color: #FFFFFF;
+    border: 2px solid #CCCCCC;
+    opacity: 1; /* Start with 1 opacity, so the menu is visible initially */
+  }

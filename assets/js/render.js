@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import { Reflector } from 'three/addons/objects/Reflector.js';
 import { DragControls } from 'three/addons/controls/DragControls.js';
 
 const scene = new THREE.Scene();
@@ -6,13 +7,27 @@ const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.inner
 
 const renderer = new THREE.WebGLRenderer();
 renderer.setSize( window.innerWidth, window.innerHeight );
+renderer.setPixelRatio(devicePixelRatio)
 renderer.shadowMap.enabled = true;
 document.body.appendChild( renderer.domElement );
 
 
+
+const skyTextureLoader = new THREE.TextureLoader();
+const skyTexture = skyTextureLoader.load('assets/imgs/skybox.png');
+
+
+// Create the skybox mesh
+const skyboxGeometry = new THREE.SphereGeometry(500, 1000, 500);
+const skyboxMaterial = new THREE.MeshBasicMaterial({map: skyTexture, side: THREE.BackSide});
+const skybox = new THREE.Mesh(skyboxGeometry, skyboxMaterial);
+
+// Add the skybox to the scene
+scene.add(skybox);
+
 // Add floor mesh
-const floorGeometry = new THREE.PlaneGeometry(50, 100);
-const floorMaterial = new THREE.MeshStandardMaterial({ color: 0xffffff });
+const floorGeometry = new THREE.CircleGeometry(22, 64);
+const floorMaterial = new THREE.MeshToonMaterial({color: 0x1d000,});
 const floor = new THREE.Mesh(floorGeometry, floorMaterial);
 floor.position.set(0, -4, 0);
 floor.rotation.x = -Math.PI / 2;
@@ -20,10 +35,9 @@ scene.add(floor);
 
 
 
-
 // card texture
-const textureLoader = new THREE.TextureLoader();
-const cardTexture = textureLoader.load('assets/imgs/image.png')
+const cardTextureLoader = new THREE.TextureLoader();
+const cardTexture = cardTextureLoader.load('assets/imgs/image.png')
 const cardMaterial = new THREE.MeshToonMaterial( {map: cardTexture, transparent: true});
 cardMaterial.side = THREE.DoubleSide;
 //card geo
@@ -32,26 +46,9 @@ const geometry = new THREE.BoxGeometry( 3.5, 4.5, 0.1 );
 const card = new THREE.Mesh( geometry, cardMaterial );
 scene.add(card);
 // card position
-card.position.set(-1.5,-1,0)
+card.position.set( 2.5,-1.5, 2,0)
 const startPoint = new THREE.Vector3(card.position.x, card.position.y, card.position.z)
 
-// HP bar geometry
-const hpBarGeometry = new THREE.BoxGeometry(2, 0.2, 0.1);
-const hpBarMaterial = new THREE.MeshBasicMaterial({ color: 0xFF0000 });
-const hpBar = new THREE.Mesh(hpBarGeometry, hpBarMaterial);
-
-// Position the HP bar above the card
-hpBar.position.set(0, 2.2, 0.1);
-card.add(hpBar);
-
-// Initialize card HP
-let cardHP = 100;
-
-// Update HP bar scale based on card HP
-function updateHPBar() {
-  const hpScale = cardHP / 100;
-  hpBar.scale.set(hpScale, 1, 1);
-}
 
 
 //setting animation state
