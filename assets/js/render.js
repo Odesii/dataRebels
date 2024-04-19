@@ -44,7 +44,7 @@ scene.add(floor);
 
 // card texture
 const cardTextureLoader = new THREE.TextureLoader();
-const cardTexture = cardTextureLoader.load('assets/imgs/image.png')
+const cardTexture = cardTextureLoader.load('assets/imgs/ILOVEYOU.png')
 const cardMaterial = new THREE.MeshToonMaterial( {map: cardTexture, transparent: true});
 cardMaterial.side = THREE.DoubleSide;
 //card geo
@@ -58,7 +58,7 @@ card.position.set( 2.5,-1.5, 2,0)
 
 // enemy card texture
 const EcardTextureLoader = new THREE.TextureLoader();
-const EcardTexture = EcardTextureLoader.load('assets/imgs/placeholder.png')
+const EcardTexture = EcardTextureLoader.load('assets/imgs/stuxnet.png')
 const EcardMaterial = new THREE.MeshToonMaterial( {map: EcardTexture, transparent: true});
 cardMaterial.side = THREE.DoubleSide;
 //card geo
@@ -113,7 +113,8 @@ function animate() {
             returning = false;
         }
     }
-    // card.rotation.y += -0.01
+    Ecard.rotation.y += 0.005
+     card.rotation.y += -0.008
 	renderer.render( scene, camera );
 }
 

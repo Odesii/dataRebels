@@ -10,7 +10,7 @@ body{
     left: 0;
     width: 100%;
     height: 30px;
-    background-color: #4682B4;
+    background-color: #a3a3a3e5;
     color: #FFFFFF;
     display: flex;
     justify-content: flex-start;
@@ -20,7 +20,7 @@ body{
   
   .start-button {
     z-index: 19;
-    background-color: #3377B5;
+    background-color: #FFFFFF;
     color: #FFFFFF;
     border: none;
     padding: 5px 10px;
