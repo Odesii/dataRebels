@@ -20,12 +20,14 @@ body{
   
   .start-button {
     z-index: 19;
-    background-color: #FFFFFF;
+    background-color: #9c9c9c;
     color: #FFFFFF;
     border: none;
     padding: 5px 10px;
     font-size: 16px;
     cursor: pointer;
+    box-shadow: -2px 2px rgb(179, 179, 179) inset, 
+    -2px 2px rgb(37, 37, 37);
   }
   
   .start-button:hover {
@@ -35,10 +37,11 @@ body{
   .start-menu {
     z-index: 1;
     position: absolute;
-    top: -92px; /* Adjust the top position to 30px, which is the height of the taskbar */
+    top: -90px; /* Adjust the top position to 30px, which is the height of the taskbar */
     left: 0;
     width: 200px;
-    background-color: #FFFFFF;
-    border: 2px solid #CCCCCC;
+    background-color: #b4b4b4;
+    box-shadow: -2px 2px gray inset, 
+    -2px 2px rgb(37, 37, 37);
     opacity: 1; /* Start with 1 opacity, so the menu is visible initially */
   }

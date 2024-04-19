@@ -1,13 +1,7 @@
 import * as THREE from 'three';
 import { Reflector } from 'three/addons/objects/Reflector.js';
 import { DragControls } from 'three/addons/controls/DragControls.js';
-import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
-import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
-import { ShaderPass } from 'three/addons/postprocessing/ShaderPass.js';
 
-import { RGBShiftShader } from 'three/addons/shaders/RGBShiftShader.js';
-import { DotScreenShader } from 'three/addons/shaders/DotScreenShader.js';
-import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
 
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
@@ -25,8 +19,8 @@ const skyTexture = skyTextureLoader.load('assets/imgs/skybox.png');
 
 
 // Create the skybox mesh
-const skyboxGeometry = new THREE.SphereGeometry(500, 1000, 500);
-const skyboxMaterial = new THREE.MeshBasicMaterial({map: skyTexture, side: THREE.BackSide});
+const skyboxGeometry = new THREE.SphereGeometry(500, 500, 500);
+const skyboxMaterial = new THREE.MeshToonMaterial({map: skyTexture, side: THREE.BackSide});
 const skybox = new THREE.Mesh(skyboxGeometry, skyboxMaterial);
 
 // Add the skybox to the scene
@@ -34,7 +28,7 @@ scene.add(skybox);
 
 // Add floor mesh
 const floorGeometry = new THREE.CircleGeometry(22, 64);
-const floorMaterial = new THREE.MeshToonMaterial({color: 0x1d000,});
+const floorMaterial = new THREE.MeshToonMaterial({color: 0x1d000});
 const floor = new THREE.Mesh(floorGeometry, floorMaterial);
 floor.position.set(0, -4, 0);
 floor.rotation.x = -Math.PI / 2;
@@ -114,7 +108,7 @@ function animate() {
         }
     }
     Ecard.rotation.y += 0.005
-     card.rotation.y += -0.008
+     card.rotation.y += -0.0061
 	renderer.render( scene, camera );
 }
 
