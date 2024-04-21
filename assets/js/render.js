@@ -53,9 +53,9 @@ cardMaterial.side = THREE.DoubleSide;
 const geometry = new THREE.BoxGeometry( 3.5, 4.5, 0.1 );
 // card mesh
 const card = new THREE.Mesh( geometry, cardMaterial );
-scene.add(card);
 // card position
 card.position.set( 2.5,-1.5, 1,0)
+scene.add(card);
 
 
 // enemy card texture
