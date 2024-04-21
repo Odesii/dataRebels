@@ -15,22 +15,30 @@ document.body.appendChild( renderer.domElement );
 
 
 const skyTextureLoader = new THREE.TextureLoader();
-const skyTexture = skyTextureLoader.load('assets/imgs/skybox.png');
+const skyTextureColor = skyTextureLoader.load('assets/imgs/skybox/space-cruiser-panels2_albedo.png');
 
 
 // Create the skybox mesh
-const skyboxGeometry = new THREE.SphereGeometry(500, 500, 500);
-const skyboxMaterial = new THREE.MeshToonMaterial({map: skyTexture, side: THREE.BackSide});
+const skyboxGeometry = new THREE.BoxGeometry( 500, 500, 500, 100, 100, 100);
+const skyboxMaterial = new THREE.MeshBasicMaterial({
+    color: 0x1d000,
+    wireframe:true,
+    map: skyTextureColor,
+    side: THREE.BackSide});
 const skybox = new THREE.Mesh(skyboxGeometry, skyboxMaterial);
 
 // Add the skybox to the scene
 scene.add(skybox);
 
 // Add floor mesh
-const floorGeometry = new THREE.CircleGeometry(22, 64);
-const floorMaterial = new THREE.MeshToonMaterial({color: 0x1d000});
+const floorGeometry = new THREE.CircleGeometry(25, 64, 900, 900);
+const floorTextureLoader = new THREE.TextureLoader();
+const floorTexture = floorTextureLoader.load('assets/imgs/floor/Texturelabs_Grunge_334L.jpg')
+const floorMaterial = new THREE.MeshToonMaterial({
+
+});
 const floor = new THREE.Mesh(floorGeometry, floorMaterial);
-floor.position.set(0, -4, 0);
+floor.position.set(0, -4.5, 0);
 floor.rotation.x = -Math.PI / 2;
 scene.add(floor);
 
@@ -47,7 +55,7 @@ const geometry = new THREE.BoxGeometry( 3.5, 4.5, 0.1 );
 const card = new THREE.Mesh( geometry, cardMaterial );
 scene.add(card);
 // card position
-card.position.set( 2.5,-1.5, 2,0)
+card.position.set( 2.5,-1.5, 1,0)
 
 
 // enemy card texture
@@ -80,7 +88,7 @@ controls.addEventListener('dragend', event =>{
 
 
 
-scene.add( new THREE.AmbientLight( 0xcccccc ) );
+scene.add( new THREE.AmbientLight( 0xcccccc, .15 ) );
 
 const light = new THREE.DirectionalLight( 0xffffff, .5 );
 light.position.set( 1, 1, 1 );
@@ -107,8 +115,10 @@ function animate() {
             returning = false;
         }
     }
-    Ecard.rotation.y += 0.005
-     card.rotation.y += -0.0061
+    // Ecard.rotation.y += 0.005
+    // card.rotation.y += -0.0061
+    skybox.rotation.y += -0.0005 
+    skybox.rotation.x += -0.0005 
 	renderer.render( scene, camera );
 }
 
