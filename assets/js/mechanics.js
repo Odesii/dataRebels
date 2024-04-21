@@ -46,7 +46,7 @@ button.addEventListener("click", startGame);//start button
 function startGame() {}
 
 function winMatch(result) {
-  if (result === win) {
+  if (result === 'win') {
     credits++;//go to shop
   } //else hard restart
 }
@@ -76,20 +76,27 @@ function battle(){
     if(compMove= 'attack'){
         playerHp-=enemyAtk
     }
-    if(compMove='defend'){
+    else if(compMove='defend'){
         enemyHp+=enemyDef
     }
-}
 
-if (plyrMove='attack'){
+    if (plyrMove='attack'){
     enemyHp-=playerAtk
-
-}plyrMove='defend',
-playerHp+=playerDef
+    }else if(plyrMove='defend'){
+        playerHp+=playerDef
+    }
+}   
 
 
 
 
 function playerTurn(){
 
+}
+
+module.exports={
+    battle,
+    enemyTurn,
+    outcome,
+    winMatch
 }
