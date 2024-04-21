@@ -9,12 +9,12 @@ const {
 
   let result;//
 let credits;//
-let playerAtk;//player att value
-let enemyAtk;//enemy attack value
+let playerAtk=5;//player att value
+let enemyAtk=5;//enemy attack value
 let playerHp=30;//plyr hp value
 let enemyHp=30;//enemyhp value
-let playerDef;//def value
-let enemyDef;//def value
+let playerDef=5;//def value
+let enemyDef=5;//def value
 let compMove;//atk or def
 let plyrMove;//atk or defend
 
@@ -49,11 +49,10 @@ const codered = new codeRed("Code Red", 20, 10, 10, 10, "Hacked by Chinese!");
 
 console.log(codered);
 
-describe('stuxNet',()=>{
-    test('stuxNet should attack the enemy for 10 damage',()=>{
+describe('battle',()=>{
+    test('If the player attacks and the computer attacks the player and enemy will have the same hp',()=>{
         
-        stuxNet.battle("attack");
-        expect(shape.render()).toEqual(`<polygon points="100,10 150,190 50,190" fill="green"/>`)
+        expect(battle(compMove='attack', plyrMove="attack")).toBe(enemyHp===playerHp)
     })
 
 

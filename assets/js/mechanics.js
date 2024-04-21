@@ -5,7 +5,7 @@ const {
   stormWorm,
   codeRed,
   myDoom,
-} = require("./monsters");
+} = require("./hack");
 
 const stuxNet = new stuxnet("Stuxnet", 20, 10, 10, 10, "Destroy centrifuge");
 
@@ -41,9 +41,9 @@ let enemyDef;//def value
 let compMove;//atk or def
 let plyrMove;//atk or defend
 //button is where start button will be/click to initialize game and bring up player input
-button.addEventListener("click", startGame);//start button
+// button.addEventListener("click", startGame);//start button
 
-function startGame() {}
+// function startGame() {}
 
 function winMatch(result) {
   if (result === 'win') {
@@ -85,6 +85,7 @@ function battle(){
     }else if(plyrMove='defend'){
         playerHp+=playerDef
     }
+    return (playerHp,enemyHp )
 }   
 
 

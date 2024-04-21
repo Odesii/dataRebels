@@ -16,6 +16,8 @@
     - JS
     - NODE
         - THREE.JS
+        -npx vite 
+            -o to render
         - GSAP
         - Anime JS
         - DAY JS?
