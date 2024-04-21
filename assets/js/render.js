@@ -115,8 +115,8 @@ function animate() {
             returning = false;
         }
     }
-    // Ecard.rotation.y += 0.005
-    // card.rotation.y += -0.0061
+    Ecard.rotation.y += 0.005
+    card.rotation.y += -0.0061
     skybox.rotation.y += -0.0005 
     skybox.rotation.x += -0.0005 
 	renderer.render( scene, camera );
