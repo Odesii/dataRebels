@@ -98,7 +98,7 @@
       - X acts as RUN
       - enemies card will show a bar for hp
       - MOVES Displayed in START Menu 
-        -Radomize sprites for 'folder look'
+        -Randomize sprites for 'folder look'
 
 
 ## TBD
@@ -114,9 +114,21 @@
 - Enemies
   - so as ascii art in a terminal 
 - Taskbar
-  - startmenu 
+  - start menu 
   - store 
 - Ecard 
   - on click it dodges courser
-  - or draga
 
+
+
+
+## Terminology
+
+attack = HACK 
+Defense = "Encrypt" / "Countermeasure"
+HP = "System Integrity" / "Network Health"
+AP = "Bandwidth" / "Bytes"
+RUN = "ESCAPE"
+
+WIN = 
+Lose = Pwned

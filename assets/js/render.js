@@ -16,14 +16,15 @@ document.body.appendChild( renderer.domElement );
 const raycaster = new THREE.Raycaster();
 const mouse = new THREE.Vector2();
 
+
+
+// Create the skybox mesh
 const skyTextureLoader = new THREE.TextureLoader();
 const skyTextureColor = skyTextureLoader.load('assets/imgs/floor/hexspin.png', function(texture){
     texture.wrapS = texture.wrapT = THREE.RepeatWrapping; 
     texture.repeat.set(10, 10);
 });
 
-
-// Create the skybox mesh
 const skyboxGeometry = new THREE.SphereGeometry( 100,100, 100);
 const skyboxMaterial = new THREE.MeshBasicMaterial({
     color: 0x1d000,
