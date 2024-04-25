@@ -43,8 +43,8 @@ class hacks {
 }
 
 class spider extends hacks{
-    constructor(name, hp, ap, atkVal,defend,moves){
-        super(name,hp,ap,atkVal, defend,moves)
+    constructor(name,hp,ap,atkVal,def,moves,speed,role){
+        super(name,hp,ap,atkVal,def,moves,speed,role)
         
     }
     hack(){
@@ -58,8 +58,8 @@ spiderHack.hack()
 // ----------------------------------------------------------------------
 
 class iloveyou extends hacks{
-    constructor(name, hp, ap, atkVal,defend,moves){
-        super(name,hp,ap,atkVal, defend,moves)
+    constructor(name,hp,ap,atkVal,def,moves,speed,role){
+        super(name,hp,ap,atkVal,def,moves,speed,role)
         
     }
     hack(){
@@ -72,8 +72,8 @@ const loveYou= new iloveyou('ILOVEYOU',20,10,10,10,'malware')
 loveYou.hack()
 
 class myDoom extends hacks{
-    constructor(name, hp, ap, atkVal,defend,moves){
-        super(name,hp,ap,atkVal, defend,moves)
+    constructor(name,hp,ap,atkVal,def,moves,speed,role){
+        super(name,hp,ap,atkVal,def,moves,speed,role)
         
     }
     hack(){
@@ -85,8 +85,8 @@ const doom= new myDoom('MyDoom',20,10,10,10,'DDoS')
 
 doom.hack()
 class stormWorm extends hacks{
-    constructor(name, hp, ap, atkVal,defend,moves){
-        super(name,hp,ap,atkVal, defend,moves)
+    constructor(name,hp,ap,atkVal,def,moves,speed,role){
+        super(name,hp,ap,atkVal,def,moves,speed,role)
         
     }
     hack(){
@@ -98,8 +98,8 @@ const worm= new stormWorm('StormWorm',20,10,10,10,'spam')
 worm.hack()
 
 class codeRed extends hacks{
-    constructor(name, hp, ap, atkVal,defend,moves){
-        super(name,hp,ap,atkVal, defend,moves)
+    constructor(name,hp,ap,atkVal,def,moves,speed,role){
+        super(name,hp,ap,atkVal,def,moves,speed,role)
         
     }
     hack(){
@@ -111,8 +111,8 @@ const codered= new codeRed('Code Red',20,10,10,10,'Hacked by Chinese!')
 codered.hack()
 
 class stuxnet extends hacks{
-    constructor(name, hp, ap, atkVal,defend,moves){
-        super(name,hp,ap,atkVal, defend,moves)
+    constructor(name,hp,ap,atkVal,def,moves,speed,role){
+        super(name,hp,ap,atkVal,def,moves,speed,role)
         
     }
     hack(){
@@ -131,5 +131,6 @@ module.exports={
     iloveyou,
     stormWorm,
     codeRed,
-    myDoom
+    myDoom,
+    hacks
 }

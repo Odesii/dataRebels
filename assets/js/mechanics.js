@@ -5,6 +5,7 @@ const {
   stormWorm,
   codeRed,
   myDoom,
+  hacks
 } = require("./hack");
 
 const stuxNet = new stuxnet("Stuxnet", 20, 10, 10, 10, "Destroy centrifuge");

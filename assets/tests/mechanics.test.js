@@ -5,18 +5,10 @@ const {
     stormWorm,
     codeRed,
     myDoom,
-  } = require("../js/monsters.js")
+    hacks
+  } = require("../js/hack.js")
 
-  let result;//
-let credits;//
-let playerAtk=5;//player att value
-let enemyAtk=5;//enemy attack value
-let playerHp=30;//plyr hp value
-let enemyHp=30;//enemyhp value
-let playerDef=5;//def value
-let enemyDef=5;//def value
-let compMove;//atk or def
-let plyrMove;//atk or defend
+const enemy=new stuxnet("Stuxnet", 20, 3, 10, 10, "Destroy centrifuge");
 
   const{
     battle,
@@ -25,7 +17,7 @@ let plyrMove;//atk or defend
     winMatch
 }=require('../js/mechanics.js')
 
-const stuxNet = new stuxnet("Stuxnet", 20, 10, 10, 10, "Destroy centrifuge");
+const stuxNet = new stuxnet("Stuxnet", 20, 3, 10, 10, "Destroy centrifuge");
 
 console.log(stuxNet);
 
@@ -49,10 +41,9 @@ const codered = new codeRed("Code Red", 20, 10, 10, 10, "Hacked by Chinese!");
 
 console.log(codered);
 
-describe('battle',()=>{
-    test('If the player attacks and the computer attacks the player and enemy will have the same hp',()=>{
-        
-        expect(battle(compMove='attack', plyrMove="attack")).toBe(enemyHp===playerHp)
+describe('attack',()=>{
+    test('If the player attacks the enemy hp goes down',()=>{
+        expect(codered.attack(doom)).toBe(0)
     })
 
 
