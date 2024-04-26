@@ -16,6 +16,8 @@
     - JS
     - NODE
         - THREE.JS
+        -npx vite 
+            -o to render
         - GSAP
         - Anime JS
         - DAY JS?
@@ -41,6 +43,14 @@
 
     GAME START
     - STATIC LEARNING
+        -initialize game with start button on taskbar
+        -prompt(wondow?modal?) for user name and roll for hack
+        -description of the hack/ability pops up someplace(corner or something?)
+        -roll enemy hack and render description
+        -player chooses attack via start menu button
+        -logs the attack and dmg /enemy hp down
+        -SET TIMEout for enemy attack and log dmg/player hp down
+        -shop. credits show up in shop and uses local storage
         - start with random hack
         - random ability
         - static enemy 
