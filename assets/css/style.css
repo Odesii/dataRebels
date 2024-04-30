@@ -35,7 +35,8 @@ body{
   }
   
   .start-button:hover {
-    background-color: #2E6CA3;
+    background-color: #000000;
+    color: #00ff15;
   }
 
   .start-menu {
@@ -45,8 +46,8 @@ body{
     left: 4px;
     width: 200px;
     background-color: #747474;
-    box-shadow: -2px 2px gray inset, 
-    -2px 2px rgb(37, 37, 37);
+    box-shadow: -4px 4px gray inset, 
+    -4px 4px rgb(37, 37, 37);
     opacity: 1; /* Start with 1 opacity, so the menu is visible initially */
     
   }

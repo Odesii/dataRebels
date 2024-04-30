@@ -131,4 +131,4 @@ AP = "Bandwidth" / "Bytes"
 RUN = "ESCAPE"
 
 WIN = 
-Lose = Pwned
+Lose = PWNED
