@@ -82,7 +82,7 @@ class CombatSystem{
         return this.enemyMove;
     }
     enemyMove(){
-        this.startTurn(player, enemy)
+        this.startTurn(attacker, defender, enemy)
         return this.playerMove
     }
     oneTurnSkillReset(){
