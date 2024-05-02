@@ -4,6 +4,7 @@ import { DragControls } from 'three/addons/controls/DragControls.js';
 import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js';
 import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js';
 import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass.js';
+import { SVGLoader } from 'three/examples/jsm/loaders/SVGLoader.js';
 import anime from 'animejs';
 
 
@@ -122,44 +123,48 @@ controls.addEventListener('dragend', event =>{
 
 // Enemy card move Logic
 renderer.domElement.addEventListener('click', (event) => {
-    // Get the mouse position in normalized device coordinates
-    mouse.x = event.clientX / window.innerWidth * 2 - 1;
-    mouse.y = event.clientY / window.innerHeight * 2 - 1;
-    
-    // Update the raycaster with the mouse position and camera
-    raycaster.setFromCamera(mouse, camera);
-    
-    // Check for intersections with the Ecard mesh
-    const intersects = raycaster.intersectObjects([Ecard]);
-    
-    // If there's an intersection, move the Ecard
-    if (intersects.length > 0) {
-      // Get the cursor position in 3D space
-      const cursorPosition = intersects[0].point;
-      
-      // Calculate the relative position of the cursor to the Ecard
-      relativePosition.x = cursorPosition.x - Ecard.position.x;
-      relativePosition.y = cursorPosition.y - Ecard.position.y;
-      
-      // Determine the direction of the movement (left or right)
-      const direction = Math.random() < 0.5 ? -1 : 1;
-      const distance = Math.random() * 4 + 1;
-      
-      // Move the Ecard x units in the determined direction
-      anime({
-        targets: Ecard.position,
-        x: Ecard.position.x + direction * distance,
-        duration: 100,
-        easing: 'easeInOutSine',
-      });
-  
-      
-      // Return the Ecard to its start position after a short delay
-      setTimeout(() => {
-        Ecard.position.x = EstartPoint.x;
-      }, 350); // delay
-    }
-  });
+  // Get the mouse position in normalized device coordinates
+  mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+  mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+
+  // Update the raycaster with the mouse position and camera
+  raycaster.setFromCamera(mouse, camera);
+
+  // Check for intersections with the Ecard mesh
+  const intersects = raycaster.intersectObjects([Ecard]);
+
+  // If there's an intersection, move the Ecard
+  if (intersects.length > 0) {
+    // Get the cursor position in 3D space
+    const cursorPosition = intersects[0].point;
+
+    // Define the relativePosition object
+    const relativePosition = {
+      x: cursorPosition.x - Ecard.position.x,
+      y: cursorPosition.y - Ecard.position.y
+    };
+
+    // Determine the direction of the movement (left or right)
+    const direction = Math.random() < 0.5 ? -1 : 1;
+    const distance = Math.random() * 4 + 1;
+
+    // Move the Ecard x units in the determined direction
+    anime({
+      targets: Ecard.position,
+      x: Ecard.position.x + direction * distance,
+      duration: 50,
+      easing: 'easeInOutSine',
+    });
+
+    // Return the Ecard to its start position after a short delay
+    setTimeout(() => {
+      Ecard.position.x = EstartPoint.x;
+    }, 350); // delay
+  }
+});
+
+
+
 
 // // glow effect on attack click
 document.querySelector('#attack').addEventListener('click', (event) => {
@@ -188,8 +193,11 @@ document.querySelector('#attack').addEventListener('click', (event) => {
   });
 
 
+
+
 const composer = new EffectComposer(renderer);
 composer.addPass(new RenderPass(scene, camera));
+
 
 // bloom
 const bloomPass = new UnrealBloomPass(new THREE.Vector2(window.innerWidth, window.innerHeight), 1.5, 0.4, 0.85);
