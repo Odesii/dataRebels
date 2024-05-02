@@ -18,7 +18,7 @@ class CombatSystem{
         this.turns=0;
         this.playerMove=true;
         this.enemyMove=true;
-        this.status; //0 no combat /1 combat
+        this.status=0; //0 no combat /1 combat
         this.oneTurnSkill=false
     }
 
@@ -35,45 +35,49 @@ class CombatSystem{
         return this.status
     }
 
-    startTurn(attacker,defender,enemy){
-        this.winLoss()
+    startTurn(attacker,defender,moveType){
         if(this.status===1){
-            switch(enemy){
+            this.winLoss();
+            switch(moveType){
                 case 'atk':
                     attacker.attack(defender);
                     break;
                 case 'def':
                     attacker.defend();
                     this.oneTurnSkill=true
-                    break
+                    break;
             }
-        if(attacker===this.player){
-            this.enemyMove=false
+                this.updateMove(attacker);
+                this.checkEndOfRound();
         }else{
-            this.playerMove=false
+            console.log('End of Combat')
         }
-        if(this.enemyMove===false && this.playerMove===false){
-            this.nextTurn;
-            this.enemyMove=true;
-            this.playerMove=true;
-            if(this.oneTurnSkill===true){
-                this.resetStatsAfterMove()
-            }
-        }
-        }else{
-            console.log(`end of combat`)
-        }
-        this.winLoss();
         
 }
+    updateMove(attacker){
+        if (attacker===this.player){
+            this.enemyMove=false;
+        }else{
+            this.playerMove=false;
+        }
+    }
 
+    checkEndOfRound(){
+        if(!this.enemyMove && !this.playerMove){
+            this.nextTurn();
+            this.playerMove=true;
+            this.enemyMove=true;
+            if(this.oneTurnSkill){
+                this.oneTurnSkillReset();
+            }
+
+        }
+    }
     
     winLoss(){
-        if(this.player.hp<=0){
+        if(this.player.hp<=0 || this.enemy.hp<=0){
             this.status=0;
-        }
-            if(this.enemy.hp<=0){
-                this.status=0;
+            console.log('End of Combat')
             }
     }
 
@@ -81,8 +85,8 @@ class CombatSystem{
         this.enemyMove=false;
         return this.enemyMove;
     }
-    enemyMove(){
-        this.startTurn(attacker, defender, enemy)
+    onEnemyTurn(){
+        this.startTurn(this.enemy, this.player, 'atk');
         return this.playerMove
     }
     oneTurnSkillReset(){
