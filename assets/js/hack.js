@@ -125,7 +125,7 @@ const stuxNet= new stuxnet('Stuxnet',20,10,10,10,'Destroy centrifuge')
 stuxNet.hack()
 
 
-module.exports={
+export{
     stuxnet,
     spider,
     iloveyou,
@@ -133,4 +133,4 @@ module.exports={
     codeRed,
     myDoom,
     hacks
-}
+};
