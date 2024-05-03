@@ -17,6 +17,6 @@ class Enemy extends hacks{
         console.log(`${this.name} uses ${this.moves} to do ${this.atkVal} damage`)
     }
 }
-const enemy= new Enemy('Sprite Spider',20,10,10,10,'ransomware')
+const enemy= new Enemy('ICE',20,10,10,10,'NeuroMancer')
 
 enemy.hack()

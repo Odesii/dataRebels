@@ -27,7 +27,7 @@ class hacks {
         
 } 
     defend(){
-       this.def=this.def+=1
+       this.def+=1
        console.log(`${this.name} increases firewall defense by ${this.def} for one turn`)
        return this.def
 }
@@ -36,7 +36,7 @@ class hacks {
 
 }
     resetStats(){
-        this.hp=character.hpBase
+        this.hp=this.hpBase
         return character.hp
     }
 
