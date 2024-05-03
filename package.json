@@ -1,4 +1,10 @@
 {
+  "name":"datarebels",
+  "version":"0.1",
+  "description":"",
+  "main":"",
+  "type":"module",
+  
   "dependencies": {
     "anime": "^0.1.2",
     "animejs": "^3.2.2",
