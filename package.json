@@ -1,14 +1,14 @@
 {
-  "name":"datarebels",
-  "version":"0.1",
-  "description":"",
-  "main":"",
-  "type":"module",
-  
+  "name": "datarebels",
+  "version": "0.1",
+  "description": "",
+  "main": "",
+  "type": "module",
   "dependencies": {
     "anime": "^0.1.2",
     "animejs": "^3.2.2",
     "jest": "^29.7.0",
+    "sequelize": "^6.37.3",
     "three": "^0.163.0"
   },
   "devDependencies": {
