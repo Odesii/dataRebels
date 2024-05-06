@@ -22,7 +22,7 @@
     "vite": "^5.2.9"
   },
   "scripts": {
-    "start": "node index.js",
+    "start": "node server.js",
     "test": "jest"
   }
 }

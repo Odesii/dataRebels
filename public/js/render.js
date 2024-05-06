@@ -1,11 +1,9 @@
 import * as THREE from 'three';
-import { Reflector } from 'three/addons/objects/Reflector.js';
 import { DragControls } from 'three/addons/controls/DragControls.js';
-import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js';
-import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js';
-import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass.js';
-import { SVGLoader } from 'three/examples/jsm/loaders/SVGLoader.js';
-import anime from 'animejs';
+import { EffectComposer } from 'three/EffectComposer';
+import { RenderPass } from 'three/RenderPass';
+import { UnrealBloomPass } from 'three/UnrealBloomPass';
+// import anime from 'animejs';
 
 
 const scene = new THREE.Scene();
