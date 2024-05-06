@@ -45,4 +45,4 @@ Character.init(
   }
 );
 
-module.exports = Character;
+export default Character;
