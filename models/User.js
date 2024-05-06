@@ -1,6 +1,6 @@
-const { Model, DataTypes } = require('sequelize');
-const bcrypt = require('bcrypt');
-const sequelize = require('../config/connection');
+import { Model, DataTypes } from 'sequelize';
+import bcrypt from 'bcrypt';
+import sequelize from '../config/connection';
 
 class User extends Model {
   checkPassword(loginPw) {
@@ -11,8 +11,8 @@ class User extends Model {
 User.init(
   {
     id: {
-    type: DataTypes.UUID,
-    defaultValue: sql.UUIDV4,
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4, // Corrected to use DataTypes.UUIDV4
       allowNull: false,
       primaryKey: true,
     },
@@ -27,27 +27,27 @@ User.init(
         len: [6],
       },
     },
-    credits:{
-        type:DataTypes.INTEGER,
-        allowNull: true,
+    credits: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
     }
   },
   {
     hooks: {
-    beforeCreate: async (newUserData) => {
+      beforeCreate: async (newUserData) => {
         newUserData.password = await bcrypt.hash(newUserData.password, 10);
         return newUserData;
-    },
-    beforeBulkCreate: async (newUsersData, options) => {
+      },
+      beforeBulkCreate: async (newUsersData, options) => {
         for (const user of newUsersData) {
-        user.password = await bcrypt.hash(user.password, 10);
+          user.password = await bcrypt.hash(user.password, 10);
         }
         return newUsersData;
-    },
-    beforeUpdate: async (updatedUserData) => {
+      },
+      beforeUpdate: async (updatedUserData) => {
         updatedUserData.password = await bcrypt.hash(updatedUserData.password, 10);
         return updatedUserData;
-    },
+      },
     },
     sequelize,
     timestamps: false,
@@ -57,4 +57,4 @@ User.init(
   }
 );
 
-module.exports = User;
+export default User;
