@@ -1,3 +1,3 @@
-DROP DATABASE IF EXISTS dataRebels_db;
+DROP DATABASE IF EXISTS datarebels_db;
 
-CREATE DATABASE dataRebels_db;
+CREATE DATABASE datarebels_db;
