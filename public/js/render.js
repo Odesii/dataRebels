@@ -27,7 +27,7 @@ const mouse = new THREE.Vector2();
 
 // Create the skybox mesh
 const skyTextureLoader = new THREE.TextureLoader();
-const skyTextureColor = skyTextureLoader.load('assets/imgs/floor/hexSpin.png', function(texture){
+const skyTextureColor = skyTextureLoader.load('/imgs/floor/hexSpin.png', function(texture){
     texture.wrapS = texture.wrapT = THREE.RepeatWrapping; 
     texture.repeat.set(10, 10);
 });
@@ -45,7 +45,7 @@ scene.add(skybox);
 // Add floor mesh
 const floorGeometry = new THREE.CircleGeometry(25, 64);
 const floorTextureLoader = new THREE.TextureLoader();
-const floorTexture = floorTextureLoader.load('assets/imgs/floor/hexSpin.png', function(texture){
+const floorTexture = floorTextureLoader.load('/imgs/floor/hexSpin.png', function(texture){
     texture.wrapS = texture.wrapT = THREE.RepeatWrapping; 
     texture.repeat.set(40, 40);
     
@@ -64,7 +64,7 @@ scene.add(floor);
 
 // card texture
 const cardTextureLoader = new THREE.TextureLoader();
-const cardTexture = cardTextureLoader.load('assets/imgs/ILOVEYOU.png')
+const cardTexture = cardTextureLoader.load('/imgs/ILOVEYOU.png')
 const cardMaterial = new THREE.MeshToonMaterial({
     map: cardTexture, 
     emissive: 0x000000, // initially no emissive color
@@ -83,7 +83,7 @@ scene.add(card);
 
 // enemy card texture
 const EcardTextureLoader = new THREE.TextureLoader();
-const EcardTexture = EcardTextureLoader.load('assets/imgs/stuxnet.png')
+const EcardTexture = EcardTextureLoader.load('/imgs/stuxnet.png')
 const EcardMaterial = new THREE.MeshToonMaterial( {map: EcardTexture, transparent: true});
 cardMaterial.side = THREE.DoubleSide;
 //card geo
