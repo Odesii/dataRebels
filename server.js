@@ -10,9 +10,9 @@ const routes = require('./routes');
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-// Parsing middleware
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+// View engine setup
+// const hbs = exphbs.create({ helpers });
+const hbs = exphbs.create({});
 
 // Session configuration
 const sess = {
@@ -32,14 +32,15 @@ const sess = {
 };
 app.use(session(sess));
 
+app.engine('handlebars', hbs.engine);
+app.set('view engine', 'handlebars');
+
+// Parsing middleware
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 // Static files
 app.use(express.static(path.join(__dirname, 'public')));
 
-// View engine setup
-// const hbs = exphbs.create({ helpers });
-const hbs = exphbs.create({});
-app.engine('handlebars', hbs.engine);
-app.set('view engine', 'handlebars');
 // Routes
 app.use(routes);
 
