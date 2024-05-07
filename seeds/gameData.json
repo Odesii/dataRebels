@@ -1,8 +1,11 @@
 [
     {
-        "user_hp":"100",
-        "user_ap":"15",
-        "enemy_hp":"100",
-        "enemy_ap":"15"
+        "user_hp": 100,
+        "user_defense": 5,
+        "user_ap": 15,
+        "enemy_hp": 100,
+        "enemy_defense": 5,
+        "enemy_ap": 15,
+        "action_taken": false
     }
 ]

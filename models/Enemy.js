@@ -19,10 +19,6 @@ Enemy.init(
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    ap:{
-      type:DataTypes.INTEGER,
-      allowNull:false
-    },
     attack: {
       type: DataTypes.INTEGER,
       allowNull: false
@@ -31,7 +27,7 @@ Enemy.init(
       type: DataTypes.INTEGER,
       allowNull: false
     },
-    ap:{
+    ap: {
       type: DataTypes.INTEGER,
       allowNull:false
     }
