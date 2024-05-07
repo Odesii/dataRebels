@@ -13,27 +13,24 @@ Enemy.init(
     },
     name: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: false
     },
     hp: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: false
     },
     attack: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: false
     },
     defense: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: false
     },
-    game_id: {
+    ap:{
       type: DataTypes.INTEGER,
-      references: {
-        model: 'game',
-        key: 'id',
-      },
-    },
+      allowNull:false
+    }
   },
   {
     sequelize,
@@ -44,4 +41,4 @@ Enemy.init(
   }
 );
 
-module.exports= Enemy;
+module.exports = Enemy;

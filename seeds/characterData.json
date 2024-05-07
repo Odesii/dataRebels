@@ -3,42 +3,42 @@
         "name":"Sprite Spider",
         "hp":"100",
         "attack":"10",
-        "defense":"10"
-
+        "defense":"10",
+        "ap": "15"
     },
     {
         "name":"ILOVEYOU",
         "hp":"100",
         "attack":"10",
-        "defense":"10"
-
+        "defense":"10",
+        "ap": "15"
     },
     {
         "name":"MyDoom",
         "hp":"100",
         "attack":"10",
-        "defense":"10"
-
+        "defense":"10",
+        "ap": "15"
     },
     {
         "name":"StormWorm",
-        "hp":"100",
-        "attack":"10",
-        "defense":"10"
-
+        "hp": "100",
+        "attack": "10",
+        "defense": "10",
+        "ap": "15"
     },
     {
         "name":"Code Red",
         "hp":"100",
         "attack":"10",
-        "defense":"10"
-
+        "defense":"10",
+        "ap": "15"
     },
     {
         "name":"Stuxnet",
         "hp":"100",
         "attack":"10",
-        "defense":"10"
-
+        "defense":"10",
+        "ap": "15"
     }
 ]

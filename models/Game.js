@@ -9,27 +9,34 @@ Game.init(
             type: DataTypes.INTEGER,
             allowNull: false,
             primaryKey: true,
-            autoIncrement: true,
+            autoIncrement: true
         },
         user_hp: {
             type: DataTypes.INTEGER,
-            allowNull: false,
+            allowNull: false
         },
         user_ap: {
             type: DataTypes.INTEGER,
-            allowNull: false,
+            allowNull: false
         },
         enemy_hp: {
             type: DataTypes.INTEGER,
-            allowNull: false,
-        },
-        turn:{
-            type:DataTypes.INTEGER,
-            allowNull:true
+            allowNull: false
         },
         enemy_ap: {
             type: DataTypes.INTEGER,
-            allowNull: false,
+            allowNull: false
+        },
+        turn: {
+            type:DataTypes.INTEGER,
+            allowNull: true
+        },
+        user_id: {
+            type: DataTypes.UUID,
+            references: {
+                model: 'user',
+                key: 'id',
+            }
         },
         enemy_id: {
             type: DataTypes.INTEGER,
@@ -37,7 +44,7 @@ Game.init(
                 model: 'enemy',
                 key: 'id',
             }
-        },
+        }
     },
     {
         sequelize,
@@ -48,4 +55,4 @@ Game.init(
     }
 );
 
-module.exports=Game;
+module.exports = Game;

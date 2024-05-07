@@ -15,25 +15,26 @@ User.init(
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4, // Corrected to use DataTypes.UUIDV4
       allowNull: false,
-      primaryKey: true,
+      primaryKey: true
     },
     username: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: false
     },
     password: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
         len: [6],
-      },
+      }
     },
     credits: {
       type: DataTypes.INTEGER,
-      allowNull: true,
+      allowNull: true
     },
     character_id:{
-      type: DataTypes.INTEGER
+      type: DataTypes.INTEGER,
+      allowNull: true
     }
   },
   {
@@ -61,4 +62,4 @@ User.init(
   }
 );
 
-module.exports =User;
+module.exports = User;
