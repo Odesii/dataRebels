@@ -37,9 +37,12 @@ router.post('/', withAuth, async (req, res) => {
             user_id: req.session.user_id,
             enemy_id: enemyData.id,
             user_hp: characterData.hp,
+            user_defense: characterData.defense,
             user_ap: characterData.ap,
             enemy_hp: enemyData.hp,
             enemy_ap: enemyData.ap,
+            enemy_defense: enemyData.defense,
+            action_taken: false,
             turn: 0
         });
   

@@ -1,7 +1,7 @@
 [
     {
-        "name" :"Void Scanner",
-        "effect":"none",
-        "cost":"1"
+        "name": "Void Scanner",
+        "effect": "none",
+        "cost": 1
     }
 ]

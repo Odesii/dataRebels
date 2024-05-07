@@ -32,7 +32,7 @@ User.init(
       type: DataTypes.INTEGER,
       allowNull: true
     },
-    character_id:{
+    character_id: {
       type: DataTypes.INTEGER,
       allowNull: true
     }
