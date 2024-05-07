@@ -23,6 +23,7 @@
   },
   "scripts": {
     "start": "node server.js",
-    "test": "jest"
+    "test": "jest",
+    "go":"nodemon ./server.js localhost 3001"
   }
 }
