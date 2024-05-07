@@ -4,7 +4,7 @@ import { EffectComposer } from 'three/EffectComposer';
 import { RenderPass } from 'three/RenderPass';
 import { UnrealBloomPass } from 'three/UnrealBloomPass';
 import { CSS2DRenderer } from 'three/CSS2DRenderer';
-import { label } from 'three/examples/jsm/nodes/Nodes.js';
+// import { label } from 'three/examples/jsm/nodes/Nodes.js';
 // import anime from 'animejs';
 
 
@@ -64,7 +64,7 @@ scene.add(floor);
 
 // card texture
 const cardTextureLoader = new THREE.TextureLoader();
-const cardTexture = cardTextureLoader.load('/imgs/cards/ILOVEYOU.png')
+const cardTexture = cardTextureLoader.load('/imgs/cards/SpriteSpider.png')
 const cardMaterial = new THREE.MeshToonMaterial({
     map: cardTexture, 
     emissive: 0x000000, // initially no emissive color
@@ -193,10 +193,16 @@ document.querySelector('#attack').addEventListener('click', (event) => {
   });
 
 
+
 // hp bar test
-const labelRenderer = new CSS2DRenderer();
+const testText = document.createElement('p')
+testText.textContent = 'TEST TEST TEST'
+
+const labelRenderer = new CSS2DRenderer(testText);
 labelRenderer.setSize(window.innerWidth, window.innerHeight);
-labelRenderer.domElement.style.top
+labelRenderer.domElement.style.position = ('absolute');
+labelRenderer.domElement.style.top = '0px'
+document.body.appendChild(labelRenderer.domElement)
 
 
 
@@ -221,6 +227,8 @@ renderer.toneMappingExposure = Math.pow(0.9, 4.0); // Adjust for desired brightn
 
 function animate() {
 	requestAnimationFrame( animate );
+
+  labelRenderer.render(scene)
 
     if(returning){
         card.position.lerp(startPoint, 0.1);
