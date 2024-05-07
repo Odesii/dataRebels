@@ -4,29 +4,28 @@ const Character= require('./Character')
 const Game= require('./Game')
 // import Item from './Item'
 
-
-Character.hasMany(User,{
+Character.hasMany(User, {
     foreignKey:'character_id'
 });
 
-User.belongsTo(Character,{
+User.belongsTo(Character, {
     foreignKey:'character_id'
 });
 
-Character.hasOne(Game,{
-    foreignKey:'character_id'
+User.hasMany(Game, {
+    foreignKey:'user_id'
 });
 
-Game.belongsTo(Character,{
-    foreignKey:'character_id'
+Game.belongsTo(User, {
+    foreignKey:'user_id'
 });
 
-Game.hasOne(Enemy,{
-    foreignKey:'game_id'
+Enemy.hasMany(Game, {
+    foreignKey:'enemy_id'
 });
 
-Enemy.belongsTo(Game,{
-foreignKey:'game_id'
+Game.belongsTo(Enemy, {
+    foreignKey:'enemy_id'
 });
 
 // Game.hasMany(Item,{
