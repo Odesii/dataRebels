@@ -27,6 +27,11 @@ Game.init(
             type:DataTypes.INTEGER,
             allowNull:true
         },
+        action_taken:{
+            type:DataTypes.BOOLEAN,
+            allowNull:false,
+            defaultValue:false
+        },
         enemy_ap: {
             type: DataTypes.INTEGER,
             allowNull: false,
