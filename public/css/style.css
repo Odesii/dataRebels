@@ -83,3 +83,10 @@ body{
     font-style: bold;
 
   }
+
+  .band {
+    position: absolute;
+
+    right: 50px;
+    transform: scale(.78);
+  }
