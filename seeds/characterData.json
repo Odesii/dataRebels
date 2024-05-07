@@ -2,6 +2,7 @@
     {
         "name":"Sprite Spider",
         "hp":"100",
+        "ap":"3",
         "attack":"10",
         "defense":"10"
 
@@ -9,6 +10,7 @@
     {
         "name":"ILOVEYOU",
         "hp":"100",
+        "ap":"3",
         "attack":"10",
         "defense":"10"
 
@@ -16,6 +18,7 @@
     {
         "name":"MyDoom",
         "hp":"100",
+        "ap":"3",
         "attack":"10",
         "defense":"10"
 
@@ -23,6 +26,7 @@
     {
         "name":"StormWorm",
         "hp":"100",
+        "ap":"3",
         "attack":"10",
         "defense":"10"
 
@@ -30,6 +34,7 @@
     {
         "name":"Code Red",
         "hp":"100",
+        "ap":"3",
         "attack":"10",
         "defense":"10"
 
@@ -37,6 +42,7 @@
     {
         "name":"Stuxnet",
         "hp":"100",
+        "ap":"3",
         "attack":"10",
         "defense":"10"
 
