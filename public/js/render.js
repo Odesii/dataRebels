@@ -236,7 +236,7 @@ document.body.appendChild(labelRenderer.domElement);
 
 const textCanvas = document.createElement('canvas');
 const textContext = textCanvas.getContext('2d');
-textContext.font = '24px Arial';
+textContext.font = '14px Arial';
 textContext.fillText('Hello, world!', 1, 2, 0);
 
 const textTexture = new THREE.Texture(textCanvas);
