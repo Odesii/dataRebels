@@ -30,6 +30,9 @@ User.init(
     credits: {
       type: DataTypes.INTEGER,
       allowNull: true,
+    },
+    character_id:{
+      type: DataTypes.INTEGER
     }
   },
   {
