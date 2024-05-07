@@ -1,3 +1,6 @@
+import * as THREE from 'three';
+import { CSS2DRenderer, CSS2DObject} from 'three/CSS2DRenderer';
+
 export function createTextLabels() {
     const testText = document.createElement('div');
     testText.textContent = 'TEST TEST TEST';
@@ -9,7 +12,7 @@ export function createTextLabels() {
     scene.add(labelObject);
   
     // Set up the CSS2DRenderer
-    const labelRenderer = new CSS2DRenderer();
+    labelRenderer = new CSS2DRenderer();
     labelRenderer.setSize(window.innerWidth, window.innerHeight);
     labelRenderer.domElement.style.position = 'absolute';
     labelRenderer.domElement.style.top = '0px';
@@ -26,4 +29,9 @@ export function createTextLabels() {
     const textTexture = new THREE.Texture(textCanvas);
     const textSprite = new THREE.Sprite(new THREE.SpriteMaterial({ map: textTexture }));
     scene.add(textSprite);
+  }
+
+
+  export function foo(){
+    console.log('FOO YOU')
   }

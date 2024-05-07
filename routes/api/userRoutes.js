@@ -1,16 +1,22 @@
 const router = require('express').Router();
-const { User } = require('../../models');
+const { User, Character } = require('../../models');
 
-router.post('/', async (req, res) => {
+router.put('/roll', async (req, res) => {
     try {
-        const userData = await User.create(req.body);
+        const characters = await Character.findAll({});
 
-        req.session.save(() => {
-            req.session.user_id = userData.id;
-            req.session.loggedIn = true;
+        const userData = await User.update(
+            {
+                character_id: characters[Math.floor(Math.random() * characters.length)].id
+            },
+            {
+                where: {
+                    id: req.session.user_id,
+                },
+            }
+        );
 
-            res.status(200).json(userData);
-        });
+        res.status(200).json(userData);
     } catch (err) {
         res.status(400).json(err);
     }
@@ -36,8 +42,13 @@ router.post('/register', async (req, res) => {
                 username: req.body.username,
                 password: req.body.password,
             });
-
-            res.status(200).json(newUserData);
+                    req.session.save(() => {
+            req.session.user_id = newUserData.id;
+            req.session.loggedIn = true;
+            
+            res.json({ user: newUserData, message: 'You are now logged in!' });
+        })
+            // res.status(200).json(newUserData);
         }
 
     } catch (err) {

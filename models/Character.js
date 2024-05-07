@@ -9,11 +9,11 @@ Character.init(
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true,
-      autoIncrement: true,
+      autoIncrement: true
     },
     name: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: false
     },
     hp:{
       type:DataTypes.INTEGER,
@@ -25,14 +25,17 @@ Character.init(
     },
     attack: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: false
     },
-    defense:{
-        type: DataTypes.INTEGER,
-        allowNull:false
+    defense: {
+      type: DataTypes.INTEGER,
+      allowNull:false
     },
+    ap: {
+      type: DataTypes.INTEGER,
+      allowNull:false
+    }
   },
-  
   {
     sequelize,
     timestamps: false,
@@ -42,4 +45,4 @@ Character.init(
   }
 );
 
-module.exports= Character;
+module.exports = Character;

@@ -4,24 +4,24 @@
         "hp":"100",
         "ap":"3",
         "attack":"10",
-        "defense":"10"
-
+        "defense":"10",
+        "ap": "15"
     },
     {
         "name":"ILOVEYOU",
         "hp":"100",
         "ap":"3",
         "attack":"10",
-        "defense":"10"
-
+        "defense":"10",
+        "ap": "15"
     },
     {
         "name":"MyDoom",
         "hp":"100",
         "ap":"3",
         "attack":"10",
-        "defense":"10"
-
+        "defense":"10",
+        "ap": "15"
     },
     {
         "name":"StormWorm",
@@ -36,15 +36,15 @@
         "hp":"100",
         "ap":"3",
         "attack":"10",
-        "defense":"10"
-
+        "defense":"10",
+        "ap": "15"
     },
     {
         "name":"Stuxnet",
         "hp":"100",
         "ap":"3",
         "attack":"10",
-        "defense":"10"
-
+        "defense":"10",
+        "ap": "15"
     }
 ]
