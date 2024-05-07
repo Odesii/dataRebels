@@ -12,6 +12,12 @@
       <li><img id="spyderSpecial" src="/imgs/moves/Spyder.png" /></li>
     </ul>
   </div>
+  {{#if loggedIn}}
+  <button id="logout">Logout</button>
+  {{else}}
+  <a href="/login"><button>--Login--</button></a>
+  <a href="/register"><button>--Register--</button></a>
+  {{/if}}
 </div>
 <script defer type="module" src="./js/startMenu.js"></script>
 <script defer type="module" src="./js/render.js"></script>

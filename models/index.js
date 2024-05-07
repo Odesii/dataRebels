@@ -37,4 +37,4 @@ Item.belongsTo(Game,{
     foreignKey:'item_id'
 });
 
-export default {User, Enemy, Character,Item,Game}
+export default {User, Enemy, Character, Item, Game}

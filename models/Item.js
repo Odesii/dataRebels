@@ -33,4 +33,4 @@ Item.init(
     }
 );
 
-export { Item };
+export default Item;
