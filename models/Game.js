@@ -23,6 +23,10 @@ Game.init(
             type: DataTypes.INTEGER,
             allowNull: false,
         },
+        turn:{
+            type:DataTypes.INTEGER,
+            allowNull:true
+        },
         enemy_ap: {
             type: DataTypes.INTEGER,
             allowNull: false,
