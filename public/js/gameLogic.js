@@ -28,7 +28,7 @@ async function fetchGame(gameId) {
     const gameData = await response.json();
     return gameData;
 }
-// Utility to update character data in the database
+//  update character data in the database
 async function updateGame(gameId, updates) {
     await fetch(`/api/game/${gameId}`, {
         method: 'PUT',
@@ -41,7 +41,6 @@ async function updateGame(gameId, updates) {
 async function playerAttack(gameId) {
     const game = await fetchGameData(gameId);
 
-    // Check if an action has been taken this turn
     if (game.action_taken) {
         console.log("An action has already been taken this turn.");
         return;
@@ -55,10 +54,9 @@ async function playerAttack(gameId) {
     const damage = Math.max(actualDamage - game.enemy_defense, 0);
     const newEnemyHp = Math.max(game.enemy_hp - damage, 0);
 
-    // Update game state after the attack
     await updateGame(gameId, {
         enemy_hp: newEnemyHp,
-        action_taken: true  // Mark that an action has been taken this turn
+        action_taken: true  
     });
 
     return {
@@ -85,11 +83,10 @@ async function playerDefend(gameId) {
 
     const newDefense = game.character_defense * 2;
 
-    // Update game state
     await updateGame(gameId, {
         character_defense: newDefense,
         user_ap: game.user_ap - 2,
-        action_taken: true  // Mark that an action has been taken
+        action_taken: true // true means action has been taken
     });
 
     return newDefense;
@@ -99,18 +96,17 @@ async function playerDefend(gameId) {
 async function nextTurn(gameId) {
     const game = await fetchGameData(gameId);
 
-    // Reset defense values to original character defense
     const character = await fetchCharacter(game.character_id);
     const enemy = await fetchEnemy(game.enemy_id);
 
     await updateGame(gameId, {
-        user_ap: 3,  // Assuming full AP replenishment
-        action_taken: false, // Reset action token for the new turn
-        character_defense: character.defense, // Reset character defense
-        enemy_defense: enemy.defense, // Reset enemy defense if applicable
+        action_taken: false, // reset the game boolean
+        character_defense: character.defense, // reset char def
+        enemy_defense: enemy.defense, // Reset enemy def
         turn: game.turn + 1
     });
 
-    console.log("Moved to the next turn.");
-    return game.turn + 1;
+    console.log("Next Turn");
+    return game.turn += 1; //to be logged or not
 }
+
