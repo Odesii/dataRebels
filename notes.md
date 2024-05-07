@@ -134,11 +134,11 @@
 
 ## Terminology
 
-attack = HACK 
-Defense = "Encrypt" / "Countermeasure"
-HP = "System Integrity" / "Network Health"
-AP = "Bandwidth" / "Bytes"
-RUN = "ESCAPE"
+- attack = HACK 
+- Defense = "Encrypt" / "Countermeasure"
+- HP = "System Integrity" / "Network Health"
+- AP = "Bandwidth" / "Bytes"
+- RUN = "ESCAPE"
 
-WIN = 
-Lose = PWNED
+- WIN = 
+- Lose = PWNED

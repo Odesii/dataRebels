@@ -62,7 +62,7 @@ scene.add(floor);
 
 // card texture
 const cardTextureLoader = new THREE.TextureLoader();
-const cardTexture = cardTextureLoader.load('/imgs/ILOVEYOU.png')
+const cardTexture = cardTextureLoader.load('/imgs/cards/ILOVEYOU.png')
 const cardMaterial = new THREE.MeshToonMaterial({
     map: cardTexture, 
     emissive: 0x000000, // initially no emissive color
@@ -81,7 +81,7 @@ scene.add(card);
 
 // enemy card texture
 const EcardTextureLoader = new THREE.TextureLoader();
-const EcardTexture = EcardTextureLoader.load('/imgs/stuxnet.png')
+const EcardTexture = EcardTextureLoader.load('/imgs/cards/stuxnet.png')
 const EcardMaterial = new THREE.MeshToonMaterial( {map: EcardTexture, transparent: true});
 cardMaterial.side = THREE.DoubleSide;
 //card geo
