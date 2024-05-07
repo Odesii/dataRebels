@@ -15,9 +15,13 @@ Character.init(
       type: DataTypes.STRING,
       allowNull: false
     },
-    hp: {
-      type:DataTypes.STRING,
-      allowNull: false
+    hp:{
+      type:DataTypes.INTEGER,
+      allowNull: false,
+    },
+    ap:{
+      type:DataTypes.INTEGER,
+      allowNull:false
     },
     attack: {
       type: DataTypes.INTEGER,

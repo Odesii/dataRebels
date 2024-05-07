@@ -3,6 +3,7 @@
     {
         "name":"AcidBurn",
         "hp":"100",
+        "ap":"3",
         "attack":"10",
         "defense":"10",
         "ap": "15"
@@ -10,6 +11,7 @@
     {
         "name":"ZeroBytes",
         "hp":"100",
+        "ap":"3",
         "attack":"10",
         "defense":"10",
         "ap": "15"

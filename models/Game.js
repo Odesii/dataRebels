@@ -23,6 +23,19 @@ Game.init(
             type: DataTypes.INTEGER,
             allowNull: false
         },
+        character_defense:{
+            type: DataTypes.INTEGER,
+            allowNull:false
+        },
+        enemy_defense:{
+            type: DataTypes.INTEGER,
+            allowNull:false
+        },
+        action_taken:{
+            type:DataTypes.BOOLEAN,
+            allowNull:false,
+            defaultValue:false
+        },
         enemy_ap: {
             type: DataTypes.INTEGER,
             allowNull: false
