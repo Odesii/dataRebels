@@ -37,4 +37,4 @@ foreignKey:'game_id'
 //     foreignKey:'item_id'
 // });
 
-module.exports=  {User, Enemy, Character,Game}// not importing over items yet
+module.exports=  {User, Enemy, Character, Game}// not importing over items yet
