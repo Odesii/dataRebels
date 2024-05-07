@@ -3,6 +3,8 @@ import { DragControls } from 'three/addons/controls/DragControls.js';
 import { EffectComposer } from 'three/EffectComposer';
 import { RenderPass } from 'three/RenderPass';
 import { UnrealBloomPass } from 'three/UnrealBloomPass';
+import { CSS2DRenderer } from 'three/CSS2DRenderer';
+import { label } from 'three/examples/jsm/nodes/Nodes.js';
 // import anime from 'animejs';
 
 
@@ -191,11 +193,17 @@ document.querySelector('#attack').addEventListener('click', (event) => {
   });
 
 
+// hp bar test
+const labelRenderer = new CSS2DRenderer();
+labelRenderer.setSize(window.innerWidth, window.innerHeight);
+labelRenderer.domElement.style.top
+
+
+
 
 
 const composer = new EffectComposer(renderer);
 composer.addPass(new RenderPass(scene, camera));
-
 
 // bloom
 const bloomPass = new UnrealBloomPass(new THREE.Vector2(window.innerWidth, window.innerHeight), 1.5, 0.4, 0.85);
@@ -221,9 +229,9 @@ function animate() {
             returning = false;
         }
     }
-    floor.rotation.z +=0.001
     // Ecard.rotation.y += 0.005
     // card.rotation.y += -0.0061
+    floor.rotation.z +=0.001
     skybox.rotation.y += -0.0015 
     skybox.rotation.x += -0.0015 
     composer.render();
