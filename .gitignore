@@ -133,3 +133,4 @@ dist
 package-lock.json
 
 .erd
+.vscode
