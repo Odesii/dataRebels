@@ -3,7 +3,7 @@ import { DragControls } from 'three/addons/controls/DragControls.js';
 import { EffectComposer } from 'three/EffectComposer';
 import { RenderPass } from 'three/RenderPass';
 import { UnrealBloomPass } from 'three/UnrealBloomPass';
-import { CSS2DRenderer } from 'three/CSS2DRenderer';
+import { CSS2DRenderer, CSS2DObject} from 'three/CSS2DRenderer';
 // import { label } from 'three/examples/jsm/nodes/Nodes.js';
 // import anime from 'animejs';
 
@@ -195,15 +195,22 @@ document.querySelector('#attack').addEventListener('click', (event) => {
 
 
 // hp bar test
-const testText = document.createElement('p')
-testText.textContent = 'TEST TEST TEST'
+// Create an HTML element
+const testText = document.createElement('div');
+testText.textContent = 'TEST TEST TEST';
+testText.style.marginTop = '-1em'; // Center vertically
 
-const labelRenderer = new CSS2DRenderer(testText);
+// Wrap it in a CSS2DObject
+const labelObject = new CSS2DObject(testText);
+labelObject.position.set(0, 1, 0); // Position in 3D space where you want the label
+scene.add(labelObject);
+
+// Set up the CSS2DRenderer
+const labelRenderer = new CSS2DRenderer();
 labelRenderer.setSize(window.innerWidth, window.innerHeight);
-labelRenderer.domElement.style.position = ('absolute');
-labelRenderer.domElement.style.top = '0px'
-document.body.appendChild(labelRenderer.domElement)
-
+labelRenderer.domElement.style.position = 'absolute';
+labelRenderer.domElement.style.top = '0px';
+document.body.appendChild(labelRenderer.domElement);
 
 
 
@@ -228,7 +235,6 @@ renderer.toneMappingExposure = Math.pow(0.9, 4.0); // Adjust for desired brightn
 function animate() {
 	requestAnimationFrame( animate );
 
-  labelRenderer.render(scene)
 
     if(returning){
         card.position.lerp(startPoint, 0.1);
@@ -237,6 +243,7 @@ function animate() {
             returning = false;
         }
     }
+    labelRenderer.render(scene, camera);
     // Ecard.rotation.y += 0.005
     // card.rotation.y += -0.0061
     floor.rotation.z +=0.001
