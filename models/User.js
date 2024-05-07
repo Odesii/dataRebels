@@ -1,6 +1,7 @@
-import { Model, DataTypes } from 'sequelize';
-import bcrypt from 'bcrypt';
-import sequelize from '../config/connection';
+const sequelize= require ('../config/connection')
+const { Model, DataTypes } = require('sequelize');
+const bcrypt= require('bcrypt');
+
 
 class User extends Model {
   checkPassword(loginPw) {
@@ -41,7 +42,7 @@ User.init(
         newUserData.password = await bcrypt.hash(newUserData.password, 10);
         return newUserData;
       },
-      beforeBulkCreate: async (newUsersData, options) => {
+      beforeBulkCreate: async (newUsersData) => {
         for (const user of newUsersData) {
           user.password = await bcrypt.hash(user.password, 10);
         }
@@ -60,4 +61,4 @@ User.init(
   }
 );
 
-export default User;
+module.exports =User;

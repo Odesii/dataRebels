@@ -24,6 +24,7 @@
   "scripts": {
     "start": "node server.js",
     "test": "jest",
-    "go":"nodemon ./server.js localhost 3001"
+    "go":"nodemon ./server.js localhost 3001",
+    "seed": "node seeds/index.js"
   }
 }
