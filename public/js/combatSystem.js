@@ -1,4 +1,4 @@
-const {
+import {
     stuxnet,
     spider,
     iloveyou,
@@ -6,7 +6,7 @@ const {
     codeRed,
     myDoom,
     hacks
-  } = require("./hack");
+  } = from("./hack");
 
 
 

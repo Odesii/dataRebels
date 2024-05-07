@@ -1,0 +1,18 @@
+[
+    
+    {
+        "name":"AcidBurn",
+        "hp":"100",
+        "attack":"10",
+        "defense":"10"
+    
+    },
+    {
+        "name":"ZeroBytes",
+        "hp":"100",
+        "attack":"10",
+        "defense":"10"
+    
+    }
+    
+]

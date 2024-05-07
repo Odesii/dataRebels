@@ -1,5 +1,5 @@
-import { Model, DataTypes } from 'sequelize';
-import sequelize from '../config/connection';
+const sequelize=require ('../config/connection')
+const { Model, DataTypes } = require('sequelize');
 
 class Game extends Model {}
 
@@ -27,13 +27,6 @@ Game.init(
             type: DataTypes.INTEGER,
             allowNull: false,
         },
-        user_id: {
-            type: DataTypes.INTEGER,
-            references: {
-                model: 'user',
-                key: 'id',
-            }
-        },
         enemy_id: {
             type: DataTypes.INTEGER,
             references: {
@@ -51,4 +44,4 @@ Game.init(
     }
 );
 
-export default Game;
+module.exports=Game;
