@@ -1,5 +1,5 @@
-import { Model, DataTypes } from 'sequelize';
-import sequelize from '../config/connection';
+const sequelize=require ('../config/connection')
+const { Model, DataTypes } = require('sequelize');
 
 class Enemy extends Model {}
 
@@ -44,4 +44,4 @@ Enemy.init(
   }
 );
 
-export default Enemy;
+module.exports= Enemy;

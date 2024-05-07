@@ -1,16 +1,16 @@
-import User from './User';
-import Enemy from './Enemy'
-import Character from './Character'
-import Game from './Game'
-import Item from './Item'
+const User= require('./User');
+const Enemy = require('./Enemy');
+const Character= require('./Character')
+const Game= require('./Game')
+// import Item from './Item'
 
-User.hasOne(Character,{
-    foreignKey:'user_id',
-    onDelete:'CASCADE'
+
+Character.hasMany(User,{
+    foreignKey:'character_id'
 });
 
-Character.belongsTo(User,{
-    foreignKey:'user_id'
+User.belongsTo(Character,{
+    foreignKey:'character_id'
 });
 
 Character.hasOne(Game,{
@@ -29,12 +29,12 @@ Enemy.belongsTo(Game,{
 foreignKey:'game_id'
 });
 
-Game.hasMany(Item,{
-    foreignKey:'item_id'
-});
+// Game.hasMany(Item,{
+//     foreignKey:'item_id'
+// });
 
-Item.belongsTo(Game,{
-    foreignKey:'item_id'
-});
+// Item.belongsTo(Game,{
+//     foreignKey:'item_id'
+// });
 
-export default {User, Enemy, Character, Item, Game}
+module.exports=  {User, Enemy, Character, Game}// not importing over items yet

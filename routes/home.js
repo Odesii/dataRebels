@@ -1,12 +1,12 @@
 const router = require('express').Router();
 
 router.get('/',  async (req, res) => {
-    res.render('homepage')
+    res.render('homepage', { loggedIn: req.session.loggedIn })
 })
 
 router.get('/register', (req, res) => {
     // If the user is already logged in, redirect to the homepage
-    if (req.session.logged_in) {
+    if (req.session.loggedIn) {
         res.redirect('/');
         return;
     }
@@ -16,7 +16,7 @@ router.get('/register', (req, res) => {
 
 router.get('/login', (req, res) => {
     // If the user is already logged in, redirect to the homepage
-    if (req.session.logged_in) {
+    if (req.session.loggedIn) {
         res.redirect('/');
         return;
     }

@@ -3,8 +3,10 @@ import { DragControls } from 'three/addons/controls/DragControls.js';
 import { EffectComposer } from 'three/EffectComposer';
 import { RenderPass } from 'three/RenderPass';
 import { UnrealBloomPass } from 'three/UnrealBloomPass';
+import { CSS2DRenderer, CSS2DObject} from 'three/CSS2DRenderer';
+// import { label } from 'three/examples/jsm/nodes/Nodes.js';
 // import anime from 'animejs';
-
+import { createTextLabels } from './extra/testText.js';
 
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
@@ -61,8 +63,27 @@ scene.add(floor);
 
 
 // card texture
+const apTextureLoader = new THREE.TextureLoader();
+const apTexture = apTextureLoader.load('/imgs/UI/ap/ap20.png')
+const apMaterial = new THREE.MeshToonMaterial({
+  transparent: true,
+    map: apTexture, 
+    emissive: 0xffffff, // initially no emissive color
+    emissiveIntensity: .08
+});
+
+//card geo
+const apGeometry = new THREE.PlaneGeometry( 1.5, 1.5);
+// card mesh
+const ap = new THREE.Mesh( apGeometry, apMaterial );
+// card position
+ap.position.set( 4.5,-2.4, 3,0)
+scene.add(ap);
+
+
+// card texture
 const cardTextureLoader = new THREE.TextureLoader();
-const cardTexture = cardTextureLoader.load('/imgs/ILOVEYOU.png')
+const cardTexture = cardTextureLoader.load('/imgs/cards/StomWorm.png')
 const cardMaterial = new THREE.MeshToonMaterial({
     map: cardTexture, 
     emissive: 0x000000, // initially no emissive color
@@ -81,7 +102,7 @@ scene.add(card);
 
 // enemy card texture
 const EcardTextureLoader = new THREE.TextureLoader();
-const EcardTexture = EcardTextureLoader.load('/imgs/stuxnet.png')
+const EcardTexture = EcardTextureLoader.load('/imgs/cards/stuxnet.png')
 const EcardMaterial = new THREE.MeshToonMaterial( {map: EcardTexture, transparent: true});
 cardMaterial.side = THREE.DoubleSide;
 //card geo
@@ -192,10 +213,40 @@ document.querySelector('#attack').addEventListener('click', (event) => {
 
 
 
+// hp bar test
+// Create an HTML element
+const testText = document.createElement('div');
+testText.textContent = 'TEST TEST TEST';
+testText.style.marginTop = '-1em'; // Center vertically
+
+// Wrap it in a CSS2DObject
+const labelObject = new CSS2DObject(testText);
+labelObject.position.set(-5.5, 1, -10.0); // Position in 3D space 
+scene.add(labelObject);
+
+// Set up the CSS2DRenderer
+const labelRenderer = new CSS2DRenderer();
+labelRenderer.setSize(window.innerWidth, window.innerHeight);
+labelRenderer.domElement.style.position = 'absolute';
+labelRenderer.domElement.style.top = '0px';
+labelRenderer.domElement.style.pointerEvents = 'none';
+document.body.appendChild(labelRenderer.domElement);
+
+
+
+const textCanvas = document.createElement('canvas');
+const textContext = textCanvas.getContext('2d');
+textContext.font = '24px Arial';
+textContext.fillText('Hello, world!', 1, 2, 0);
+
+const textTexture = new THREE.Texture(textCanvas);
+const textSprite = new THREE.Sprite(new THREE.SpriteMaterial({ map: textTexture }));
+scene.add(textSprite);
+
+
 
 const composer = new EffectComposer(renderer);
 composer.addPass(new RenderPass(scene, camera));
-
 
 // bloom
 const bloomPass = new UnrealBloomPass(new THREE.Vector2(window.innerWidth, window.innerHeight), 1.5, 0.4, 0.85);
@@ -210,9 +261,9 @@ renderer.toneMapping = THREE.ReinhardToneMapping;
 renderer.toneMappingExposure = Math.pow(0.9, 4.0); // Adjust for desired brightness
 
 
-
 function animate() {
 	requestAnimationFrame( animate );
+
 
     if(returning){
         card.position.lerp(startPoint, 0.1);
@@ -221,9 +272,12 @@ function animate() {
             returning = false;
         }
     }
-    floor.rotation.z +=0.001
+    // render the text
+    labelRenderer.render(scene, camera);
     // Ecard.rotation.y += 0.005
     // card.rotation.y += -0.0061
+
+    floor.rotation.z +=0.001
     skybox.rotation.y += -0.0015 
     skybox.rotation.x += -0.0015 
     composer.render();

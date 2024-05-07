@@ -1,5 +1,5 @@
-import { Model, DataTypes } from 'sequelize';
-import sequelize from '../config/connection';
+const sequelize=require ('../config/connection')
+const { Model, DataTypes } = require('sequelize');
 
 class Character extends Model {}
 
@@ -27,15 +27,8 @@ Character.init(
         type: DataTypes.INTEGER,
         allowNull:false
     },
-
-    user_id: {
-      type: DataTypes.INTEGER,
-      references: {
-        model: 'user',
-        key: 'id',
-      },
-    },
   },
+  
   {
     sequelize,
     timestamps: false,
@@ -45,4 +38,4 @@ Character.init(
   }
 );
 
-export default Character;
+module.exports= Character;
