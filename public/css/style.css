@@ -6,6 +6,14 @@ body{
   box-sizing: border-box;
 }
 
+.terminal {
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  left: -70px;
+  z-index: 1; 
+  transform: scale(.85);/* Ensure the terminal is on top of the Three.js canvas */
+}
 
 
 .taskbar {
@@ -30,6 +38,7 @@ body{
     border: none;
     padding: 5px 10px;
     font-size: 16px;
+    font-weight: bolder;
     cursor: pointer;
     box-shadow: -2px 2px rgb(179, 179, 179) inset, 
     -2px 2px rgb(37, 37, 37);
@@ -52,6 +61,8 @@ body{
     opacity: 1; /* Start with 1 opacity, so the menu is visible initially */
     
   }
+
+
   .start-menu li {
   list-style: none;
 
@@ -70,6 +81,8 @@ body{
   box-shadow: 0px 0px 10px #f5f5f5e5;
   }
 
+
+
   #sidebar {
     position:absolute;
     top: 43px;
@@ -87,7 +100,23 @@ body{
 
   .band {
     position: absolute;
-
     right: 50px;
     transform: scale(.78);
   }
+
+.log-bttn{
+  background-color: #9c9c9c;
+    color: #FFFFFF;
+    border: none;
+    margin-left: 15px;
+    padding: 5px 10px;
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: -2px 2px rgb(179, 179, 179) inset, 
+    -2px 2px rgb(37, 37, 37);
+}
+
+.log-bttn:hover {
+  background-color: #000000;
+  color: #00ff15;
+}
