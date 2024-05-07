@@ -1,3 +1,8 @@
+<img class="terminal" src="/imgs/UI/terminal.png"/>
+<div class="terminal-text">
+  <!-- Your text here -->
+  <p>"In the neon-lit shadows of the sprawling cities, I weave spells of code and chaos, bending the digital ether to my will.My creed is the liberation of information, breaking the chains that bind free knowledge, for in data, there is power and in secrecy, oppression."</p>
+</div>
 <div class="taskbar">
   <button class="start-button">--Hack--</button>
   <div class="start-menu" id="start-menu" style="display: none">
@@ -14,11 +19,15 @@
   </div>
   <img  class="band" src="/imgs/UI/bandwith.png"/>
   {{#if loggedIn}}
-  <button id="logout">Logout</button>
+  <button class="log-bttn" id="logout">Logout</button>
   {{else}}
-  <a href="/login"><button>--Login--</button></a>
-  <a href="/register"><button>--Register--</button></a>
+  <a href="/login"><button class="log-bttn">--Login--</button></a>
+  <a href="/register"><button class="log-bttn">--Register--</button></a>
   {{/if}}
+    <audio controls loop autoplay preload="auto" class="">
+    <source src="./audio/hackMe.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+    </audio>
 </div>
 <script defer type="module" src="./js/startMenu.js"></script>
 <script defer type="module" src="./js/render.js"></script>
