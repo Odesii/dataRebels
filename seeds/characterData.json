@@ -4,41 +4,48 @@
         "hp": 100 ,
         "attack": 10,
         "defense": 10,
-        "ap": 15
+        "ap": 15,
+        "img": "/imgs/cards/SpriteSpider.png"
+
     },
     {
         "name":"ILOVEYOU",
         "hp": 100 ,
         "attack": 10,
         "defense": 10,
-        "ap": 15
+        "ap": 15,
+        "img": "/imgs/cards/ILOVEYOU.png"
     },
     {
         "name":"MyDoom",
         "hp": 100 ,
         "attack": 10,
         "defense": 10,
-        "ap": 15
+        "ap": 15,
+        "img": "/imgs/cards/myDOOM.png"
     },
     {
         "name":"StormWorm",
         "hp": 100,
         "attack": 10,
         "defense": 10,
-        "ap": 15
+        "ap": 15,
+        "img": "/imgs/cards/StormWorm.png"
     },
     {
         "name":"Code Red",
         "hp": 100,
         "attack": 10,
         "defense": 10,
-        "ap": 15
+        "ap": 15,
+        "img": "/imgs/cards/CODERED.png"
     },
     {
         "name":"Stuxnet",
         "hp": 100,
         "attack": 10,
         "defense": 10,
-        "ap": 15
+        "ap": 15,
+        "img": "/imgs/cards/stuxnet.png"
     }
 ]

@@ -7,6 +7,10 @@ import { DragControls } from 'three/addons/controls/DragControls.js';
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
 
+let card;
+//setting animation state
+let returning = false;
+
 const renderer = new THREE.WebGLRenderer();
 renderer.setSize( window.innerWidth, window.innerHeight );
 document.body.appendChild( renderer.domElement );
@@ -29,9 +33,13 @@ const skybox = new THREE.Mesh(skyboxGeometry, skyboxMaterial);
 // Add the skybox to the scene
 scene.add(skybox);
 
-// card texture
-const cardTextureLoader = new THREE.TextureLoader();
-const cardTexture = cardTextureLoader.load('/imgs/cards/StomWorm.png')
+let startPoint; // = new THREE.Vector3(card.position.x, card.position.y, card.position.z)
+function renderCard(url) {
+    console.log('NEW URL FROM TEST',url)
+    // card texture
+    const cardTextureLoader = new THREE.TextureLoader();
+    const cardTexture = cardTextureLoader.load(url)
+
 const cardMaterial = new THREE.MeshBasicMaterial({
     map: cardTexture, 
 });
@@ -39,11 +47,19 @@ cardMaterial.side = THREE.DoubleSide;
 //card geo
 const cardGeometry = new THREE.BoxGeometry( 2, 2.5, 0.1 );
 // card mesh
-const card = new THREE.Mesh( cardGeometry, cardMaterial );
+card = new THREE.Mesh( cardGeometry, cardMaterial );
 // card position
 card.position.set( -3.5,.5, 1,0)
-const startPoint = new THREE.Vector3(card.position.x, card.position.y, card.position.z)
 scene.add(card);
+startPoint = new THREE.Vector3(card.position.x, card.position.y, card.position.z)
+
+// Setup DragControls
+const controls = new DragControls([card], camera, renderer.domElement);
+controls.addEventListener('dragend', event =>{
+    returning = true;
+})
+}
+
 
 // create Terminal 
 const cubeTextureLoader = new THREE.TextureLoader();
@@ -58,13 +74,11 @@ scene.add( cube );
 
 
 
-//setting animation state
-let returning = false;
 // Setup DragControls
-const controls = new DragControls([card], camera, renderer.domElement);
-controls.addEventListener('dragend', event =>{
-    returning = true;
-})
+// const controls = new DragControls([card], camera, renderer.domElement);
+// controls.addEventListener('dragend', event =>{
+//     returning = true;
+// })
 
 
 camera.position.z = 5;
@@ -85,3 +99,5 @@ function animate() {
 }
 
 animate();
+
+export  {renderCard}
