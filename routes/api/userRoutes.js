@@ -4,10 +4,10 @@ const { User, Character } = require('../../models');
 router.put('/roll', async (req, res) => {
     try {
         const characters = await Character.findAll({});
-
-        const userData = await User.update(
+        const character_id =  Math.floor(Math.random() * characters.length )+1;
+        await User.update(
             {
-                character_id: characters[Math.floor(Math.random() * characters.length)].id
+                character_id
             },
             {
                 where: {
@@ -15,12 +15,13 @@ router.put('/roll', async (req, res) => {
                 },
             }
         );
-
-        res.status(200).json(userData);
+        const characterData = await Character.findByPk(character_id)
+        res.status(200).json(characterData);
     } catch (err) {
         res.status(400).json(err);
     }
 });
+
 
 router.post('/register', async (req, res) => {
     try {
@@ -59,7 +60,7 @@ router.post('/register', async (req, res) => {
 
 router.post('/login', async (req, res) => {
     try {
-        const userData = await User.findOne({ where: { username: req.body.username } });
+        const userData = await User.findOne({ where: { username: req.body.username }});
 
         if (!userData) {
             res
@@ -77,11 +78,12 @@ router.post('/login', async (req, res) => {
             return;
         }
 
+
         req.session.save(() => {
             req.session.user_id = userData.id;
             req.session.loggedIn = true;
             
-            res.json({ user: userData, message: 'You are now logged in!' });
+            res.json({ user: userData,  message: 'You are now logged in!' });
         });
 
     } catch (err) {
