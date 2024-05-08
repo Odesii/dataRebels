@@ -2,6 +2,20 @@ const router = require('express').Router();
 const { User, Character, Enemy, Game } = require('../../models');
 const withAuth = require('../../utils/auth');
 
+router.get('/:id', withAuth, async (req, res) => {
+    try {
+        const gameData = await Game.findOne({
+            where: {
+                id: req.params.id
+            }
+        });
+
+        res.status(200).json(gameData);
+    } catch (err) {
+        res.status(400).json(err);
+    }
+});
+
 router.post('/', withAuth, async (req, res) => {
     try {
         const gameData = await Game.findOne({
@@ -47,6 +61,67 @@ router.post('/', withAuth, async (req, res) => {
         });
   
         res.status(200).json(newGame);
+    } catch (err) {
+        res.status(400).json(err);
+    }
+});
+
+router.put('/:id', withAuth, async (req, res) => {
+    try {
+        // 1. enemy_hp, action_take
+        if (req.body.enemy_hp && req.body.action_taken) {
+            const updateGame = await Game.update(
+                {
+                    enemy_hp: req.body.enemy_hp,
+                    action_taken: req.body.action_taken
+                },
+                {
+                    where: {
+                        id: req.params.id
+                    }
+                }
+            );
+
+            res.status(200).json(updateGame);
+        }
+
+        // 2. user_defense, user_ap, action_taken
+        else if (req.body.user_defense && req.body.user_ap &&req.body.action_taken) {
+            const updateGame = await Game.update(
+                {
+                    user_defense: req.body.user_defense,
+                    user_ap: req.body.user_ap,
+                    action_taken: req.body.action_taken
+                },
+                {
+                    where: {
+                        id: req.params.id
+                    }
+                }
+            );
+
+            res.status(200).json(updateGame);
+        }
+
+        // 3. action_taken, user_defense, enemy_defense, turn
+        else if (req.body.action_taken && req.body.user_defense &&
+            req.body.enemy_defense && req.body.turn) {
+            const updateGame = await Game.update(
+                {
+                    action_taken: req.body.action_taken,
+                    user_defense: req.body.user_defense,
+                    enemy_defense: req.bodyenemy_defense,
+                    turn: req.body.turn
+                },
+                {
+                    where: {
+                        id: req.params.id
+                    }
+                }
+            );
+
+            res.status(200).json(updateGame);
+        }
     } catch (err) {
         res.status(400).json(err);
     }
