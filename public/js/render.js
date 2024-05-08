@@ -211,31 +211,31 @@ document.querySelector('#attack').addEventListener('click', (event) => {
       }, 400);
   });
 
-// player take damage
-document.querySelector('#health-bar').addEventListener('change', (event) => {
-    event.preventDefault();
-    const cardMat = card.material;
+// // player take damage
+// document.querySelector('#data-').addEventListener('change', (event) => {
+//     event.preventDefault();
+//     const cardMat = card.material;
 
-    cardMat.emissive.set(0xa44141)
+//     cardMat.emissive.set(0xa44141)
     
-    console.log('Animation started!')
-    anime({
-        targets: cardMat, 
-        emissiveIntensity: [0.5, 0.1],
-        duration: 150,
-        easing: 'easeInOutSine',
-        direction: 'alternate',
-        loop: 2,
-        delay: 50,
-        complete: () => {
-          console.log('Animation ended!');
-        }
-      });
+//     console.log('Animation started!')
+//     anime({
+//         targets: cardMat, 
+//         emissiveIntensity: [0.5, 0.1],
+//         duration: 150,
+//         easing: 'easeInOutSine',
+//         direction: 'alternate',
+//         loop: 2,
+//         delay: 50,
+//         complete: () => {
+//           console.log('Animation ended!');
+//         }
+//       });
 
-      setTimeout(() => {
-        cardMat.emissive.set(0x000000)
-      }, 400);
-  });
+//       setTimeout(() => {
+//         cardMat.emissive.set(0x000000)
+//       }, 400);
+//   });
 
 
 const composer = new EffectComposer(renderer);

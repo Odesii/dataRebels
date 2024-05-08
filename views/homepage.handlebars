@@ -1,10 +1,10 @@
 <img class="terminal" src="/imgs/UI/terminal.png"/>
 <div class="terminal-text">
   <!-- Your text here -->
-  <p>{Acid Burn}</p>
-  <pre>[[Network Strength]]</pre><p id="health-bar">▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓</p>
-  <p>{Zero Bytes}</p>
-  <pre>[[Network Strength]]</pre><p id="e-health-bar">▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓</p>
+  <p>{{user.username}}</p>
+  <pre>[[Network Strength]]</pre><p id="health-bar" data-user-hp="{{game.user_hp}}">▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓</p>
+  <p>{{enemy.name}}</p>
+  <pre>[[Network Strength]]</pre><p id="e-health-bar" data-e-hp="{{game.enemy_hp}}">▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓</p>
   <button>End Turn</button>
 </div>
 <div class="taskbar">
@@ -20,6 +20,9 @@
       <li><img id="defend" src="/imgs/moves/Encrypt.png" /></li>
       <li><img id="spyderSpecial" src="/imgs/moves/Spyder.png" /></li>
     </ul>
+    <div>
+      <p>Turn Count:{{game.turn}}</p>
+    </div>
   </div>
 
   {{#if loggedIn}}
