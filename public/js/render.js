@@ -62,24 +62,6 @@ scene.add(floor);
 
 
 
-// card texture
-const apTextureLoader = new THREE.TextureLoader();
-const apTexture = apTextureLoader.load('/imgs/UI/ap/ap20.png')
-const apMaterial = new THREE.MeshToonMaterial({
-  transparent: true,
-    map: apTexture, 
-    emissive: 0xffffff, // initially no emissive color
-    emissiveIntensity: .08
-});
-
-//card geo
-const apGeometry = new THREE.PlaneGeometry( 1.5, 1.5);
-// card mesh
-const ap = new THREE.Mesh( apGeometry, apMaterial );
-// card position
-ap.position.set( 4.5,-2.4, 3,0)
-scene.add(ap);
-
 
 // card texture
 const cardTextureLoader = new THREE.TextureLoader();

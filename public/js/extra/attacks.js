@@ -9,10 +9,10 @@ document.querySelector('#attack').addEventListener('click', (event) => {
   
   if (usernameElement) {
     const existingText = usernameElement.textContent;
-    const username = existingText.split(':')[0]; // extract the username
-    const printText = textToInsert.trim(); // only print the new text
-    
-    printLine (printText); // print the new text after the existing text
+    const username = existingText.split(':')[0];
+    const printText = textToInsert.trim(); 
+    usernameElement.textContent = username + ': '; // clear existing text and set username
+    printLine(printText); 
   }
 })
 

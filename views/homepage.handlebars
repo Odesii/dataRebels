@@ -1,43 +1,14 @@
-<img class="terminal" src="/imgs/UI/terminal.png"/>
-<div class="terminal-text">
-  <!-- Your text here -->
-  <p>{{user.username}}</p>
-  <pre>[[Network Strength]]</pre><p id="health-bar" data-user-hp="{{game.user_hp}}">▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓</p>
-  <p>{{enemy.name}}</p>
-  <pre>[[Network Strength]]</pre><p id="e-health-bar" data-e-hp="{{game.enemy_hp}}">▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓</p>
-  <button>End Turn</button>
-</div>
-<div class="taskbar">
-  <button class="start-button">--Hack--</button>
-  <div class="start-menu" id="start-menu" style="display: none">
-    <p id="sidebar">&ensp;&ensp;&ensp;&ensp;L33t 0S&emsp;
-      &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-      &emsp;&emsp;&emsp;&emsp;</p>
-    <!-- Add menu items here -->
-    <ul>
-      <li><img id="attack" src="/imgs/moves/HACK.png" /></li>
-      <li><img id="loveSpecial" src="/imgs/moves/LoveDDOS.png" /></li>
-      <li><img id="defend" src="/imgs/moves/Encrypt.png" /></li>
-      <li><img id="spyderSpecial" src="/imgs/moves/Spyder.png" /></li>
-    </ul>
-    <div>
-      <p>Turn Count:{{game.turn}}</p>
-    </div>
-  </div>
+<
 
-  {{#if loggedIn}}
+
   <button class="log-bttn roll">--Roll--</button>
   <a href="/play"><button class="log-bttn play">--Play--</button></a>
   <button class="log-bttn" id="logout">--Logout--</button>
-  {{else}}
-  <a href="/login"><button class="log-bttn">--Login--</button></a>
-  <a href="/register"><button class="log-bttn">--Register--</button></a>
-  {{/if}}
-    <audio controls loop autoplay preload="auto" class="">
+    {{!-- <audio controls loop autoplay preload="auto" class="">
     <source src="./audio/hackMe.mp3" type="audio/mpeg">
     Your browser does not support the audio element.
-    </audio>
+    </audio> --}}
 </div>
 <script src="./js/extra/hpBar.js"></script>
 <script defer type="module" src="./js/startMenu.js"></script>
-<script defer type="module" src="./js/render.js"></script>
+<script defer type="module" src="./js/3dRender/homePage.js"></script>
