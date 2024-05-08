@@ -1,7 +1,5 @@
 //functions for the combat logic so we can call on it when we do the order of events
-
-import { any } from "three/examples/jsm/nodes/Nodes.js";
-
+const attackButton=document.querySelector('#attack');
 //PUT hp, ap, enemy hp enemy, ap, turn
 
 //GOAL get attack to register in front end and log numbers
@@ -13,10 +11,7 @@ async function fetchCharacter(characterId) {
     return characterData;
 }
 
-async function fetchGameData(gameId) {
-    const response = await fetch(`/api/game/${gameId}`);
-    return response.json();  // Parses the JSON response into JavaScript objects.
-}
+
 
 async function fetchEnemy(enemyId){
     const response=await fetch(`/api/enemy/${enemyId}`);
@@ -24,13 +19,14 @@ async function fetchEnemy(enemyId){
 }
 
 async function fetchGame(gameId) {
-    const response = await fetch(`/api/game/${gameId}`);
+    const response = await fetch(`/api/games/${gameId}`);
     const gameData = await response.json();
+    console.log('this is the fetch game',gameData)
     return gameData;
 }
 //  update character data in the database
 async function updateGame(gameId, updates) {
-    await fetch(`/api/game/${gameId}`, {
+    await fetch(`/api/games/${gameId}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(updates)
@@ -38,15 +34,16 @@ async function updateGame(gameId, updates) {
     return fetchGame(gameId); // Fetch updated data
 }
 
-async function playerAttack(gameId) {
-    const game = await fetchGameData(gameId);
 
+async function playerAttack(gameId) {
+    const game = await fetchGame(gameId);
+console.log('this is supposed to be game data',game)
     if (game.action_taken) {
         console.log("An action has already been taken this turn.");
         return;
     }
 
-    const character = await fetchCharacter(game.character_id);
+    const character = await fetchCharacter(game.user_id);
     const critChance = Math.random();
     const baseDamage = Math.round(character.attack + (character.attack * Math.random()));
     const isCriticalHit = critChance > 0.75;
@@ -58,7 +55,7 @@ async function playerAttack(gameId) {
         enemy_hp: newEnemyHp,
         action_taken: true  
     });
-
+    console.log(`enemy took ${damage} damage`)
     return {
         damage: damage,
         isCriticalHit: isCriticalHit,
@@ -66,10 +63,36 @@ async function playerAttack(gameId) {
     };
 }
 
+async function playerAttack(gameId) {
+    const game = await fetchGame(gameId);
+console.log('this is supposed to be game data',game)
+    if (game.action_taken) {
+        console.log("An action has already been taken this turn.");
+        return;
+    }
 
+    const character = await fetchCharacter(game.user_id);
+    const critChance = Math.random();
+    const baseDamage = Math.round(character.attack + (character.attack * Math.random()));
+    const isCriticalHit = critChance > 0.75;
+    const actualDamage = isCriticalHit ? baseDamage * 3 : baseDamage;
+    const damage = Math.max(actualDamage - game.enemy_defense, 0);
+    const newEnemyHp = Math.max(game.enemy_hp - damage, 0);
+
+    await updateGame(gameId, {
+        enemy_hp: newEnemyHp,
+        action_taken: true  
+    });
+    console.log(`enemy took ${damage} damage`)
+    return {
+        damage: damage,
+        isCriticalHit: isCriticalHit,
+        newEnemyHp: newEnemyHp
+    };
+}
 
 async function playerDefend(gameId) {
-    const game = await fetchGameData(gameId);
+    const game = await fetchGame(gameId);
 
     if (game.action_taken) {
         console.log("An action has already been taken this turn.");
@@ -94,9 +117,9 @@ async function playerDefend(gameId) {
 
 
 async function nextTurn(gameId) {
-    const game = await fetchGameData(gameId);
+    const game = await fetchGame(gameId);
 
-    const character = await fetchCharacter(game.character_id);
+    const character = await fetchCharacter(game.user_id);
     const enemy = await fetchEnemy(game.enemy_id);
 
     await updateGame(gameId, {
@@ -109,4 +132,12 @@ async function nextTurn(gameId) {
     console.log("Next Turn");
     return game.turn += 1; //to be logged or not
 }
+
+
+
+attackButton.addEventListener('click', async()=>{
+    const gameId=2;
+    const battle=await playerAttack(gameId);
+    console.log("this is",battle)
+});
 
