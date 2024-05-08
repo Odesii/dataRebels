@@ -2,7 +2,7 @@ const router = require('express').Router();
 const { User, Character, Enemy, Game } = require('../../models');
 const withAuth = require('../../utils/auth');
 
-router.get('/:id', withAuth, async (req, res) => {
+router.get('/:id', withAuth, async (req, res) => { //gets specific game
     try {
         const gameData = await Game.findOne({
             where: {
@@ -47,7 +47,7 @@ router.post('/', withAuth, async (req, res) => {
             }
         });
 
-        const newGame = await Game.create({
+        const newGame = await Game.create({//created new row with chosen data
             user_id: req.session.user_id,
             enemy_id: enemyData.id,
             user_hp: characterData.hp,
@@ -68,6 +68,7 @@ router.post('/', withAuth, async (req, res) => {
 
 router.put('/:id', withAuth, async (req, res) => {
     try {
+    console.log(req.body)
         // 1. enemy_hp, action_take
         if (req.body.enemy_hp && req.body.action_taken) {
             const updateGame = await Game.update(
@@ -104,13 +105,11 @@ router.put('/:id', withAuth, async (req, res) => {
         }
 
         // 3. action_taken, user_defense, enemy_defense, turn
-        else if (req.body.action_taken && req.body.user_defense &&
-            req.body.enemy_defense && req.body.turn) {
+        else if (req.body.action_taken!=undefined && req.body.turn) {
+            console.log("this is game routes action and turn")
             const updateGame = await Game.update(
                 {
                     action_taken: req.body.action_taken,
-                    user_defense: req.body.user_defense,
-                    enemy_defense: req.bodyenemy_defense,
                     turn: req.body.turn
                 },
                 {

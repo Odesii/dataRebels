@@ -31,10 +31,10 @@ router.get('/play', withAuth, async (req, res) => {
         }
     });
 
-    const game = gameData.get({ plan: true });
-    const user = userData.get({ plan: true });
-    const character = characterData.get({ plan: true });
-    const enemy = enemyData.get({ plan: true });
+    const game = gameData.get({ plain: true });
+    const user = userData.get({ plain: true });
+    const character = characterData.get({ plain: true });
+    const enemy = enemyData.get({ plain: true });
     res.render('play', { game, user, character, enemy, loggedIn: req.session.loggedIn })
 })
 
