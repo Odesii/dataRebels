@@ -22,11 +22,15 @@ console.log('No IMAGE REROLLING')
 rollCharacter();
 }
     renderCard(character.img)
+
+    
+
+
     setTimeout(function() {
         console.log('TIME OUT', reRoll)
         reRoll.style.display= 'inline'
         console.log(reRoll)
-    }, 1000 )
+    }, 3000 )
     current.innerHTML = ''
     current.innerHTML = character.name
 };
