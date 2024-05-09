@@ -35,6 +35,10 @@ User.init(
     character_id: {
       type: DataTypes.INTEGER,
       allowNull: true
+    },
+    highest_level:{
+      type:DataTypes.INTEGER,
+      allowNull:false
     }
   },
   {
