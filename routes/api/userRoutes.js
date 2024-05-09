@@ -23,6 +23,20 @@ router.put('/roll', withAuth, async (req, res) => {
     }
 });
 
+router.delete('/gameover', async (req, res) => {
+    try {
+        const userData = await User.destroy({
+            where: {
+                id: req.session.user_id
+            }
+        });
+
+        req.session.loggedIn = false;
+        res.status(200).json(userData);
+    } catch (err) {
+        res.status(500).json(err);
+    }
+});
 
 router.post('/register', async (req, res) => {
     try {

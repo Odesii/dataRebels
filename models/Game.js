@@ -23,6 +23,10 @@ Game.init(
             type: DataTypes.INTEGER,
             allowNull: false
         },
+        user_ap_img: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
         enemy_hp: {
             type: DataTypes.INTEGER,
             allowNull: false
