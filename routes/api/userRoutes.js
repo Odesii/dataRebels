@@ -11,7 +11,7 @@ router.put('/roll', async (req, res) => {
             },
             {
                 where: {
-                    id: req.session.user_id,
+                    id: req.session.user_id,  //checks to see if character is assigned to correct user
                 },
             }
         );
