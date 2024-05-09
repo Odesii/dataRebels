@@ -12,7 +12,8 @@ const nextTurnButton=document.querySelector('#nextTurn')
 //attack needs to interact with health bars ::extras hp bars :: enemy and player
 //textdisplay js to interact with defend and attack only attacks interact atm 
 // optional coins
-//
+//if player hits 0 delete user and redirect them to sign up page
+//if enemy hits 0 send them to home screen to click next level then advance to next level
 async function fetchCharacter(characterId) { //GETs character data based on the character ID
     const response = await fetch(`/api/character/${characterId}`);
     const characterData = await response.json();
