@@ -1,5 +1,5 @@
 import { enemyHit, enemyDGlow } from "./render.js";
-import { displayText,printText } from "./extra/textDisplay.js";
+import { displayText,printLine } from "./extra/textDisplay.js";
 
 const attackButton=document.querySelector('#attack');
 const actionTaken = document.querySelector('#actionTaken')
@@ -76,7 +76,6 @@ async function playerAttack(gameId) {
         action_taken: true  
     });
 
-    
     const enemy = await fetchEnemy(game.enemy_id);
     const baseHp = enemy.hp;
     await enemyTakeDamage(baseHp, newEnemyHp);
@@ -84,11 +83,9 @@ async function playerAttack(gameId) {
     const updateHp = document.getElementById("enemy-hp");
     updateHp.innerHTML = "";
     updateHp.innerHTML = `${newEnemyHp}/${enemy.hp}`
-    
-    displayText(`Hack deployed...Target takes ${damage} damage`);
+
     await endGame(gameId);
-    
-    console.log(`enemy took ${damage} damage`)
+    displayText(`#userMsg`,`Hack sent ... Target took ${damage} damage`)
     return {
         damage: damage,
         isCriticalHit: isCriticalHit,
@@ -107,6 +104,7 @@ async function enemyAttack(gameId) {
     const newUserHp = Math.max(game.user_hp - damage, 0);
     
     console.log(`Enemy attacks for ${damage} damage`)
+    displayText(`#enemyMsg`,`Hack received ... You took ${damage} damage`)
     await updateGame(gameId, {
         user_hp: newUserHp
     });
@@ -119,7 +117,6 @@ async function enemyAttack(gameId) {
     updateHp.innerHTML = "";
     updateHp.innerHTML = `${newUserHp}/${character.hp}`
 
-    displayText(`Hack deployed...You take ${damage} damage`);
     await endGame(gameId);
 
     console.log(`user took ${damage} damage`)
@@ -146,15 +143,15 @@ async function playerDefend(gameId) {
     }
 
     const newDefense = game.user_defense * 2;
-
-
+    
     await updateGame(gameId, {
         user_defense: newDefense,
         user_ap: game.user_ap - 2,
         action_taken: true // true means action has been taken
     });
-
-
+    
+    displayText(`#userMsg`,`Encryption Engaged`)
+    
     return newDefense;
 }
 
@@ -172,8 +169,8 @@ async function enemyDefend(gameId) {
         enemy_defense: newDefense,
         enemy_ap: game.enemy_ap - 2
     });
-
     console.log(`Enemy defends`)
+    displayText(`#enemyMsg`,`Encryption Engaged`)
     return newDefense;
 }
 

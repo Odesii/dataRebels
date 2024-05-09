@@ -68,6 +68,7 @@ transform: scale(50%);
 }
 
 #actionTaken {
+  pointer-events: none;
   z-index:123;
   position: absolute;
   top: 20%;
@@ -78,6 +79,7 @@ transform: scale(50%);
 }
 
 #color1{
+  pointer-events: none;
   color:#00ff15;
   text-shadow: 
   0 0 5px #00ff15,
