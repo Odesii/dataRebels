@@ -68,7 +68,6 @@ router.post('/', withAuth, async (req, res) => {
 
 router.put('/:id', withAuth, async (req, res) => {
     try {
-    console.log(req.body)
         // 1. enemy_hp, action_take
         if (req.body.enemy_hp && req.body.action_taken) {
             const updateGame = await Game.update(
@@ -105,7 +104,7 @@ router.put('/:id', withAuth, async (req, res) => {
         }
 
         // 3. action_taken, user_defense, enemy_defense, turn
-        else if (req.body.action_taken!=undefined && req.body.turn) {
+        else if (req.body.action_taken!=undefined && req.body.turn) {//!= was used because it is a boolean and makes sure that the required field is there 
             console.log("this is game routes action and turn")
             const updateGame = await Game.update(
                 {
@@ -121,6 +120,60 @@ router.put('/:id', withAuth, async (req, res) => {
 
             res.status(200).json(updateGame);
         }
+        else if(req.body.user_hp){
+            const updateGame=await Game.update(
+                {
+                    user_hp: req.body.user_hp
+                },
+                {
+                where:{
+                    id: req.params.id
+                }
+                }
+            )
+            res.status(200).json(updateGame)
+        }
+        else if(req.body.enemy_defense && req.body.enemy_ap){
+            const updateGame=await Game.update(
+                {
+                    enemy_defense: req.body.enemy_defense,
+                    enemy_ap:req.body.enemy_ap
+                },
+                {
+                where:{
+                    id: req.params.id
+                }
+                }
+            )
+            res.status(200).json(updateGame)
+        }
+        else if(req.body.user_defense){
+            const updateGame=await Game.update(
+                {
+                    user_defense: req.body.user_defense
+                },
+                {
+                where:{
+                    id: req.params.id
+                }
+                }
+            )
+            res.status(200).json(updateGame)
+        }
+        else if(req.body.enemy_defense){
+            const updateGame=await Game.update(
+                {
+                    enemy_defense: req.body.enemy_defense
+                },
+                {
+                where:{
+                    id: req.params.id
+                }
+                }
+            )
+            res.status(200).json(updateGame)
+        }
+        
     } catch (err) {
         res.status(400).json(err);
     }
