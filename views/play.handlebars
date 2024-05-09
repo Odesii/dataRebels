@@ -2,10 +2,10 @@
 <img class="terminal" src="/imgs/UI/terminal.png"/>
 <div class="terminal-text">
   <p id="userMsg">{{user.username}}: </p>
-  <pre>[[Network Strength]]</pre><p id="health-bar" data-user-hp="{{game.user_hp}}">▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓</p>
+  <pre>[[Network Strength]]</pre><p id="health-bar" data-user-hp="{{game.user_hp}}">▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓</p>
   <p>{{enemy.name}}:</p>
-  <pre>[[Network Strength]]</pre><p id="e-health-bar" data-e-hp="{{game.enemy_hp}}">▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓</p>
-  <button>End Turn</button>
+  <pre>[[Network Strength]]</pre><p id="e-health-bar" data-e-hp="{{game.enemy_hp}}">▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓</p>
+  <button >End Turn</button>
   
 </div>
 <div class="taskbar">
@@ -39,7 +39,7 @@
     Your browser does not support the audio element.
     </audio>
 </div>
-{{!-- <section class="card">
+{{!-- {{!-- <section class="card">
     <p>Attack: {{character.attack}}</p>
     <p>Defense: {{character.defense}}</p>
     <p>AP: {{game.user_ap}}</p>
@@ -49,12 +49,8 @@
     <p>Defense: {{enemy.defense}}</p>
     <p>AP: {{game.enemy_ap}}</p>
 </section> --}}
-
-
-<button id="attack">attack</button>
-<button id="defend">defend</button>
 <button id="nextTurn">next turn</button>
-<script src="./js/gameLogic.js"></script>
-<script src="./js/extra/hpBar.js"></script>
+<script type="module" src="./js/gameLogic.js"></script>
+{{!-- <script src="./js/extra/hpBar.js"></script> --}}
 <script defer type="module" src="./js/startMenu.js"></script>
 <script defer type="module" src="./js/render.js"></script>
