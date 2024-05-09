@@ -14,7 +14,7 @@ if(req.session.loggedIn){
     }] 
 });
 
-const user = userData.get({plain: true})
+const user = userData.get({plain: true});
 const {character} = userData.get({plain: true})
 return res.render('homepage', {user, character, loggedIn: req.session.loggedIn })
 }
