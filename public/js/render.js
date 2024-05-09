@@ -70,7 +70,7 @@ function renderCard(url) {
     // card texture
     const cardTextureLoader = new THREE.TextureLoader();
 const cardTexture = cardTextureLoader.load(url)
-const cardMaterial = new THREE.MeshPhongMaterial({
+const cardMaterial = new THREE.MeshStandardMaterial({
     map: cardTexture, 
     emissive: 0x000000, // initially no emissive color
     emissiveIntensity: 0
@@ -115,7 +115,11 @@ controls.addEventListener('dragend', event =>{
 // enemy card texture
 const EcardTextureLoader = new THREE.TextureLoader();
 const EcardTexture = EcardTextureLoader.load('/imgs/cards/stuxnet.png')
-const EcardMaterial = new THREE.MeshToonMaterial( {map: EcardTexture, transparent: true});
+const EcardMaterial = new THREE.MeshToonMaterial( {map: EcardTexture,  
+  emissive: 0x000000, // initially no emissive color
+  emissiveIntensity: 0}
+
+);
 EcardMaterial.side = THREE.DoubleSide;
 //card geo
 const Egeometry = new THREE.BoxGeometry( 3.5, 4.5, 0.1);
@@ -198,7 +202,7 @@ renderer.domElement.addEventListener('click', (event) => {
 document.querySelector('#attack').addEventListener('click', (event) => {
     event.preventDefault();
     const cardMat = card.material;
-
+    const EcardMat= Ecard.material;
     cardMat.emissive.set(0xffff)
     
     console.log('Animation started!')
@@ -210,14 +214,31 @@ document.querySelector('#attack').addEventListener('click', (event) => {
         direction: 'alternate',
         loop: 2,
         delay: 50,
-        complete: () => {
-          console.log('Animation ended!');
+        complete: () => {;
         }
       });
 
       setTimeout(() => {
         cardMat.emissive.set(0x000000)
       }, 400);
+      
+      setTimeout(() => {
+        EcardMat.emissive.set(0xff0000)
+        anime({
+          targets: EcardMat, 
+          emissiveIntensity: [0.5, 0.1],
+          duration: 150,
+          easing: 'easeInOutSine',
+          direction: 'alternate',
+          loop: 2,
+          delay: 50,
+          complete: () => {;
+          }
+        });
+      }, 1000)
+      setTimeout(() => {
+        EcardMat.emissive.set(0x000000)
+      },1000 + 400)
   });
 
 // // player take damage
