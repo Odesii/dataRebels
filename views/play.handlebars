@@ -3,9 +3,14 @@
 <img class="terminal" src="/imgs/UI/terminal.png"/>
 <div class="terminal-text">
   <p id="userMsg">{{user.username}}: </p>
-  <pre>[[Network Strength]] {{game.user_hp}}/{{character.hp}}</pre><p id="health-bar" data-user-hp="{{game.user_hp}}">▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓</p>
+  <pre>[[Network Strength]] <span id="user-hp">{{game.user_hp}}/{{character.hp}}</span></pre>
+  <img src="{{game.user_ap_img}}" height="30px" width="30px" id="bandwidth"/>
+  
+  <p id="health-bar" data-user-hp="{{game.user_hp}}">▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓</p>
   <p>{{enemy.name}}:</p>
-  <pre>[[Network Strength]] {{game.enemy_hp}}/{{enemy.hp}}</pre><p id="e-health-bar" data-e-hp="{{game.enemy_hp}}">▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓</p>
+  <pre>[[Network Strength]] <span id="enemy-hp">{{game.enemy_hp}}/{{enemy.hp}}</span></pre>
+  
+  <p id="e-health-bar" data-e-hp="{{game.enemy_hp}}">▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓</p>
   <button id="nextTurn" >End Turn</button>
   
 </div>

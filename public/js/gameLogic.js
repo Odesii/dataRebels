@@ -68,6 +68,10 @@ async function playerAttack(gameId) {
     const baseHp = enemy.hp;
     await enemyTakeDamage(baseHp, newEnemyHp);
     
+    const updateHp = document.getElementById("enemy-hp");
+    updateHp.innerHTML = "";
+    updateHp.innerHTML = `${newEnemyHp}/${enemy.hp}`
+
     await endGame(gameId);
     
     console.log(`enemy took ${damage} damage`)
@@ -96,6 +100,10 @@ async function enemyAttack(gameId) {
     const character = await fetchCharacter(game.user_id);
     const baseHp = character.hp;
     await playerTakeDamage(baseHp, newUserHp);
+
+    const updateHp = document.getElementById("user-hp");
+    updateHp.innerHTML = "";
+    updateHp.innerHTML = `${newUserHp}/${character.hp}`
 
     await endGame(gameId);
 
@@ -128,6 +136,7 @@ async function playerDefend(gameId) {
         action_taken: true // true means action has been taken
     });
 
+    await renderBandwith(gameId);
     return newDefense;
 }
 
@@ -151,7 +160,7 @@ async function enemyDefend(gameId) {
 }
 
 nextTurnButton.addEventListener('click', async() => {
-    const gameId = 2;
+    const gameId = document.getElementById("game-state").getAttribute("data-id");
     await nextTurn(gameId);
 });
 
@@ -200,14 +209,14 @@ async function resetEnemyDefend(gameId) {
 }
 
 attackButton.addEventListener('click', async() => {
-    const gameId=2; //coded in for testing purposes******
+    const gameId = document.getElementById("game-state").getAttribute("data-id"); //coded in for testing purposes******
     await playerAttack(gameId);
 });
 
 const defendButton = document.querySelector('#defend');
 
 defendButton.addEventListener('click', async() => {
-    const gameId = 2;
+    const gameId = document.getElementById("game-state").getAttribute("data-id");
     await playerDefend(gameId);
 });
 
@@ -215,7 +224,7 @@ async function endGame(gameId) {
     const game = await fetchGame(gameId)
 
     if(game.user_hp === 0) { 
-        return;
+        document.location.replace('/gameover');
     }
 
     if(game.enemy_hp === 0) { 
@@ -271,6 +280,17 @@ function playerTakeDamage(baseHp, playerHp) {//damage-health
     }
 }
 
+async function renderBandwith(gameId) {
+    const game = await fetchGame(gameId);
+    await updateGame(gameId, {
+        user_ap_img: game.user_ap
+    });
+
+    setInterval(function() {
+        document.getElementById("bandwidth").src = game.user_ap_img + "?" + new Date().valueOf();
+    }, 3000)
+}
+
 async function loadGameState() {
     const gameId = document.getElementById("game-state").getAttribute("data-id");
     const game = await fetchGame(gameId);
@@ -279,6 +299,7 @@ async function loadGameState() {
 
     await playerTakeDamage(character.hp, game.user_hp);
     await enemyTakeDamage(enemy.hp, game.enemy_hp);
+    await renderBandwith(gameId);
 }
 
 loadGameState();

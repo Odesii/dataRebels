@@ -53,7 +53,15 @@ router.get('/play', withAuth, async (req, res) => {
     const enemy = enemyData.get({ plain: true });
     
     res.render('play', { game, user, character, enemy, loggedIn: req.session.loggedIn })
-})
+});
+
+router.get('/gameover', async (req, res) => {
+    try {
+        res.render('gameover');
+    } catch (err) {
+        res.status(500).json(err);
+    }
+});
 
 router.get('/register', (req, res) => {
     // If the user is already logged in, redirect to the homepage
