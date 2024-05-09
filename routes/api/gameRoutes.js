@@ -73,7 +73,7 @@ router.put('/:id', withAuth, async (req, res) => {
         //     user_defense, user_ap, enemy_defense,
         //     enemy_ap, turn } = req.body;
         // 1. enemy_hp, action_take
-        if (req.body.enemy_hp && req.body.action_taken) {
+        if (req.body.enemy_hp != undefined && req.body.action_taken) {
             const updateGame = await Game.update(
                 {
                     enemy_hp: req.body.enemy_hp,
@@ -108,7 +108,7 @@ router.put('/:id', withAuth, async (req, res) => {
         }
 
         // 3. action_taken, user_defense, enemy_defense, turn
-        else if (req.body.action_taken!=undefined && req.body.turn) {//!= was used because it is a boolean and makes sure that the required field is there 
+        else if (req.body.action_taken != undefined && req.body.turn) {//!= was used because it is a boolean and makes sure that the required field is there 
             console.log("this is game routes action and turn")
             const updateGame = await Game.update(
                 {
@@ -124,7 +124,7 @@ router.put('/:id', withAuth, async (req, res) => {
 
             res.status(200).json(updateGame);
         }
-        else if(req.body.user_hp){
+        else if(req.body.user_hp != undefined){
             const updateGame=await Game.update(
                 {
                     user_hp: req.body.user_hp

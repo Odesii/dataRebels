@@ -200,7 +200,7 @@ async function resetEnemyDefend(gameId) {
 }
 
 attackButton.addEventListener('click', async() => {
-    const gameId = document.getElementById("game-state").getAttribute("data-id");
+    const gameId = document.getElementById("game-state").getAttribute("data-id"); //coded in for testing purposes******
     await playerAttack(gameId);
 });
 
@@ -215,7 +215,7 @@ async function endGame(gameId) {
     const game = await fetchGame(gameId)
 
     if(game.user_hp === 0) { 
-        return;
+        document.location.replace('/gameover');
     }
 
     if(game.enemy_hp === 0) { 
