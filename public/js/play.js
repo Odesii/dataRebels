@@ -1,18 +1,36 @@
+import {renderCard} from './3dRender/homePage.js'
+
+const reRoll = document.querySelector('.roll')
+
 const rollCharacter = async (event) => {
     event.preventDefault();
-
+    reRoll.style.display = 'none';
     const response = await fetch('/api/users/roll', {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
     });
   
     if (response.ok) {
-        alert('Rolled a character!');
-        document.location.replace('/');
+        // alert('Rolled a character!');
     } else {
         alert('Failed to roll a character.');
     }
+
+    const character = await response.json()
+if (!character.img){
+console.log('No IMAGE REROLLING')
+rollCharacter();
+}
+    renderCard(character.img)
+    setTimeout(function() {
+        console.log('TIME OUT', reRoll)
+        reRoll.style.display= 'inline'
+        console.log(reRoll)
+    }, 1000 )
+    // document.location.replace('/');
 };
+
+
 
 const initializeGameState = async (event) => {
     event.preventDefault();
@@ -21,7 +39,7 @@ const initializeGameState = async (event) => {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
     });
-  
+  console.log(response)
     if (response.ok) {
         document.location.replace('/play');
     } else if (response.status = 500) {
@@ -32,11 +50,16 @@ const initializeGameState = async (event) => {
     }
 };
 
-document
-    .querySelector('.roll')
-    ?.addEventListener('click', rollCharacter);
+    reRoll.addEventListener('click', rollCharacter);
 
 document
     .querySelector('.play')
     ?.addEventListener('click', initializeGameState);
   
+
+
+window.addEventListener('load', () => {
+    if(reRoll.dataset.img){
+   renderCard(reRoll.dataset.img)
+    }
+})
