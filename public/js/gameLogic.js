@@ -1,4 +1,5 @@
 import { enemyHit, enemyDGlow } from "./render.js";
+import { displayText,printLine } from "./extra/textDisplay.js";
 
 const attackButton=document.querySelector('#attack');
 const actionTaken = document.querySelector('#actionTaken')
@@ -58,7 +59,7 @@ async function playerAttack(gameId) {
     const game = await fetchGame(gameId); //GET game data by taking in the specific game ID
     if (game.action_taken) {
         actionTaken.innerHTML = ""
-        actionTaken.innerHTML = "An action has already been taken this turn. END TURN"
+        actionTaken.innerHTML = `An action has already been taken this turn. <span id="color1">END TURN</span>`
         return;
     }
 
@@ -84,8 +85,7 @@ async function playerAttack(gameId) {
     updateHp.innerHTML = `${newEnemyHp}/${enemy.hp}`
 
     await endGame(gameId);
-    
-    console.log(`enemy took ${damage} damage`)
+    displayText(`#userMsg`,`Hack sent ... Target took ${damage} damage`)
     return {
         damage: damage,
         isCriticalHit: isCriticalHit,
@@ -104,6 +104,7 @@ async function enemyAttack(gameId) {
     const newUserHp = Math.max(game.user_hp - damage, 0);
     
     console.log(`Enemy attacks for ${damage} damage`)
+    displayText(`#enemyMsg`,`Hack received ... You took ${damage} damage`)
     await updateGame(gameId, {
         user_hp: newUserHp
     });
@@ -131,28 +132,26 @@ async function playerDefend(gameId) {
 
     if (game.action_taken) {
         actionTaken.innerHTML = ""
-        actionTaken.innerHTML = "An action has already been taken this turn. END TURN"
-        console.log("An action has already been taken this turn. END TURN");
+        actionTaken.innerHTML = `An action has already been taken this turn. <span id="color1">END TURN</span>`
         return;
     }
 
     if (game.user_ap < 2) { //AP cost for defend is 2 so if theres not enough ap you cant defend
         actionTaken.innerHTML = ""
-        actionTaken.innerHTML = "NOT ENOUGH BANDWITH"
-        console.log("Not enough AP to defend.");
+        actionTaken.innerHTML = "NOT ENOUGH BANDWIDTH"
         return;
     }
 
     const newDefense = game.user_defense * 2;
-
-
+    
     await updateGame(gameId, {
         user_defense: newDefense,
         user_ap: game.user_ap - 2,
         action_taken: true // true means action has been taken
     });
-
-
+    
+    displayText(`#userMsg`,`Encryption Engaged`)
+    
     return newDefense;
 }
 
@@ -170,8 +169,8 @@ async function enemyDefend(gameId) {
         enemy_defense: newDefense,
         enemy_ap: game.enemy_ap - 2
     });
-
     console.log(`Enemy defends`)
+    displayText(`#enemyMsg`,`Encryption Engaged`)
     return newDefense;
 }
 
