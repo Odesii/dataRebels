@@ -6,15 +6,39 @@
         "attack": 10,
         "defense": 10,
         "ap": 15,
-        "img": "/imgs/cards/stuxnet.png"
+        "img": "/imgs/cards/SpriteSpider.png"
     },
     {
-        "name":"ZeroBytes",
-        "hp": 100 ,
-        "attack": 10,
-        "defense": 10,
+        "name":"PhantomPhreak",
+        "hp": 105 ,
+        "attack": 11,
+        "defense": 11,
         "ap": 15,
-        "img": "/imgs/cards/myDOOM.png"
+        "img": "/imgs/cards/SpriteSpider.png"
+    },
+    {
+        "name":"CerealKiller",
+        "hp": 110 ,
+        "attack": 12,
+        "defense": 12,
+        "ap": 17,
+        "img": "/imgs/cards/SpriteSpider.png"
+    },
+    {
+        "name":"LordNikon",
+        "hp": 115 ,
+        "attack": 13,
+        "defense": 13,
+        "ap": 18,
+        "img": "/imgs/cards/SpriteSpider.png"
+    },
+    {
+        "name":"ThePlague",
+        "hp": 120 ,
+        "attack": 14,
+        "defense": 14,
+        "ap": 20,
+        "img": "/imgs/cards/SpriteSpider.png"
     }
     
 ]

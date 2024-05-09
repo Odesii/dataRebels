@@ -1,0 +1,19 @@
+Bios:
+
+Sprite Spider
+A type of trojan virus that evolved into a ransomware called DEFRAY777.  Hidden in coonsumer programs like notepad it infected systems including the healthcare and educational sectors
+
+ILOVEYOU
+Also known as the lovebug or loveletter, this virus is a type of worm that spread wildly through emails hidden behind the subject line ILOVEYOU or attachments names LOVE-LETTER-FOR-YOU.TXT
+
+MyDoom
+A type of worm that specifically targets Microsoft Windows computers. It spread through emails and became the fastest spreading email worm of all time with none exceeding it as of 2024
+
+StormWorm
+A phising backdoor trojan that affects computers using Microsoft operating systems.  It concealed itself in emails using the subject line "230 dead as storm batters Europe"
+
+Code Red
+Named after the Mountain Dew flavor by the same name, code red was a computer worm that infected over 359,000 systems leaving the message payload of "HELLO! Welcome to http://www.worm.com! Hacked By Chinese!"
+
+Stuxnet
+A malicious computer worm that was allegedly built by the U.S. and Israel, it was responsible for the self destruction of Iran's nuclear centrifuges, therefore crippling the Iranian nuclear program

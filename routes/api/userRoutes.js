@@ -42,14 +42,14 @@ router.post('/register', async (req, res) => {
     try {
         const userData = await User.findOne({
             where: {
-              username: req.body.username,
+            username: req.body.username,
             },
         });
-      
+    
         if (userData) {
             res
-              .status(400)
-              .json({ message: 'Username in use. Please try again!' });
+            .status(400)
+            .json({ message: 'Username in use. Please try again!' });
             return;
         }
 
@@ -57,7 +57,7 @@ router.post('/register', async (req, res) => {
             const newUserData = await User.create({
                 username: req.body.username,
                 password: req.body.password,
-                highest_level: 1
+                highest_level:1
             });
                     req.session.save(() => {
             req.session.user_id = newUserData.id;

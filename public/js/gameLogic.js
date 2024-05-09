@@ -9,11 +9,18 @@ const nextTurnButton=document.querySelector('#nextTurn');
 // COMBAT starting ap pool once action per turn, defend takes ap and atack takes none. next turn button to submit choices and initiate battle go next turn
 
 //TODO:
-//attack needs to interact with health bars ::extras hp bars :: enemy and player
+//attack needs to interact with health bars ::extras hp bars :: enemy and player CHECK
 //textdisplay js to interact with defend and attack only attacks interact atm 
 // optional coins
-//if player hits 0 delete user and redirect them to sign up page
-//if enemy hits 0 send them to home screen to click next level then advance to next level
+//if player hits 0 delete user and redirect them to sign up page CHECK
+
+//THURSDAY-----
+// for each level the enemy needs to update image
+//if enemy hits 0 send them to home screen to click next level then advance to next level 
+// ask about render
+// glow effect on enemy attack
+// enemies animations synced with enemy actions
+// terminal combat log
 async function fetchCharacter(characterId) { //GETs character data based on the character ID
     const response = await fetch(`/api/character/${characterId}`);
     const characterData = await response.json();
