@@ -151,7 +151,7 @@ async function enemyDefend(gameId) {
 }
 
 nextTurnButton.addEventListener('click', async() => {
-    const gameId = 2;
+    const gameId = document.getElementById("game-state").getAttribute("data-id");
     await nextTurn(gameId);
 });
 
@@ -200,14 +200,14 @@ async function resetEnemyDefend(gameId) {
 }
 
 attackButton.addEventListener('click', async() => {
-    const gameId=2; //coded in for testing purposes******
+    const gameId = document.getElementById("game-state").getAttribute("data-id");
     await playerAttack(gameId);
 });
 
 const defendButton = document.querySelector('#defend');
 
 defendButton.addEventListener('click', async() => {
-    const gameId = 2;
+    const gameId = document.getElementById("game-state").getAttribute("data-id");
     await playerDefend(gameId);
 });
 
