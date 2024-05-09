@@ -1,7 +1,8 @@
 const router = require('express').Router();
 const { User, Character } = require('../../models');
+const withAuth = require('../../utils/auth');
 
-router.put('/roll', async (req, res) => {
+router.put('/roll', withAuth, async (req, res) => {
     try {
         const characters = await Character.findAll({});
         const character_id =  Math.floor(Math.random() * characters.length )+1;
