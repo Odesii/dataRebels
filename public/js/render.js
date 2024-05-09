@@ -52,7 +52,7 @@ const floorTexture = floorTextureLoader.load('/imgs/floor/hexSpin.png', function
     texture.repeat.set(40, 40);
     
 })
-const floorMaterial = new THREE.MeshToonMaterial({
+const floorMaterial = new THREE.MeshPhongMaterial({
     color: 0xffffff,
     map: floorTexture,
     transparent: true
@@ -70,7 +70,7 @@ function renderCard(url) {
     // card texture
     const cardTextureLoader = new THREE.TextureLoader();
 const cardTexture = cardTextureLoader.load(url)
-const cardMaterial = new THREE.MeshToonMaterial({
+const cardMaterial = new THREE.MeshPhongMaterial({
     map: cardTexture, 
     emissive: 0x000000, // initially no emissive color
     emissiveIntensity: 0
