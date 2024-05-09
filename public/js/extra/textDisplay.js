@@ -1,7 +1,8 @@
 let printIndex = 0;
 const printDelay = 50; // adjust the speed of printing here
+let textToInsert;
 
-document.querySelector('#attack').addEventListener('click', (event) => {
+function displayText(){
   event.preventDefault();
 
   const usernameElement = document.querySelector('#userMsg');
@@ -14,9 +15,10 @@ document.querySelector('#attack').addEventListener('click', (event) => {
     usernameElement.textContent = username + ': '; // clear existing text and set username
     printLine(printText); 
   }
-})
+}
 
 function printLine(text) {
+  let printIndex = 0;
   const usernameElement = document.querySelector('#userMsg');
   let i = 0;
   const intervalId = setInterval(() => {

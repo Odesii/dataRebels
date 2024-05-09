@@ -58,7 +58,7 @@ async function playerAttack(gameId) {
     const game = await fetchGame(gameId); //GET game data by taking in the specific game ID
     if (game.action_taken) {
         actionTaken.innerHTML = ""
-        actionTaken.innerHTML = "An action has already been taken this turn. END TURN"
+        actionTaken.innerHTML = `An action has already been taken this turn. <span id="color1">END TURN</span>`
         return;
     }
 
@@ -131,15 +131,13 @@ async function playerDefend(gameId) {
 
     if (game.action_taken) {
         actionTaken.innerHTML = ""
-        actionTaken.innerHTML = "An action has already been taken this turn. END TURN"
-        console.log("An action has already been taken this turn. END TURN");
+        actionTaken.innerHTML = `An action has already been taken this turn. <span id="color1">END TURN</span>`
         return;
     }
 
     if (game.user_ap < 2) { //AP cost for defend is 2 so if theres not enough ap you cant defend
         actionTaken.innerHTML = ""
-        actionTaken.innerHTML = "NOT ENOUGH BANDWITH"
-        console.log("Not enough AP to defend.");
+        actionTaken.innerHTML = "NOT ENOUGH BANDWIDTH"
         return;
     }
 
