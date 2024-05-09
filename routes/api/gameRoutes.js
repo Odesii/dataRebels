@@ -69,6 +69,9 @@ router.post('/', withAuth, async (req, res) => {
 
 router.put('/:id', withAuth, async (req, res) => {
     try {
+        // const { enemy_hp, action_taken, user_hp,
+        //     user_defense, user_ap, enemy_defense,
+        //     enemy_ap, turn } = req.body;
         // 1. enemy_hp, action_take
         if (req.body.enemy_hp && req.body.action_taken) {
             const updateGame = await Game.update(
@@ -87,7 +90,7 @@ router.put('/:id', withAuth, async (req, res) => {
         }
 
         // 2. user_defense, user_ap, action_taken
-        else if (req.body.user_defense && req.body.user_ap &&req.body.action_taken) {
+        else if (req.body.user_defense && req.body.user_ap && req.body.action_taken) {
             const updateGame = await Game.update(
                 {
                     user_defense: req.body.user_defense,
@@ -128,8 +131,8 @@ router.put('/:id', withAuth, async (req, res) => {
                 },
                 {
                 where:{
-                    id: req.params.id
-                }
+                        id: req.params.id
+                    }
                 }
             )
             res.status(200).json(updateGame)
