@@ -4,12 +4,14 @@ import { EffectComposer } from 'three/EffectComposer';
 import { RenderPass } from 'three/RenderPass';
 import { UnrealBloomPass } from 'three/UnrealBloomPass';
 import { CSS2DRenderer, CSS2DObject} from 'three/CSS2DRenderer';
-
+// import {renderCard} from './3dRender/homePage.js'
 
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
 
-
+let card;
+//setting animation state
+let returning = false;
 
 const renderer = new THREE.WebGLRenderer();
 renderer.setSize( window.innerWidth, window.innerHeight );
@@ -62,31 +64,59 @@ scene.add(floor);
 
 
 
-
-// card texture
-const cardTextureLoader = new THREE.TextureLoader();
-const cardTexture = cardTextureLoader.load('/imgs/cards/StomWorm.png')
+let startPoint; // = new THREE.Vector3(card.position.x, card.position.y, card.position.z)
+function renderCard(url) {
+    console.log('NEW URL FROM TEST',url)
+    // card texture
+    const cardTextureLoader = new THREE.TextureLoader();
+const cardTexture = cardTextureLoader.load(url)
 const cardMaterial = new THREE.MeshToonMaterial({
     map: cardTexture, 
     emissive: 0x000000, // initially no emissive color
     emissiveIntensity: 0
 });
+
 cardMaterial.side = THREE.DoubleSide;
 //card geo
-const geometry = new THREE.BoxGeometry( 3.5, 4.5, 0.1 );
+const cardGeometry = new THREE.BoxGeometry( 3.5, 4.5, 0.1);
 // card mesh
-const card = new THREE.Mesh( geometry, cardMaterial );
+card = new THREE.Mesh( cardGeometry, cardMaterial );
 // card position
-card.position.set( 2.5,-1.5, 1,0)
-const startPoint = new THREE.Vector3(card.position.x, card.position.y, card.position.z)
+card.position.set(  2.5,-1.5, 1,0)
 scene.add(card);
+startPoint = new THREE.Vector3(card.position.x, card.position.y, card.position.z)
+
+// Setup DragControls
+const controls = new DragControls([card], camera, renderer.domElement);
+controls.addEventListener('dragend', event =>{
+    returning = true;
+})
+}
+
+// // card texture
+// const cardTextureLoader = new THREE.TextureLoader();
+// const cardTexture = cardTextureLoader.load('/imgs/cards/StomWorm.png')
+// const cardMaterial = new THREE.MeshToonMaterial({
+//     map: cardTexture, 
+//     emissive: 0x000000, // initially no emissive color
+//     emissiveIntensity: 0
+// });
+// cardMaterial.side = THREE.DoubleSide;
+// //card geo
+// const geometry = new THREE.BoxGeometry( 3.5, 4.5, 0.1 );
+// // card mesh
+// const card = new THREE.Mesh( geometry, cardMaterial );
+// // card position
+// card.position.set( 2.5,-1.5, 1,0)
+// const startPoint = new THREE.Vector3(card.position.x, card.position.y, card.position.z)
+// scene.add(card);
 
 
 // enemy card texture
 const EcardTextureLoader = new THREE.TextureLoader();
 const EcardTexture = EcardTextureLoader.load('/imgs/cards/stuxnet.png')
 const EcardMaterial = new THREE.MeshToonMaterial( {map: EcardTexture, transparent: true});
-cardMaterial.side = THREE.DoubleSide;
+EcardMaterial.side = THREE.DoubleSide;
 //card geo
 const Egeometry = new THREE.BoxGeometry( 3.5, 4.5, 0.1);
 // card mesh
@@ -104,7 +134,7 @@ light.position.set( 1, 1, 1 );
 scene.add( light );
 // Enable shadows
 light.castShadow = true;
-card.castShadow = true;
+// renderCard.castShadow = true;
 Ecard.castShadow = true;
 floor.receiveShadow = true;
 
@@ -112,14 +142,11 @@ camera.position.z = 7.5;
 
 
 
-//setting animation state
-let returning = false;
-
-// Setup DragControls
-const controls = new DragControls([card], camera, renderer.domElement);
-controls.addEventListener('dragend', event =>{
-    returning = true;
-})
+// // Setup DragControls
+// const controls = new DragControls([card], camera, renderer.domElement);
+// controls.addEventListener('dragend', event =>{
+//     returning = true;
+// })
 
 
 // Enemy card move Logic
@@ -261,3 +288,4 @@ function animate() {
 
 animate();
 
+export {renderCard}
