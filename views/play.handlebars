@@ -1,10 +1,10 @@
+<img class="bandwith" src="" id="bandwidth"/>
 <div id="game-state" data-id="{{game.id}}"></div>
 <div id="card-img" data-img={{character.img}}></div>
 <img class="terminal" src="/imgs/UI/terminal.png"/>
 <div class="terminal-text">
   <p id="userMsg">{{user.username}}: </p>
   <pre>[[Network Strength]] <span id="user-hp">{{game.user_hp}}/{{character.hp}}</span></pre>
-  <img src="{{game.user_ap_img}}" height="30px" width="30px" id="bandwidth"/>
   
   <p id="health-bar" data-user-hp="{{game.user_hp}}">▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓</p>
   <p>{{enemy.name}}:</p>
@@ -40,9 +40,9 @@
     <source src="./audio/hackMe.mp3" type="audio/mpeg">
     Your browser does not support the audio element.
     </audio>
+<h1 id="actionTaken"></h1>
 </div>
-
-<script src="./js/gameLogic.js"></script>
+<script type="module" src="./js/gameLogic.js"></script>
 {{!-- <script src="./js/extra/textDisplay.js"></script> --}}
 <script type="module" src="./js/gameLogic.js"></script>
 <script defer type="module" src="./js/startMenu.js"></script>

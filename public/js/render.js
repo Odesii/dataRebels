@@ -241,11 +241,10 @@ document.querySelector('#attack').addEventListener('click', (event) => {
       },1000 + 400)
   });
 
-
-  document.querySelector('#nextTurn').addEventListener('click', (event) => {
-    event.preventDefault();
-    const cardMat = card.material;
-    const EcardMat= Ecard.material;
+function enemyHit(cardMat, EcardMat){
+    cardMat = card.material;
+    EcardMat= Ecard.material;
+    
     EcardMat.emissive.set(0xffff)
     
     console.log('Animation started!')
@@ -282,7 +281,8 @@ document.querySelector('#attack').addEventListener('click', (event) => {
       setTimeout(() => {
         cardMat.emissive.set(0x000000)
       },1000 + 400)
-  });
+  };
+
 
 
 
@@ -290,31 +290,53 @@ document.querySelector('#attack').addEventListener('click', (event) => {
     event.preventDefault();
     const cardMat = card.material;
     cardMat.emissive.set(0xFFD700)
-  anime({
-    targets: cardMat,
-    emissiveIntensity: [0.2, 0.1],
-    duration: 150,
-    easing: 'easeInOutSine',
-    direction: 'alternate',
-    loop: 2,
-    delay: 50,
-    complete: () => {
-      // Hold the glow for 1 second
-      setTimeout(() => {
+    anime({
+      targets: cardMat,
+      emissiveIntensity: [0.2, 0.1],
+      duration: 150,
+      easing: 'easeInOutSine',
+      direction: 'alternate',
+      loop: 2,
+      delay: 50,
+      complete: () => {
         anime({
           targets: cardMat,
-          emissiveIntensity: .3,
-          duration: 10,
+          emissiveIntensity: [0.25, 0],
+          duration: 500,
+          delay: 500,
           easing: 'easeInOutSine'
         });
-      }, 500);
-    }
-  });
-  setTimeout(() => {
-    cardMat.emissive.set(0x000000)
-  },1500);
+      }
+    });
+
+  })
+function enemyDGlow(EcardMat){
+    EcardMat = Ecard.material;
+    EcardMat.emissive.set(0xFFD700)
+    anime({
+      targets: EcardMat,
+      emissiveIntensity: [0.2, 0.1],
+      duration: 150,
+      easing: 'easeInOutSine',
+      direction: 'alternate',
+      loop: 2,
+      delay: 50,
+      complete: () => {
+        anime({
+          targets: EcardMat,
+          emissiveIntensity: [0.25, 0],
+          duration: 500,
+          delay: 500,
+          easing: 'easeInOutSine'
+        });
+      }
+    });
+  }
+  // setTimeout(() => {
+  //   cardMat.emissive.set(0x000000)
+  // },1500);
   
-});
+
 // // player take damage
 // document.querySelector('#data-').addEventListener('change', (event) => {
 //     event.preventDefault();
@@ -355,7 +377,7 @@ composer.addPass(bloomPass);
 
 
 renderer.toneMapping = THREE.ReinhardToneMapping;
-renderer.toneMappingExposure = Math.pow(1.4, 4.0); // Adjust for desired brightness
+renderer.toneMappingExposure = Math.pow(1.4, 1.5); // Adjust for desired brightness
 
 
 function animate() {
@@ -383,4 +405,4 @@ function animate() {
 
 animate();
 
-export {renderCard}
+export {renderCard, enemyHit, enemyDGlow}
