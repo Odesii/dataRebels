@@ -1,22 +1,60 @@
-<section class="card">
-    <p>{{character.name}}</p>
-    <p>HP: {{game.user_hp}}</p>
+<div id="card-img" data-img={{character.img}}></div>
+<img class="terminal" src="/imgs/UI/terminal.png"/>
+<div class="terminal-text">
+  <p id="userMsg">{{user.username}}: </p>
+  <pre>[[Network Strength]]</pre><p id="health-bar" data-user-hp="{{game.user_hp}}">▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓</p>
+  <p>{{enemy.name}}:</p>
+  <pre>[[Network Strength]]</pre><p id="e-health-bar" data-e-hp="{{game.enemy_hp}}">▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓</p>
+  <button>End Turn</button>
+  
+</div>
+<div class="taskbar">
+  <button class="start-button">--Hack--</button>
+  <div class="start-menu" id="start-menu" style="display: none">
+    <p id="sidebar">&ensp;&ensp;&ensp;&ensp;L33t 0S&emsp;
+      &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+      &emsp;&emsp;&emsp;&emsp;</p>
+    <!-- Add menu items here -->
+    <ul>
+      <li><img id="attack" src="/imgs/moves/HACK.png" /></li>
+      <li><img id="defend" src="/imgs/moves/Encrypt.png" /></li>
+      <li><img id="loveSpecial" src="/imgs/moves/LoveDDOS.png" /></li>
+      <li><img id="spyderSpecial" src="/imgs/moves/Spyder.png" /></li>
+    </ul>
+    <div>
+    </div>
+  </div>
+      <p>Turn Count:{{game.turn}}</p>
+
+  {{#if loggedIn}}
+  <button class="log-bttn roll">--Roll--</button>
+  <a href="/play"><button class="log-bttn play">--Play--</button></a>
+  <button class="log-bttn" id="logout">--Logout--</button>
+  {{else}}
+  <a href="/login"><button class="log-bttn">--Login--</button></a>
+  <a href="/register"><button class="log-bttn">--Register--</button></a>
+  {{/if}}
+    <audio controls loop autoplay preload="auto" class="">
+    <source src="./audio/hackMe.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+    </audio>
+</div>
+{{!-- <section class="card">
     <p>Attack: {{character.attack}}</p>
     <p>Defense: {{character.defense}}</p>
     <p>AP: {{game.user_ap}}</p>
 </section>
 <section class="card">
-    <p>{{enemy.name}}</p>
-    <p>HP: {{game.enemy_hp}}</p>
     <p>Attack: {{enemy.attack}}</p>
     <p>Defense: {{enemy.defense}}</p>
     <p>AP: {{game.enemy_ap}}</p>
-</section>
+</section> --}}
+
+
 <button id="attack">attack</button>
 <button id="defend">defend</button>
 <button id="nextTurn">next turn</button>
-<section class="card">
-    <p>Turn Counter: {{game.turn}}</p>
-</section>
-
 <script src="./js/gameLogic.js"></script>
+<script src="./js/extra/hpBar.js"></script>
+<script defer type="module" src="./js/startMenu.js"></script>
+<script defer type="module" src="./js/render.js"></script>

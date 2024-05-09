@@ -30,6 +30,10 @@ Character.init(
     ap: {
       type: DataTypes.INTEGER,
       allowNull:false
+    },
+    img: {
+      type: DataTypes.STRING,
+      allowNull: false
     }
   },
   {

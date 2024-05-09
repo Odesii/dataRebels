@@ -25,7 +25,8 @@ router.post('/', withAuth, async (req, res) => {
         });
 
         if(gameData) {
-            res.status(500).json(err);
+
+           return res.status(200).json(gameData);
         }
 
         const userData = await User.findOne({

@@ -3,7 +3,21 @@ const { User, Character, Enemy, Game } = require('../models');
 const withAuth = require('../utils/auth');
 
 router.get('/', withAuth,  async (req, res) => {
-    res.render('homepage', { loggedIn: req.session.loggedIn })
+if(req.session.loggedIn){
+    
+    const userData = await User.findByPk( req.session.user_id,
+       {
+        include: 
+        [{
+        model: Character
+    }] 
+});
+    const {character} = userData.get({plain: true})
+console.log('home route', character)
+return res.render('homepage', {character, loggedIn: req.session.loggedIn })
+}
+
+    res.render('homepage', {loggedIn: req.session.loggedIn })
 })
 
 router.get('/play', withAuth, async (req, res) => {

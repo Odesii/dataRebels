@@ -1,4 +1,6 @@
-// import anime from '../animejs/lib/anime.es.js';
+import { renderCard } from "./render.js";
+
+
 
 document.addEventListener('DOMContentLoaded', () => {
   const startButton = document.querySelector('.start-button');
@@ -24,4 +26,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
    
   });
+})
+
+
+window.addEventListener('load', () => {
+renderCard(document.querySelector('#card-img').dataset.img)
+
 })
