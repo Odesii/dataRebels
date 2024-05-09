@@ -1,7 +1,7 @@
 
 const attackButton=document.querySelector('#attack');
 
-const nextTurnButton=document.querySelector('#nextTurn')
+const nextTurnButton=document.querySelector('#nextTurn');
 //GOAL get attack to register in front end and log numbers CHECK
 
 //GOAL 2 
@@ -22,7 +22,7 @@ async function fetchCharacter(characterId) { //GETs character data based on the 
 
 
 
-async function fetchEnemy(enemyId){  //GETs enemy data based on enemyID
+async function fetchEnemy(enemyId) {  //GETs enemy data based on enemyID
     const response=await fetch(`/api/enemy/${enemyId}`);
     const enemyData=await response.json()
     return enemyData;
@@ -58,12 +58,18 @@ async function playerAttack(gameId) {
     const actualDamage = isCriticalHit ? baseDamage * 3 : baseDamage;//damage after calculating crit or the base damage calculation
     const damage = Math.max(actualDamage - game.enemy_defense, 0); // math.max gives the highest number value after the calculation, 0 is there so that the number cannot return negative
     const newEnemyHp = Math.max(game.enemy_hp - damage, 0); //enemy hp value after taking the enemy defense into account
+    
     await updateGame(gameId, {
         enemy_hp: newEnemyHp,
         action_taken: true  
     });
-    enemyTakeDamage(newEnemyHp);
-    endGame(gameId);
+
+    const enemy = await fetchEnemy(game.enemy_id);
+    const baseHp = enemy.hp;
+    await enemyTakeDamage(baseHp, newEnemyHp);
+    
+    await endGame(gameId);
+    
     console.log(`enemy took ${damage} damage`)
     return {
         damage: damage,
@@ -81,12 +87,18 @@ async function enemyAttack(gameId) {
     const actualDamage = isCriticalHit ? baseDamage * 3 : baseDamage;
     const damage = Math.max(actualDamage - game.enemy_defense, 0);
     const newUserHp = Math.max(game.user_hp - damage, 0);
+    
     console.log(`Enemy attacks for ${damage} damage`)
     await updateGame(gameId, {
         user_hp: newUserHp
     });
-    endGame(gameId);
-    playerTakeDamage(newUserHp);
+
+    const character = await fetchCharacter(game.user_id);
+    const baseHp = character.hp;
+    await playerTakeDamage(baseHp, newUserHp);
+
+    await endGame(gameId);
+
     console.log(`user took ${damage} damage`)
     return {
         damage: damage,
@@ -123,7 +135,7 @@ async function enemyDefend(gameId) {
     const game = await fetchGame(gameId);
 
     if (game.user_ap < 2) {
-       enemyAttack(gameId);
+        await enemyAttack(gameId);
         return;
     }
 
@@ -133,46 +145,52 @@ async function enemyDefend(gameId) {
         enemy_defense: newDefense,
         enemy_ap: game.enemy_ap - 2
     });
-console.log(`Enemy defends`)
+
+    console.log(`Enemy defends`)
     return newDefense;
 }
 
-nextTurnButton.addEventListener('click', async()=>{
-    const gameId=2;
+nextTurnButton.addEventListener('click', async() => {
+    const gameId = 2;
     await nextTurn(gameId);
 });
+
 async function nextTurn(gameId) {
     const game = await fetchGame(gameId);
-    const enemyRandom=Math.floor(Math.random()*2); //50/50 chance of the enemy attacking or defending
-   await resetEnemyDefend(gameId); //resets the enemy defense after the users turn
-    if(enemyRandom===0){
+    const enemyRandom = Math.floor(Math.random()*2); //50/50 chance of the enemy attacking or defending
+    await resetEnemyDefend(gameId); //resets the enemy defense after the users turn
+    if(enemyRandom === 0) {
         await enemyAttack(gameId); //the random gives a number thats either 0 or 1 so if its 0 the enemy will attack
-    }else{
+    } else{
        await enemyDefend(gameId); //resets the enemy defense
     }
-   await resetUserDefend(gameId); //resets the users defense after the enemy attacks
+    await resetUserDefend(gameId); //resets the users defense after the enemy attacks
 
     await updateGame(gameId, {
         action_taken: false, // reset the game boolean
         turn: game.turn + 1,
     });
 
+    const turnCount = document.getElementById("turn-counter")
+    turnCount.innerHTML = "";
+    turnCount.innerHTML = game.turn + 1;
     console.log("Next Turn");
+
     return game.turn + 1; //to be logged or not
 }
 
-async function resetUserDefend(gameId){
-    const game= await fetchGame(gameId);
+async function resetUserDefend(gameId) {
+    const game = await fetchGame(gameId);
 
     const character = await fetchCharacter(game.user_id);
-    await updateGame(gameId,{
+    await updateGame(gameId, {
         user_defense:character.defense //resets the character defense value to the base value on the characters table
     });
     return console.log(`user defense reset`)
 }
 
-async function resetEnemyDefend(gameId){
-    const game= await fetchGame(gameId);
+async function resetEnemyDefend(gameId) {
+    const game = await fetchGame(gameId);
 
     const enemy = await fetchEnemy(game.enemy_id);
     await updateGame(gameId,{
@@ -181,59 +199,86 @@ async function resetEnemyDefend(gameId){
     return console.log(`enemy defense reset`)
 }
 
-attackButton.addEventListener('click', async()=>{
-    const gameId=2;//coded in for testing purposes******
+attackButton.addEventListener('click', async() => {
+    const gameId=2; //coded in for testing purposes******
     await playerAttack(gameId);
-
 });
 
-const defendButton=document.querySelector('#defend');
+const defendButton = document.querySelector('#defend');
 
-defendButton.addEventListener('click', async()=>{
-    const gameId=2;
+defendButton.addEventListener('click', async() => {
+    const gameId = 2;
     await playerDefend(gameId);
-
 });
 
-async function endGame(gameId){
-const game=fetchGame(gameId)
-if(game.user_hp===0){ 
-    return;
-}
-if(game.enemy_hp===0){ 
-    return;
-}
+async function endGame(gameId) {
+    const game = await fetchGame(gameId)
+
+    if(game.user_hp === 0) { 
+        return;
+    }
+
+    if(game.enemy_hp === 0) { 
+        return;
+    }
 }
 
-function enemyTakeDamage(enemyHp) {//damage-health
+function enemyTakeDamage(baseHp, enemyHp) {//damage-health
+    const healthBar = document.getElementById("e-health-bar");
+    
+    if ((enemyHp / baseHp) === 1) {
+        return;
+    }
 
-  const healthBar = document.getElementById("e-health-bar");
     if (enemyHp < 0) {
-      enemyHp = 0;
+        enemyHp = 0;
     }
   
-      healthBar.innerHTML = "";
-      for (let i = 0; i < enemyHp; i++) {
-        healthBar.innerHTML += "▓"; // current health point total
-      }
-      healthBar.innerHTML += "▒"; //  current health point position
-      for (let i = 0; i < 100-enemyHp; i++) {
-        healthBar.innerHTML += "░"; // lost health points
-    }
-  }
+    healthBar.innerHTML = "";
 
-  function playerTakeDamage(playerHp) {//damage-health
-    const healthBar = document.getElementById("health-bar");
-      if (playerHp < 0) {
-        playerHp = 0;
-      }
-    
-      healthBar.innerHTML = "";
-      for (let i = 0; i < playerHp; i++) {
+    for (let i = 0; i < Math.floor(enemyHp / 2); i++) {
         healthBar.innerHTML += "▓"; // current health point total
-      }
-      healthBar.innerHTML += "▒"; //  current health point position
-      for (let i = 0; i < 100 - playerHp; i++) {
-        healthBar.innerHTML += "░"; // lost health points
-      }
     }
+
+    healthBar.innerHTML += "▒"; //  current health point position
+    
+    for (let i = 0; i < Math.floor((baseHp - enemyHp - 1) / 2); i++) {
+        healthBar.innerHTML += "░"; // lost health points
+    }
+}
+
+function playerTakeDamage(baseHp, playerHp) {//damage-health
+    const healthBar = document.getElementById("health-bar");
+    
+    if ((playerHp / baseHp) === 1) {
+        return;
+    }
+
+    if (playerHp < 0) {
+        playerHp = 0;
+    }
+    
+    healthBar.innerHTML = "";
+    
+    for (let i = 0; i < Math.floor(playerHp / 2); i++) {
+        healthBar.innerHTML += "▓"; // current health point total
+    }
+
+    healthBar.innerHTML += "▒"; //  current health point position
+    
+    for (let i = 0; i < Math.floor((baseHp - playerHp - 1) / 2); i++) {
+        healthBar.innerHTML += "░"; // lost health points
+    }
+}
+
+async function loadGameState() {
+    const gameId = document.getElementById("game-state").getAttribute("data-id");
+    const game = await fetchGame(gameId);
+    const character = await fetchCharacter(game.user_id);
+    const enemy = await fetchEnemy(game.enemy_id);
+
+    await playerTakeDamage(character.hp, game.user_hp);
+    await enemyTakeDamage(enemy.hp, game.enemy_hp);
+}
+
+loadGameState();

@@ -2,6 +2,7 @@
     {
         "username": "zeroCool",
         "password": "hackers",
-        "credits": 5
+        "credits": 5,
+        "highest_level": 1
     }
 ]
