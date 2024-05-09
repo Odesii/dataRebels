@@ -3,7 +3,8 @@ import {renderCard} from './3dRender/homePage.js'
 const reRoll = document.querySelector('.roll')
 
 const rollCharacter = async (event) => {
-    event.preventDefault();
+    // event.preventDefault();
+    const current =document.getElementById('current-Char')
     reRoll.style.display = 'none';
     const response = await fetch('/api/users/roll', {
         method: 'PUT',
@@ -15,7 +16,6 @@ const rollCharacter = async (event) => {
     } else {
         alert('Failed to roll a character.');
     }
-
     const character = await response.json()
 if (!character.img){
 console.log('No IMAGE REROLLING')
@@ -27,7 +27,8 @@ rollCharacter();
         reRoll.style.display= 'inline'
         console.log(reRoll)
     }, 1000 )
-    // document.location.replace('/');
+    current.innerHTML = ''
+    current.innerHTML = character.name
 };
 
 
