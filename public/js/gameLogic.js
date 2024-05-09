@@ -7,6 +7,12 @@ const nextTurnButton=document.querySelector('#nextTurn')
 //GOAL 2 
 
 // COMBAT starting ap pool once action per turn, defend takes ap and atack takes none. next turn button to submit choices and initiate battle go next turn
+
+//TODO:
+//attack needs to interact with health bars ::extras hp bars :: enemy and player
+//textdisplay js to interact with defend and attack only attacks interact atm 
+// optional coins
+//
 async function fetchCharacter(characterId) { //GETs character data based on the character ID
     const response = await fetch(`/api/character/${characterId}`);
     const characterData = await response.json();
@@ -28,14 +34,11 @@ async function fetchGame(gameId) { //GETs game data based on the game ID
 }
 //  update character data in the database
 async function updateGame(gameId, updates) { //PUT route that we use to update the game table with our dynamic values which takes in the game ID and spits out the updates to the DB
-    console.log('before the fetch')
-
     const response=await fetch(`/api/games/${gameId}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(updates)
     });
-    console.log('after the fetch')
     console.log(response)
     return fetchGame(gameId); // Fetch updated data
 }
@@ -54,11 +57,11 @@ async function playerAttack(gameId) {
     const actualDamage = isCriticalHit ? baseDamage * 3 : baseDamage;//damage after calculating crit or the base damage calculation
     const damage = Math.max(actualDamage - game.enemy_defense, 0); // math.max gives the highest number value after the calculation, 0 is there so that the number cannot return negative
     const newEnemyHp = Math.max(game.enemy_hp - damage, 0); //enemy hp value after taking the enemy defense into account
-
     await updateGame(gameId, {
         enemy_hp: newEnemyHp,
         action_taken: true  
     });
+    enemyTakeDamage(newEnemyHp);
     endGame(gameId);
     console.log(`enemy took ${damage} damage`)
     return {
@@ -82,6 +85,7 @@ async function enemyAttack(gameId) {
         user_hp: newUserHp
     });
     endGame(gameId);
+    playerTakeDamage(newUserHp);
     console.log(`user took ${damage} damage`)
     return {
         damage: damage,
@@ -178,16 +182,16 @@ async function resetEnemyDefend(gameId){
 
 attackButton.addEventListener('click', async()=>{
     const gameId=2;//coded in for testing purposes******
-    const battle=await playerAttack(gameId);
-    console.log("this is",battle)
+    await playerAttack(gameId);
+
 });
 
 const defendButton=document.querySelector('#defend');
 
 defendButton.addEventListener('click', async()=>{
     const gameId=2;
-    const battle=await playerDefend(gameId);
-    console.log("this is",battle)
+    await playerDefend(gameId);
+
 });
 
 async function endGame(gameId){
@@ -199,3 +203,36 @@ if(game.enemy_hp===0){
     return;
 }
 }
+
+function enemyTakeDamage(enemyHp) {//damage-health
+
+  const healthBar = document.getElementById("e-health-bar");
+    if (enemyHp < 0) {
+      enemyHp = 0;
+    }
+  
+      healthBar.innerHTML = "";
+      for (let i = 0; i < enemyHp; i++) {
+        healthBar.innerHTML += "▓"; // current health point total
+      }
+      healthBar.innerHTML += "▒"; //  current health point position
+      for (let i = 0; i < 100-enemyHp; i++) {
+        healthBar.innerHTML += "░"; // lost health points
+    }
+  }
+
+  function playerTakeDamage(playerHp) {//damage-health
+    const healthBar = document.getElementById("health-bar");
+      if (playerHp < 0) {
+        playerHp = 0;
+      }
+    
+      healthBar.innerHTML = "";
+      for (let i = 0; i < playerHp; i++) {
+        healthBar.innerHTML += "▓"; // current health point total
+      }
+      healthBar.innerHTML += "▒"; //  current health point position
+      for (let i = 0; i < 100 - playerHp; i++) {
+        healthBar.innerHTML += "░"; // lost health points
+      }
+    }
