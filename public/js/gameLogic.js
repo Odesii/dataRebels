@@ -252,13 +252,13 @@ function enemyTakeDamage(baseHp, enemyHp) {//damage-health
   
     healthBar.innerHTML = "";
 
-    for (let i = 0; i < Math.floor(enemyHp / 2); i++) {
+    for (let i = 0; i < Math.floor(enemyHp / (baseHp / 50)); i++) {
         healthBar.innerHTML += "▓"; // current health point total
     }
 
     healthBar.innerHTML += "▒"; //  current health point position
     
-    for (let i = 0; i < Math.floor((baseHp - enemyHp - 1) / 2); i++) {
+    for (let i = 0; i < Math.floor((baseHp - enemyHp) / (baseHp / 50)); i++) {
         healthBar.innerHTML += "░"; // lost health points
     }
 }
@@ -276,13 +276,13 @@ function playerTakeDamage(baseHp, playerHp) {//damage-health
     
     healthBar.innerHTML = "";
     
-    for (let i = 0; i < Math.floor(playerHp / 2); i++) {
+    for (let i = 0; i < Math.floor(playerHp / (baseHp / 50)); i++) {
         healthBar.innerHTML += "▓"; // current health point total
     }
 
     healthBar.innerHTML += "▒"; //  current health point position
     
-    for (let i = 0; i < Math.floor((baseHp - playerHp - 1) / 2); i++) {
+    for (let i = 0; i < Math.floor((baseHp - playerHp) / (baseHp / 50)); i++) {
         healthBar.innerHTML += "░"; // lost health points
     }
 }
