@@ -1,10 +1,11 @@
+<div id="game-state" data-id="{{game.id}}"></div>
 <div id="card-img" data-img={{character.img}}></div>
 <img class="terminal" src="/imgs/UI/terminal.png"/>
 <div class="terminal-text">
   <p id="userMsg">{{user.username}}: </p>
-  <pre>[[Network Strength]]</pre><p id="health-bar" data-user-hp="{{game.user_hp}}">▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓</p>
+  <pre>[[Network Strength]] {{game.user_hp}}/{{character.hp}}</pre><p id="health-bar" data-user-hp="{{game.user_hp}}">▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓</p>
   <p>{{enemy.name}}:</p>
-  <pre>[[Network Strength]]</pre><p id="e-health-bar" data-e-hp="{{game.enemy_hp}}">▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓</p>
+  <pre>[[Network Strength]] {{game.enemy_hp}}/{{enemy.hp}}</pre><p id="e-health-bar" data-e-hp="{{game.enemy_hp}}">▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓</p>
   <button id="nextTurn" >End Turn</button>
   
 </div>
@@ -24,10 +25,10 @@
     <div>
     </div>
   </div>
-      <p class="turn">Turn Count:<span class="turn-color">{{game.turn}}</span></p>
+      <p class="turn">Turn Count:<span class="turn-color" id="turn-counter">{{game.turn}}</span></p>
 
   
-  <a href="/login"><button class="log-bttn">--Login--</button></a>
+  <button class="log-bttn" id="logout">--Logout--</button>
   <a href="/"><button class="log-bttn">--Home--</button></a>
 
     <audio controls loop autoplay preload="auto" class="">
