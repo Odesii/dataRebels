@@ -22,8 +22,8 @@ renderer.physicallyCorrectLights = true; // Optional, for more realistic lightin
 renderer.gammaOutput = true; // Ensure gamma correction is enabled
 
 //mouse pointers
-const raycaster = new THREE.Raycaster();
-const mouse = new THREE.Vector2();
+// const raycaster = new THREE.Raycaster();
+// const mouse = new THREE.Vector2();
 
 
 
@@ -153,47 +153,47 @@ camera.position.z = 7.5;
 // })
 
 
-// Enemy card move Logic
-renderer.domElement.addEventListener('click', (event) => {
-  // Get the mouse position in normalized device coordinates
-  mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
-  mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+// // Enemy card move Logic
+// renderer.domElement.addEventListener('click', (event) => {
+//   // Get the mouse position in normalized device coordinates
+//   mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+//   mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
 
-  // Update the raycaster with the mouse position and camera
-  raycaster.setFromCamera(mouse, camera);
+//   // Update the raycaster with the mouse position and camera
+//   raycaster.setFromCamera(mouse, camera);
 
-  // Check for intersections with the Ecard mesh
-  const intersects = raycaster.intersectObjects([Ecard]);
+//   // Check for intersections with the Ecard mesh
+//   const intersects = raycaster.intersectObjects([Ecard]);
 
-  // If there's an intersection, move the Ecard
-  if (intersects.length > 0) {
-    // Get the cursor position in 3D space
-    const cursorPosition = intersects[0].point;
+//   // If there's an intersection, move the Ecard
+//   if (intersects.length > 0) {
+//     // Get the cursor position in 3D space
+//     const cursorPosition = intersects[0].point;
 
-    // Define the relativePosition object
-    const relativePosition = {
-      x: cursorPosition.x - Ecard.position.x,
-      y: cursorPosition.y - Ecard.position.y
-    };
+//     // Define the relativePosition object
+//     const relativePosition = {
+//       x: cursorPosition.x - Ecard.position.x,
+//       y: cursorPosition.y - Ecard.position.y
+//     };
 
-    // Determine the direction of the movement (left or right)
-    const direction = Math.random() < 0.5 ? -1 : 1;
-    const distance = Math.random() * 4 + 1;
+//     // Determine the direction of the movement (left or right)
+//     const direction = Math.random() < 0.5 ? -1 : 1;
+//     const distance = Math.random() * 4 + 1;
 
-    // Move the Ecard x units in the determined direction
-    anime({
-      targets: Ecard.position,
-      x: Ecard.position.x + direction * distance,
-      duration: 50,
-      easing: 'easeInOutSine',
-    });
+//     // Move the Ecard x units in the determined direction
+//     anime({
+//       targets: Ecard.position,
+//       x: Ecard.position.x + direction * distance,
+//       duration: 50,
+//       easing: 'easeInOutSine',
+//     });
 
-    // Return the Ecard to its start position after a short delay
-    setTimeout(() => {
-      Ecard.position.x = EstartPoint.x;
-    }, 350); // delay
-  }
-});
+//     // Return the Ecard to its start position after a short delay
+//     setTimeout(() => {
+//       Ecard.position.x = EstartPoint.x;
+//     }, 350); // delay
+//   }
+// });
 
 
 

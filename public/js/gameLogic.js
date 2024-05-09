@@ -1,4 +1,5 @@
 import { enemyHit, enemyDGlow } from "./render.js";
+import { displayText,printText } from "./extra/textDisplay.js";
 
 const attackButton=document.querySelector('#attack');
 const actionTaken = document.querySelector('#actionTaken')
@@ -75,6 +76,7 @@ async function playerAttack(gameId) {
         action_taken: true  
     });
 
+    
     const enemy = await fetchEnemy(game.enemy_id);
     const baseHp = enemy.hp;
     await enemyTakeDamage(baseHp, newEnemyHp);
@@ -82,7 +84,8 @@ async function playerAttack(gameId) {
     const updateHp = document.getElementById("enemy-hp");
     updateHp.innerHTML = "";
     updateHp.innerHTML = `${newEnemyHp}/${enemy.hp}`
-
+    
+    displayText(`Hack deployed...Target takes ${damage} damage`);
     await endGame(gameId);
     
     console.log(`enemy took ${damage} damage`)
@@ -116,6 +119,7 @@ async function enemyAttack(gameId) {
     updateHp.innerHTML = "";
     updateHp.innerHTML = `${newUserHp}/${character.hp}`
 
+    displayText(`Hack deployed...You take ${damage} damage`);
     await endGame(gameId);
 
     console.log(`user took ${damage} damage`)

@@ -2,11 +2,12 @@ let printIndex = 0;
 const printDelay = 50; // adjust the speed of printing here
 let textToInsert;
 
-function displayText(){
+function displayText(text){
   event.preventDefault();
 
   const usernameElement = document.querySelector('#userMsg');
-  const textToInsert = ' Attack and dealt';
+
+  let textToInsert= text
   
   if (usernameElement) {
     const existingText = usernameElement.textContent;
@@ -19,6 +20,8 @@ function displayText(){
 
 function printLine(text) {
   let printIndex = 0;
+const printDelay = 50;
+
   const usernameElement = document.querySelector('#userMsg');
   let i = 0;
   const intervalId = setInterval(() => {
@@ -31,3 +34,5 @@ function printLine(text) {
     }
   }, printDelay);
 }
+
+export {displayText, printText}
