@@ -15,7 +15,7 @@ document.body.appendChild( renderer.domElement );
 
 const cubeTextureLoader = new THREE.TextureLoader();
 const cubeTexture = cubeTextureLoader.load('/imgs/UI/Terminal.png') 
-const geometry = new THREE.PlaneGeometry( 4, 2.5);
+const geometry = new THREE.PlaneGeometry( 4, 2.);
 const material = new THREE.MeshBasicMaterial( { 
     transparent: true,
     map: cubeTexture } );
