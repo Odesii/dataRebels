@@ -6,32 +6,6 @@ body{
   box-sizing: border-box;
 }
 
-.terminal {
-  pointer-events: none;
-  position: absolute;
-  top: 0;
-  left: -70px;
-  z-index: 1; 
-  transform: scale(.85);/* Ensure the terminal is on top of the Three.js canvas */
-}
-
-.terminal-text {
-  pointer-events: none;
-  position: absolute;
-  top: 7%;
-  left: 5%;
-  z-index: 2;
-  width: 500px;
-  height: 300px;
-  overflow: hidden;
-  font-size: 16px;
-  font-family: "JetBrains Mono", monospace;
-  color: #fff;
-  text-align: left;
-  padding: 10px;
-  white-space: normal;
-  word-wrap: break-word;
-}
 
 .taskbar {
   z-index: 20;

@@ -24,16 +24,12 @@
     <div>
     </div>
   </div>
-      <p>Turn Count:{{game.turn}}</p>
+      <p class="turn">Turn Count:<span class="turn-color">{{game.turn}}</span></p>
 
-  {{#if loggedIn}}
-  <button class="log-bttn roll">--Roll--</button>
-  <a href="/play"><button class="log-bttn play">--Play--</button></a>
-  <button class="log-bttn" id="logout">--Logout--</button>
-  {{else}}
+  
   <a href="/login"><button class="log-bttn">--Login--</button></a>
-  <a href="/register"><button class="log-bttn">--Register--</button></a>
-  {{/if}}
+  <a href="/"><button class="log-bttn">--Home--</button></a>
+
     <audio controls loop autoplay preload="auto" class="">
     <source src="./audio/hackMe.mp3" type="audio/mpeg">
     Your browser does not support the audio element.

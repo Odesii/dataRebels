@@ -49,7 +49,7 @@ const cardGeometry = new THREE.BoxGeometry( 2, 2.5, 0.1 );
 // card mesh
 card = new THREE.Mesh( cardGeometry, cardMaterial );
 // card position
-card.position.set( -3.5,.5, 1,0)
+card.position.set( -3.5,0, 1,0)
 scene.add(card);
 startPoint = new THREE.Vector3(card.position.x, card.position.y, card.position.z)
 
@@ -64,21 +64,14 @@ controls.addEventListener('dragend', event =>{
 // create Terminal 
 const cubeTextureLoader = new THREE.TextureLoader();
 const cubeTexture = cubeTextureLoader.load('/imgs/UI/Terminal.png') 
-const geometry = new THREE.PlaneGeometry( 4, 2.5);
+const geometry = new THREE.PlaneGeometry( 5, 2.5);
 const material = new THREE.MeshBasicMaterial( { 
     transparent: true,
     map: cubeTexture } );
 const cube = new THREE.Mesh( geometry, material );
-cube.position.set( -.2,0,2)
+cube.position.set( .82,0,2)
 scene.add( cube );
 
-
-
-// Setup DragControls
-// const controls = new DragControls([card], camera, renderer.domElement);
-// controls.addEventListener('dragend', event =>{
-//     returning = true;
-// })
 
 
 camera.position.z = 5;

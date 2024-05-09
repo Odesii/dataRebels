@@ -1,0 +1,61 @@
+
+.terminal {
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  left: -70px;
+  z-index: 1; 
+  transform: scale(.85);/* Ensure the terminal is on top of the Three.js canvas */
+}
+
+.terminal-text {
+  pointer-events: none;
+  position: absolute;
+  top: 60px;
+  left: 100px;
+  z-index: 2;
+  width: 500px;
+  height: 300px;
+  overflow: hidden;
+  font-size: 16px;
+  font-family: "JetBrains Mono", monospace;
+  color: #fff;
+  text-align: left;
+  padding: 10px;
+  white-space: normal;
+  word-wrap: break-word;
+}
+
+.terminal-text button {
+
+  position: absolute;
+  right:20px;
+  pointer-events: all;
+  z-index: 19;
+  background-color: #5f5f5f;
+  color: #FFFFFF;
+  border: none;
+  padding: 5px 10px;
+  font-size: 16px;
+  font-weight: bolder;
+  cursor: pointer;
+  box-shadow: -2px 2px rgb(179, 179, 179) inset, 
+  -2px 2px rgb(37, 37, 37);
+} 
+
+
+.terminal-text button:hover{
+  background-color: #000000;
+  color: #00ff15;
+}
+
+.turn{
+  pointer-events: none;
+  position: absolute;
+  right: 60px;
+  border: 1px solid #000000;
+}
+
+.turn-color {
+  color: red;
+}
