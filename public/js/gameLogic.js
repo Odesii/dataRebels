@@ -39,7 +39,7 @@ async function updateGame(gameId, updates) { //PUT route that we use to update t
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(updates)
     });
-    console.log(response)
+
     return fetchGame(gameId); // Fetch updated data
 }
 
