@@ -241,6 +241,80 @@ document.querySelector('#attack').addEventListener('click', (event) => {
       },1000 + 400)
   });
 
+
+  document.querySelector('#nextTurn').addEventListener('click', (event) => {
+    event.preventDefault();
+    const cardMat = card.material;
+    const EcardMat= Ecard.material;
+    EcardMat.emissive.set(0xffff)
+    
+    console.log('Animation started!')
+    anime({
+        targets: EcardMat, 
+        emissiveIntensity: [0.5, 0.1],
+        duration: 150,
+        easing: 'easeInOutSine',
+        direction: 'alternate',
+        loop: 2,
+        delay: 50,
+        complete: () => {;
+        }
+      });
+
+      setTimeout(() => {
+        EcardMat.emissive.set(0x000000)
+      }, 400);
+      
+      setTimeout(() => {
+        cardMat.emissive.set(0xff0000)
+        anime({
+          targets: cardMat, 
+          emissiveIntensity: [0.5, 0.1],
+          duration: 150,
+          easing: 'easeInOutSine',
+          direction: 'alternate',
+          loop: 2,
+          delay: 50,
+          complete: () => {;
+          }
+        });
+      }, 1000)
+      setTimeout(() => {
+        cardMat.emissive.set(0x000000)
+      },1000 + 400)
+  });
+
+
+
+  document.querySelector('#defend').addEventListener('click', (event) => {
+    event.preventDefault();
+    const cardMat = card.material;
+    cardMat.emissive.set(0xFFD700)
+  anime({
+    targets: cardMat,
+    emissiveIntensity: [0.2, 0.1],
+    duration: 150,
+    easing: 'easeInOutSine',
+    direction: 'alternate',
+    loop: 2,
+    delay: 50,
+    complete: () => {
+      // Hold the glow for 1 second
+      setTimeout(() => {
+        anime({
+          targets: cardMat,
+          emissiveIntensity: .3,
+          duration: 10,
+          easing: 'easeInOutSine'
+        });
+      }, 500);
+    }
+  });
+  setTimeout(() => {
+    cardMat.emissive.set(0x000000)
+  },1500);
+  
+});
 // // player take damage
 // document.querySelector('#data-').addEventListener('change', (event) => {
 //     event.preventDefault();
@@ -281,7 +355,7 @@ composer.addPass(bloomPass);
 
 
 renderer.toneMapping = THREE.ReinhardToneMapping;
-renderer.toneMappingExposure = Math.pow(0.9, 4.0); // Adjust for desired brightness
+renderer.toneMappingExposure = Math.pow(1.4, 4.0); // Adjust for desired brightness
 
 
 function animate() {

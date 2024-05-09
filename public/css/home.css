@@ -1,10 +1,11 @@
 #roll{
     position: absolute;
-    top: 35%;
-    left: 50%;
+    top: 28%;
+    left: 47%;
     font-family: "JetBrains Mono", monospace;
     text-align: center;
-    color: #19d308;
+    color: #ffffff;
+    text-shadow: 1px #000000;
   }
   
   #log a{
@@ -41,3 +42,11 @@
       left: 10%;
     }
   
+
+.color {
+  color: #48ff00;
+}
+
+.fight {
+  color: red;
+}

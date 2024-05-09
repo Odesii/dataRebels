@@ -5,6 +5,7 @@ const withAuth = require('../utils/auth');
 router.get('/', withAuth,  async (req, res) => {
 if(req.session.loggedIn){
     
+
     const userData = await User.findByPk( req.session.user_id,
        {
         include: 
@@ -12,9 +13,10 @@ if(req.session.loggedIn){
         model: Character
     }] 
 });
-    const {character} = userData.get({plain: true})
-console.log('home route', character)
-return res.render('homepage', {character, loggedIn: req.session.loggedIn })
+
+const user = userData.get({plain: true})
+const {character} = userData.get({plain: true})
+return res.render('homepage', {user, character, loggedIn: req.session.loggedIn })
 }
 
     res.render('homepage', {loggedIn: req.session.loggedIn })
@@ -49,6 +51,7 @@ router.get('/play', withAuth, async (req, res) => {
     const user = userData.get({ plain: true });
     const character = characterData.get({ plain: true });
     const enemy = enemyData.get({ plain: true });
+    
     res.render('play', { game, user, character, enemy, loggedIn: req.session.loggedIn })
 });
 
