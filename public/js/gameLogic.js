@@ -1,5 +1,7 @@
+import { enemyHit, enemyDGlow } from "./render.js";
 
 const attackButton=document.querySelector('#attack');
+const actionTaken = document.querySelector('#actionTaken')
 
 const nextTurnButton=document.querySelector('#nextTurn');
 //GOAL get attack to register in front end and log numbers CHECK
@@ -55,6 +57,8 @@ async function updateGame(gameId, updates) { //PUT route that we use to update t
 async function playerAttack(gameId) {
     const game = await fetchGame(gameId); //GET game data by taking in the specific game ID
     if (game.action_taken) {
+        actionTaken.innerHTML = ""
+        actionTaken.innerHTML = "An action has already been taken this turn. END TURN"
         return;
     }
 
@@ -126,16 +130,21 @@ async function playerDefend(gameId) {
     const game = await fetchGame(gameId);
 
     if (game.action_taken) {
-        console.log("An action has already been taken this turn.");
+        actionTaken.innerHTML = ""
+        actionTaken.innerHTML = "An action has already been taken this turn. END TURN"
+        console.log("An action has already been taken this turn. END TURN");
         return;
     }
 
     if (game.user_ap < 2) { //AP cost for defend is 2 so if theres not enough ap you cant defend
+        actionTaken.innerHTML = ""
+        actionTaken.innerHTML = "NOT ENOUGH BANDWITH"
         console.log("Not enough AP to defend.");
         return;
     }
 
     const newDefense = game.user_defense * 2;
+
 
     await updateGame(gameId, {
         user_defense: newDefense,
@@ -143,7 +152,7 @@ async function playerDefend(gameId) {
         action_taken: true // true means action has been taken
     });
 
-    await renderBandwith(gameId);
+
     return newDefense;
 }
 
@@ -175,10 +184,13 @@ async function nextTurn(gameId) {
     const game = await fetchGame(gameId);
     const enemyRandom = Math.floor(Math.random()*2); //50/50 chance of the enemy attacking or defending
     await resetEnemyDefend(gameId); //resets the enemy defense after the users turn
+    actionTaken.innerHTML = ""
     if(enemyRandom === 0) {
         await enemyAttack(gameId); //the random gives a number thats either 0 or 1 so if its 0 the enemy will attack
+        enemyHit();
     } else{
        await enemyDefend(gameId); //resets the enemy defense
+       enemyDGlow();
     }
     await resetUserDefend(gameId); //resets the users defense after the enemy attacks
 
@@ -295,7 +307,7 @@ async function renderBandwith(gameId) {
 
     setInterval(function() {
         document.getElementById("bandwidth").src = game.user_ap_img + "?" + new Date().valueOf();
-    }, 3000)
+    }, 10)
 }
 
 async function loadGameState() {
