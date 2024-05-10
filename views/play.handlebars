@@ -1,6 +1,7 @@
 <img class="bandwith" src="" id="bandwidth"/>
 <div id="game-state" data-id="{{game.id}}"></div>
 <div id="card-img" data-img={{character.img}}></div>
+<div id="enemy-card-img" data-img={{enemy.img}}></div>
 <img class="terminal" src="/imgs/UI/Terminal.png"/>
 <div class="terminal-text">
   <p id="userMsg">{{user.username}}: </p>
@@ -42,8 +43,6 @@
     </audio>
 </div>
 <h1 id="actionTaken"></h1>
-<script type="module" src="./js/gameLogic.js"></script>
-{{!-- <script src="./js/extra/textDisplay.js"></script> --}}
 <script type="module" src="./js/gameLogic.js"></script>
 <script defer type="module" src="./js/startMenu.js"></script>
 <script defer type="module" src="./js/render.js"></script>

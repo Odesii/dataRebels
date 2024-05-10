@@ -24,7 +24,7 @@ const sess = {
     sameSite: 'strict',
   },
   resave: false,
-  saveUninitialized: true,
+  saveUninitialized: false,
   
   store: new SequelizeStore({
     db: sequelize,
@@ -47,6 +47,6 @@ app.use(routes);
 // Sync database and start server
 sequelize.sync({ force: false }).then(() => {
   app.listen(PORT, () => {
-    console.log(`\nServer running on port ${PORT}. Visit http://localhost:${PORT} and create an account!`);
+    console.log(`\nServer running on port ${PORT}. Visit http://localhost:${PORT} `);
   });
 });
