@@ -23,28 +23,45 @@ router.put('/roll', withAuth, async (req, res) => {
     }
 });
 
-router.put('/level', withAuth, async(req, res) => {
+router.put('/level/:id', withAuth, async(req, res) => {
     const userData = await User.findOne({
         where: {
             id: req.session.user_id
         }
     });
-    
-    const userUpdate= await User.update(
-        {
-            credits: userData.credits + Math.floor(userData.highest_level * 50 * (Math.random() + 1)),
-            highest_level: userData.highest_level + 1
-        },
-        {
-            where:{
-                id: req.session.user_id
-            }
-        }
-    );
 
-    res.status(200).json(userUpdate);
-}
-)
+    if (userData.highest_level <= req.params.id && userData.highest_level !== 5) {
+        const userUpdate= await User.update(
+            {
+                credits: userData.credits + Math.floor(userData.highest_level * 50 * (Math.random() + 1)),
+                highest_level: userData.highest_level + 1
+            },
+            {
+                where:{
+                    id: req.session.user_id
+                }
+            }
+        );
+
+        res.status(200).json(userUpdate);
+    }
+
+    else {
+        
+        const userUpdate= await User.update(
+            {
+                credits: userData.credits + Math.floor(req.params.id * 50 * (Math.random() + 1))
+            },
+            {
+                where:{
+                    id: req.session.user_id
+                }
+            }
+        );
+
+        res.status(200).json(userUpdate);
+    }
+});
 
 router.delete('/gameover', async (req, res) => {
     try {

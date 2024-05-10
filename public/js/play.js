@@ -40,7 +40,10 @@ rollCharacter();
 const initializeGameState = async (event) => {
     event.preventDefault();
 
-    const response = await fetch('/api/games', {
+    const enemy = event.target;
+    const enemyId = JSON.parse(enemy.getAttribute('data-id'));
+
+    const response = await fetch(`/api/games/${enemyId}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
     });
@@ -57,11 +60,8 @@ const initializeGameState = async (event) => {
 
     reRoll.addEventListener('click', rollCharacter);
 
-document
-    .querySelector('.play')
-    ?.addEventListener('click', initializeGameState);
-  
-
+document.querySelectorAll('.play')
+    .forEach(button => button?.addEventListener('click', initializeGameState));
 
 window.addEventListener('load', () => {
     if(reRoll.dataset.img){
