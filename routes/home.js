@@ -3,23 +3,39 @@ const { User, Character, Enemy, Game, Item, UserItem } = require('../models');
 const withAuth = require('../utils/auth');
 
 router.get('/', withAuth,  async (req, res) => {
-if(req.session.loggedIn){
-    
+    if(req.session.loggedIn) {
 
-    const userData = await User.findByPk( req.session.user_id,
-       {
-        include: 
-        [{
-        model: Character
-    }] 
-});
+        const userData = await User.findByPk( req.session.user_id, {
+            include: 
+            [{
+                model: Character
+            }] 
+        });
 
-const user = userData.get({plain: true});
-const {character} = userData.get({plain: true})
-return res.render('homepage', {user, character, loggedIn: req.session.loggedIn })
-}
+        const findUserInventory = await UserItem.findOne({
+            where: {
+                user_id: req.session.user_id
+            }
+        })
+        
+        if (!findUserInventory) {
+            const itemData = await Item.findAll({});
 
-    res.render('homepage', {loggedIn: req.session.loggedIn })
+            const userItemData = itemData.map((item) => UserItem.create({
+                item_id: item.id,
+                user_id: req.session.user_id,
+                cost: item.cost,
+                quantity: 0
+            }))
+            await Promise.all(userItemData);
+        }
+
+        const user = userData.get({ plain: true });
+        const { character } = userData.get({ plain: true })
+        return res.render('homepage', { user, character, loggedIn: req.session.loggedIn })
+    }
+
+    res.render('homepage', { loggedIn: req.session.loggedIn })
 })
 
 router.get('/play', withAuth, async (req, res) => {
