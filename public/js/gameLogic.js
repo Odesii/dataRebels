@@ -89,7 +89,7 @@ async function playerAttack(gameId) {
   const character = await fetchCharacter(game.user_id);
   const critChance = Math.random(); // decimal number between 0 and 1
   const baseDamage = Math.round(
-    character.attack + character.attack * Math.random()
+    game.user_attack + game.user_attack * Math.random()
   ); // character base attack + (base attack multiplied by a decimal between 0 and 1) so that theres no getting stuck
   const isCriticalHit = critChance > 0.75; //25% critical strike chance that multiplies base damage by 3
   const actualDamage = isCriticalHit ? baseDamage * 3 : baseDamage; //damage after calculating crit or the base damage calculation
