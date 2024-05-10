@@ -11,7 +11,7 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 
 // View engine setup
-// const hbs = exphbs.create({ helpers });
+const sqlStore = new SequelizeStore({db: sequelize})
 const hbs = exphbs.create({});
 
 // Session configuration
@@ -26,11 +26,12 @@ const sess = {
   resave: false,
   saveUninitialized: false,
   
-  store: new SequelizeStore({
-    db: sequelize,
-  }),
+  store: sqlStore
 };
 app.use(session(sess));
+
+sqlStore.sync();
+
 
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
