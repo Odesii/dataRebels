@@ -34,11 +34,14 @@ User.init(
     },
     character_id: {
       type: DataTypes.INTEGER,
-      allowNull: true
+      references: {
+        model: 'character',
+        key: 'id'
+      }
     },
-    highest_level:{
+    highest_level: {
       type:DataTypes.INTEGER,
-      allowNull:false
+      allowNull: false
     }
   },
   {

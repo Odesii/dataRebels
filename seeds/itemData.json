@@ -1,7 +1,27 @@
 [
     {
+        "name": "Network Booster",
+        "effect": "hp",
+        "cost": 50
+    },
+    {
+        "name": "DDoS Dosage",
+        "effect": "attack",
+        "cost": 100
+    },
+    {
+        "name": "Wall of Fire",
+        "effect": "defense",
+        "cost": 100
+    },
+    {
+        "name": "More Bandwidth",
+        "effect": "ap",
+        "cost": 50
+    },
+    {
         "name": "Void Scanner",
-        "effect": "none",
-        "cost": 1
+        "effect": "special",
+        "cost": 50000
     }
 ]

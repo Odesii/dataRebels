@@ -1,8 +1,9 @@
-const User= require('./User');
+const User = require('./User');
 const Enemy = require('./Enemy');
-const Character= require('./Character')
-const Game= require('./Game')
-// import Item from './Item'
+const Character = require('./Character')
+const Game = require('./Game')
+const Item = require('./Item')
+const UserItem = require('./UserItem')
 
 Character.hasMany(User, {
     foreignKey:'character_id'
@@ -28,6 +29,16 @@ Game.belongsTo(Enemy, {
     foreignKey:'enemy_id'
 });
 
+User.belongsToMany(Item, {
+    through: UserItem,
+    foreignKey: 'user_id'
+});
+
+Item.belongsToMany(User, {
+    through: UserItem,
+    foreignKey: 'item_id'
+});
+
 // Game.hasMany(Item,{
 //     foreignKey:'item_id'
 // });
@@ -36,4 +47,4 @@ Game.belongsTo(Enemy, {
 //     foreignKey:'item_id'
 // });
 
-module.exports=  {User, Enemy, Character, Game}// not importing over items yet
+module.exports=  { User, Enemy, Character, Game, Item, UserItem }// not importing over items yet

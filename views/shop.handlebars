@@ -1,0 +1,26 @@
+WELCOME TO THE SHOP YA SCALLYWAGS! [WE ARE STILL UNDER CONSTRUCTION]
+{{#each itemData}}
+<div>
+    Name: {{this.name}}
+</div>
+<div>
+    Effect: {{this.effect}}
+</div>
+<div>
+    Cost: {{#with (lookup ../userItemData @index)}}{{this.cost}}{{/with}}
+</div>
+<div>
+    Current Level: {{#with (lookup ../userItemData @index)}}{{this.quantity}}{{/with}}
+</div>
+<div>
+    <button class="log-bttn buy" data-id="{{this.id}}">BUY IT NOW</button>
+</div>
+{{/each}}
+
+<div>
+    <a href="/"><button class="log-bttn">GET OUTTA HERE YA POOR BUM</button></a>
+</div>
+<div>
+    User Credits: {{user.credits}}
+</div>
+<script type="module" src="/js/shop.js"></script>

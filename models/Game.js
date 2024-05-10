@@ -15,7 +15,11 @@ Game.init(
             type: DataTypes.INTEGER,
             allowNull: false
         },
-        user_defense:{
+        user_attack: {
+            type: DataTypes.INTEGER,
+            allowNull:false
+        },
+        user_defense: {
             type: DataTypes.INTEGER,
             allowNull:false
         },
@@ -39,7 +43,7 @@ Game.init(
             type: DataTypes.INTEGER,
             allowNull: false
         },
-        action_taken:{
+        action_taken: {
             type:DataTypes.BOOLEAN,
             allowNull:false,
             defaultValue:false

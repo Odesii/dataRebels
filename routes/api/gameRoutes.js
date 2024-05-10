@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { User, Character, Enemy, Game } = require('../../models');
+const { User, Character, Enemy, Game, UserItem } = require('../../models');
 const withAuth = require('../../utils/auth');
 
 router.get('/:id', withAuth, async (req, res) => { //gets specific game
@@ -48,12 +48,21 @@ router.post('/', withAuth, async (req, res) => {
             }
         });
 
+        const userItemData = await UserItem.findAll({
+            where: {
+                user_id: req.session.user_id
+            },
+            raw: true,
+            order: [['item_id', 'ASC']]
+        });
+
         const newGame = await Game.create({//created new row with chosen data
             user_id: req.session.user_id,
             enemy_id: enemyData.id,
-            user_hp: characterData.hp,
-            user_defense: characterData.defense,
-            user_ap: characterData.ap,
+            user_hp: characterData.hp + userItemData[0].quantity * 3,
+            user_attack: characterData.attack + userItemData[1].quantity,
+            user_defense: characterData.defense + userItemData[2].quantity,
+            user_ap: characterData.ap + userItemData[3].quantity * 2,
             user_ap_img: "/imgs/UI/ap/ap15.png",
             enemy_hp: enemyData.hp,
             enemy_ap: enemyData.ap,
@@ -187,6 +196,21 @@ router.put('/:id', withAuth, async (req, res) => {
             res.status(200).json(updateGame);
         }
 
+        else if(req.body.enemy_hp !=undefined) {//1= undefined because 0 is a falsy value and it wont register
+            const updateGame=await Game.update(
+                {
+                    enemy_hp:req.body.enemy_hp
+                },
+                {
+                    where:{
+                        id:req.params.id
+                    }
+                }
+            );
+   
+            res.status(200).json(updateGame);
+        }
+
         else if (req.body.user_ap_img) {
             const img = renderBandwith(req.body.user_ap_img);
             const updateGame = await Game.update(
@@ -203,6 +227,20 @@ router.put('/:id', withAuth, async (req, res) => {
             res.status(200).json(updateGame);
         }
         
+    } catch (err) {
+        res.status(400).json(err);
+    }
+});
+
+router.delete('/:id', withAuth, async (req, res) => {
+    try {
+        const gameData = await Game.destroy({
+            where: {
+                id: req.params.id
+            }
+        });
+
+        res.status(200).json(gameData);
     } catch (err) {
         res.status(400).json(err);
     }
@@ -242,6 +280,8 @@ function renderBandwith(userAp) {
             return "/imgs/UI/ap/ap1.png";
         case 0:
             return "/imgs/UI/ap/ap0.png";
+        default:
+            return "/imgs/UI/ap/ap15.png";
     }
 }
 
