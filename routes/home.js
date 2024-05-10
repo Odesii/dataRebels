@@ -30,9 +30,20 @@ router.get('/', withAuth,  async (req, res) => {
             await Promise.all(userItemData);
         }
 
+        const enemyData = [];
+        for (let i = 0; i < userData.highest_level; i++) {
+            enemyData.push(await Enemy.findOne({
+                where: {
+                    id: i + 1
+                },
+                raw: true
+            }));
+        }
+
         const user = userData.get({ plain: true });
         const { character } = userData.get({ plain: true })
-        return res.render('homepage', { user, character, loggedIn: req.session.loggedIn })
+
+        return res.render('homepage', { user, character, enemyData, loggedIn: req.session.loggedIn })
     }
 
     res.render('homepage', { loggedIn: req.session.loggedIn })
