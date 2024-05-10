@@ -1,7 +1,7 @@
 #roll{
     position: absolute;
     top: 28%;
-    left: 47%;
+    left: 42%;
     font-family: "JetBrains Mono", monospace;
     text-align: center;
     color: #ffffff;
@@ -49,4 +49,9 @@
 
 .fight {
   color: red;
+}
+
+#wake-up {
+  position: absolute;
+  left: -90%;
 }
