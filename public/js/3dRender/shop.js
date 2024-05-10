@@ -1,7 +1,5 @@
 import * as THREE from 'three';
-import { EffectComposer } from 'three/EffectComposer';
-import { RenderPass } from 'three/RenderPass';
-import { UnrealBloomPass } from 'three/UnrealBloomPass';
+
 
 
 
@@ -12,16 +10,29 @@ const renderer = new THREE.WebGLRenderer();
 renderer.setSize( window.innerWidth, window.innerHeight );
 document.body.appendChild( renderer.domElement );
 
-
+// main terminal
 const cubeTextureLoader = new THREE.TextureLoader();
-const cubeTexture = cubeTextureLoader.load('/imgs/UI/Terminal.png') 
-const geometry = new THREE.PlaneGeometry( 4, 2.);
+const cubeTexture = cubeTextureLoader.load('/imgs/UI/shop.png') 
+const geometry = new THREE.PlaneGeometry( 2.8, 2.5);
 const material = new THREE.MeshBasicMaterial( { 
     transparent: true,
     map: cubeTexture } );
 const cube = new THREE.Mesh( geometry, material );
-cube.position.set( -.2,0,2)
+cube.position.set( 0,0,3)
 scene.add( cube );
+
+
+//wip 
+const wipTextureLoader =new THREE.TextureLoader();
+const wipTexture = wipTextureLoader.load('/imgs/UI/wip.png')
+const wipMaterial = new THREE.MeshBasicMaterial({
+    transparent: true,
+    map: wipTexture
+})
+const wipGeometry = new THREE.PlaneGeometry(2, 1);
+const wip = new THREE.Mesh(wipGeometry, wipMaterial)
+wip.position.set( -3.8,1.6,1)
+scene.add( wip );
 
 
 // Create the skybox mesh
@@ -44,6 +55,20 @@ scene.add(skybox);
 
 
 camera.position.z = 5;
+
+
+
+
+anime({
+  targets: wip.position,
+//   x: [-1.5, -1.3], // sway range
+  z: [1.5, 1.4], // sway range
+  duration: 1500, // 2 seconds
+  easing: 'easeInOutSine',
+  loop: true, // repeat the animation
+  direction: 'alternate' // sway back and forth
+});
+
 
 function animate() {
 	requestAnimationFrame( animate );

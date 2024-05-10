@@ -1,4 +1,6 @@
-WELCOME TO THE SHOP YA SCALLYWAGS! [WE ARE STILL UNDER CONSTRUCTION]
+<h1 class="welcome">WELCOME TO THE SHOP YA N00B! 
+    <br>[WE ARE STILL UNDER CONSTRUCTION]</h1>
+<div class="grid-container">
 {{#each itemData}}
 <div>
     Name: {{this.name}}
@@ -15,13 +17,15 @@ WELCOME TO THE SHOP YA SCALLYWAGS! [WE ARE STILL UNDER CONSTRUCTION]
 <div>
     <button class="log-bttn buy" data-id="{{this.id}}">BUY IT NOW</button>
 </div>
+<p></p>
 {{/each}}
 
 <div>
     <a href="/"><button class="log-bttn">GET OUTTA HERE YA POOR BUM</button></a>
 </div>
-<div>
-    User Credits: {{user.credits}}
 </div>
-<script type="module" src="/js/shop.js"></script>
-<script type="module" src="/js/3dRender/shop.js"></script>
+<div class="credits">
+    User Credits: <span>{{user.credits}}</span>
+</div>
+<script type="module" src="./js/shop.js"></script>
+<script type="module" src="./js/3dRender/shop.js"></script>
