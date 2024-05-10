@@ -11,6 +11,10 @@ UserItem.init(
             primaryKey: true,
             autoIncrement: true
         },
+        cost: {
+            type: DataTypes.INTEGER,
+            allowNull: false
+        },
         quantity: {
             type: DataTypes.INTEGER,
             allowNull: false

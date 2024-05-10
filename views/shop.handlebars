@@ -7,7 +7,7 @@ WELCOME TO THE SHOP YA SCALLYWAGS! [WE ARE STILL UNDER CONSTRUCTION]
     Effect: {{this.effect}}
 </div>
 <div>
-    Cost: {{this.cost}}
+    Cost: {{#with (lookup ../userItemData @index)}}{{this.cost}}{{/with}}
 </div>
 <div>
     Current Level: {{#with (lookup ../userItemData @index)}}{{this.quantity}}{{/with}}

@@ -2,6 +2,35 @@ const router = require('express').Router();
 const { User, Item, UserItem } = require('../../models');
 const withAuth = require('../../utils/auth');
 
+router.get('/item/:id', withAuth, async (req, res) => {
+    try {
+        const itemData = await Item.findOne({
+            where: {
+                id: req.params.id
+            }
+        });
+
+        res.status(200).json(itemData);
+    } catch (err) {
+        res.status(400).json(err);
+    }
+});
+
+router.get('/quantity/:id', withAuth, async (req, res) => {
+    try {
+        const quantityData = await UserItem.findOne({
+            where: {
+                item_id: req.params.id,
+                user_id: req.session.user_id
+            }
+        });
+
+        res.status(200).json(quantityData);
+    } catch (err) {
+        res.status(400).json(err);
+    }
+});
+
 router.post('/', withAuth, async (req, res) => {
     try {
         const userData = await UserItem.findOne({
@@ -18,6 +47,7 @@ router.post('/', withAuth, async (req, res) => {
         const userItemData = itemData.map((item) => UserItem.create({
             item_id: item.id,
             user_id: req.session.user_id,
+            cost: item.cost,
             quantity: 0
         }))
         await Promise.all(userItemData);
@@ -39,7 +69,8 @@ router.put('/:id', withAuth, async (req, res) => {
 
         const userItemData = await UserItem.update(
             {
-                quantity: userItem.quantity + 1
+                quantity: userItem.quantity + 1,
+                cost: userItem.cost + 25
             },
             {
                 where: {

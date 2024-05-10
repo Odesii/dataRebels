@@ -71,7 +71,8 @@ router.get('/shop', withAuth, async (req, res) => {
             where: {
                 user_id: req.session.user_id
             },
-            raw: true
+            raw: true,
+            order: [['id', 'ASC']]
         });
         
         res.render('shop', { itemData, userItemData, loggedIn: req.session.loggedIn });
