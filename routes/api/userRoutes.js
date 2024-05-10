@@ -8,7 +8,7 @@ router.put('/roll', withAuth, async (req, res) => {
         const character_id =  Math.floor(Math.random() * characters.length )+1;
         await User.update(
             {
-                character_id: characters[Math.floor(Math.random() * characters.length)].id//randomizes character on roll
+                character_id: character_id//randomizes character on roll
             },
             {
                 where: {

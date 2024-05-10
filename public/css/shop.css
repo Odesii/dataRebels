@@ -1,0 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
+
+.grid-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 20px;
+    padding: 20px;
+    z-index: 1; /* ensure it's on top of the Three.js canvas */
+  }
+  
+  /* Style the grid items */
+  .grid-container div {
+
+    padding: 10px;
+
+  }
+  
+.welcome {
+    text-align: center;
+    position:absolute;
+}
+
+.credits {
+    position: absolute;
+    top: 30%;
+    font-size: 25px;
+    font-weight: 700;
+}
+
+.credits span {
+color: red;
+}

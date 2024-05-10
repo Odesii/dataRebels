@@ -30,6 +30,7 @@ const sess = {
 };
 
 app.use(express.static(path.join(__dirname, 'public')));
+
 app.use(session(sess));
 
 

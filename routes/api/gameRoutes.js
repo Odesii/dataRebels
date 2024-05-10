@@ -246,43 +246,4 @@ router.delete('/:id', withAuth, async (req, res) => {
     }
 });
 
-function renderBandwith(userAp) {
-    switch (userAp) {
-        case 15:
-            return "/imgs/UI/ap/ap15.png";
-        case 14:
-            return "/imgs/UI/ap/ap14.png";
-        case 13:
-            return "/imgs/UI/ap/ap13.png";
-        case 12:
-            return "/imgs/UI/ap/ap12.png";
-        case 11:
-            return "/imgs/UI/ap/ap11.png";
-        case 10:
-            return "/imgs/UI/ap/ap10.png";
-        case 9:
-            return "/imgs/UI/ap/ap9.png";
-        case 8:
-            return "/imgs/UI/ap/ap8.png";
-        case 7:
-            return "/imgs/UI/ap/ap7.png";
-        case 6:
-            return "/imgs/UI/ap/ap6.png";
-        case 5:
-            return "/imgs/UI/ap/ap5.png";
-        case 4:
-            return "/imgs/UI/ap/ap4.png";
-        case 3:
-            return "/imgs/UI/ap/ap3.png";
-        case 2:
-            return "/imgs/UI/ap/ap2.png";
-        case 1:
-            return "/imgs/UI/ap/ap1.png";
-        case 0:
-            return "/imgs/UI/ap/ap0.png";
-        default:
-            return "/imgs/UI/ap/ap15.png";
-    }
-}
-
 module.exports = router;
