@@ -72,10 +72,17 @@ router.get('/shop', withAuth, async (req, res) => {
                 user_id: req.session.user_id
             },
             raw: true,
-            order: [['id', 'ASC']]
+            order: [['item_id', 'ASC']]
+        });
+
+        const userData = await User.findOne({
+            where: {
+                id: req.session.user_id
+            }
         });
         
-        res.render('shop', { itemData, userItemData, loggedIn: req.session.loggedIn });
+        const user = userData.get({ plain: true })
+        res.render('shop', { user, itemData, userItemData, loggedIn: req.session.loggedIn });
     } catch (err) {
         res.status(500).json(err);
     }

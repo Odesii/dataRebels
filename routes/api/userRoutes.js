@@ -57,7 +57,8 @@ router.post('/register', async (req, res) => {
             const newUserData = await User.create({
                 username: req.body.username,
                 password: req.body.password,
-                highest_level:1
+                highest_level: 1,
+                credits: 100
             });
                     req.session.save(() => {
             req.session.user_id = newUserData.id;

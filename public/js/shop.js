@@ -29,6 +29,8 @@ const purchaseItem = async (event) => {
       
     if (response.ok) {
         document.location.reload();
+    } else if (response.status === 500) {
+        alert("HEY PUT THAT DOWN YOU CAN'T AFFORD THAT!");
     } else {
         alert('Failed to buy the item.');
     }
