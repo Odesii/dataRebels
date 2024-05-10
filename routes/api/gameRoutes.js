@@ -43,7 +43,6 @@ router.post('/:id', withAuth, async (req, res) => {
             }
         });
 
-        const enemyDataList = await Enemy.findAll({});
         const enemyData = await Enemy.findOne({
             where: {
                 id: req.params.id
@@ -78,17 +77,24 @@ router.post('/:id', withAuth, async (req, res) => {
         }
         
         else {
+            const enemies = await Enemy.findAll({});
+            const random = await Enemy.findOne({
+                where: {
+                    id: enemies[Math.floor(Math.random() * enemies.length)].id
+                }
+            })
+
             const newGame = await Game.create({//created new row with chosen data
                 user_id: req.session.user_id,
-                enemy_id: enemyDataList[Math.floor(Math.random() * enemyDataList.length)].id,
+                enemy_id: random.id,
                 user_hp: characterData.hp + userItemData[0].quantity * 3,
                 user_attack: characterData.attack + userItemData[1].quantity,
                 user_defense: characterData.defense + userItemData[2].quantity,
                 user_ap: characterData.ap + userItemData[3].quantity * 2,
                 user_ap_img: "/imgs/UI/ap/ap15.png",
-                enemy_hp: enemyData.hp,
-                enemy_ap: enemyData.ap,
-                enemy_defense: enemyData.defense,
+                enemy_hp: random.hp,
+                enemy_ap: random.ap,
+                enemy_defense: random.defense,
                 action_taken: false,
                 turn: 0
             });
