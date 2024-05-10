@@ -47,7 +47,7 @@ const initializeGameState = async (event) => {
   console.log(response)
     if (response.ok) {
         document.location.replace('/play');
-    } else if (response.status = 500) {
+    } else if (response.status === 500) {
         alert('You are already in a game! Redirecting you to your game ...')
         document.location.replace('/play');
     } else {

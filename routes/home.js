@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { User, Character, Enemy, Game } = require('../models');
+const { User, Character, Enemy, Game, Item, UserItem } = require('../models');
 const withAuth = require('../utils/auth');
 
 router.get('/', withAuth,  async (req, res) => {
@@ -62,6 +62,31 @@ router.get('/gameover', async (req, res) => {
         res.status(500).json(err);
     }
 });
+
+router.get('/shop', withAuth, async (req, res) => {
+    try {
+        const itemData = await Item.findAll({ raw: true });
+
+        const userItemData = await UserItem.findAll({
+            where: {
+                user_id: req.session.user_id
+            },
+            raw: true,
+            order: [['item_id', 'ASC']]
+        });
+
+        const userData = await User.findOne({
+            where: {
+                id: req.session.user_id
+            }
+        });
+        
+        const user = userData.get({ plain: true })
+        res.render('shop', { user, itemData, userItemData, loggedIn: req.session.loggedIn });
+    } catch (err) {
+        res.status(500).json(err);
+    }
+})
 
 router.get('/register', (req, res) => {
     // If the user is already logged in, redirect to the homepage

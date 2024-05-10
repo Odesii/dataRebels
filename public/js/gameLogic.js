@@ -235,18 +235,6 @@ defendButton.addEventListener('click', async() => {
     await playerDefend(gameId);
 });
 
-async function endGame(gameId) {
-    const game = await fetchGame(gameId)
-
-    if(game.user_hp === 0) { 
-        document.location.replace('/gameover');
-    }
-
-    if(game.enemy_hp === 0) { 
-        return;
-    }
-}
-
 function enemyTakeDamage(baseHp, enemyHp) {//damage-health
     const healthBar = document.getElementById("e-health-bar");
     
@@ -260,13 +248,13 @@ function enemyTakeDamage(baseHp, enemyHp) {//damage-health
   
     healthBar.innerHTML = "";
 
-    for (let i = 0; i < Math.floor(enemyHp / 2); i++) {
+    for (let i = 0; i < Math.floor(enemyHp / (baseHp / 50)); i++) {
         healthBar.innerHTML += "▓"; // current health point total
     }
 
     healthBar.innerHTML += "▒"; //  current health point position
     
-    for (let i = 0; i < Math.floor((baseHp - enemyHp - 1) / 2); i++) {
+    for (let i = 0; i < Math.floor((baseHp - enemyHp) / (baseHp / 50)); i++) {
         healthBar.innerHTML += "░"; // lost health points
     }
 }
@@ -284,14 +272,56 @@ function playerTakeDamage(baseHp, playerHp) {//damage-health
     
     healthBar.innerHTML = "";
     
-    for (let i = 0; i < Math.floor(playerHp / 2); i++) {
+    for (let i = 0; i < Math.floor(playerHp / (baseHp / 50)); i++) {
         healthBar.innerHTML += "▓"; // current health point total
     }
 
     healthBar.innerHTML += "▒"; //  current health point position
     
-    for (let i = 0; i < Math.floor((baseHp - playerHp - 1) / 2); i++) {
+    for (let i = 0; i < Math.floor((baseHp - playerHp) / (baseHp / 50)); i++) {
         healthBar.innerHTML += "░"; // lost health points
+    }
+}
+
+async function updateLevel(gameId) {
+    console.log('update level 1');
+    const response = await fetch (`/api/users/level`, {
+        method:'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+    });
+
+    const gameData = await response.json();
+    return gameData;
+}
+
+async function deleteGame(gameId) {
+    const response = await fetch(`/api/games/${gameId}`, {
+        method:'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    });
+
+    await updateLevel(gameId);
+    const gameData = await response.json();
+    return gameData;
+}
+
+async function endGame(gameId) {
+    const game = await fetchGame(gameId);
+    if (game.user_hp === 0) { 
+        document.location.replace('/gameover');
+    }
+
+    if (game.enemy_hp === 0) {
+        //delete req 
+        alert('You Live for NOW');
+        await deleteGame(gameId); //deleting the game instance if the user wins and redirect the user to the homepage to start level 2
+        
+        document.location.replace('/');
+        return;
     }
 }
 
