@@ -3,7 +3,7 @@ import {renderCard} from './3dRender/homePage.js'
 const reRoll = document.querySelector('.roll')
 
 const rollCharacter = async (event) => {
-    // event.preventDefault();
+    event.preventDefault();
     const current =document.getElementById('current-Char')
     reRoll.style.display = 'none';
     const response = await fetch('/api/users/roll', {

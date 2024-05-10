@@ -1,5 +1,8 @@
+import { enemyHit, enemyDGlow } from "./render.js";
+import { displayText,printLine } from "./extra/textDisplay.js";
 
 const attackButton=document.querySelector('#attack');
+const actionTaken = document.querySelector('#actionTaken')
 
 const nextTurnButton=document.querySelector('#nextTurn');
 //GOAL get attack to register in front end and log numbers CHECK
@@ -55,6 +58,8 @@ async function updateGame(gameId, updates) { //PUT route that we use to update t
 async function playerAttack(gameId) {
     const game = await fetchGame(gameId); //GET game data by taking in the specific game ID
     if (game.action_taken) {
+        actionTaken.innerHTML = ""
+        actionTaken.innerHTML = `An action has already been taken this turn. <span id="color1">END TURN</span>`
         return;
     }
 
@@ -80,8 +85,7 @@ async function playerAttack(gameId) {
     updateHp.innerHTML = `${newEnemyHp}/${enemy.hp}`
 
     await endGame(gameId);
-    
-    console.log(`enemy took ${damage} damage`)
+    displayText(`#userMsg`,`Hack sent ... Target took ${damage} damage`)
     return {
         damage: damage,
         isCriticalHit: isCriticalHit,
@@ -100,6 +104,7 @@ async function enemyAttack(gameId) {
     const newUserHp = Math.max(game.user_hp - damage, 0);
     
     console.log(`Enemy attacks for ${damage} damage`)
+    displayText(`#enemyMsg`,`Hack received ... You took ${damage} damage`)
     await updateGame(gameId, {
         user_hp: newUserHp
     });
@@ -126,24 +131,27 @@ async function playerDefend(gameId) {
     const game = await fetchGame(gameId);
 
     if (game.action_taken) {
-        console.log("An action has already been taken this turn.");
+        actionTaken.innerHTML = ""
+        actionTaken.innerHTML = `An action has already been taken this turn. <span id="color1">END TURN</span>`
         return;
     }
 
     if (game.user_ap < 2) { //AP cost for defend is 2 so if theres not enough ap you cant defend
-        console.log("Not enough AP to defend.");
+        actionTaken.innerHTML = ""
+        actionTaken.innerHTML = "NOT ENOUGH BANDWIDTH"
         return;
     }
 
     const newDefense = game.user_defense * 2;
-
+    
     await updateGame(gameId, {
         user_defense: newDefense,
         user_ap: game.user_ap - 2,
         action_taken: true // true means action has been taken
     });
-
-    await renderBandwith(gameId);
+    
+    displayText(`#userMsg`,`Encryption Engaged`)
+    
     return newDefense;
 }
 
@@ -161,8 +169,8 @@ async function enemyDefend(gameId) {
         enemy_defense: newDefense,
         enemy_ap: game.enemy_ap - 2
     });
-
     console.log(`Enemy defends`)
+    displayText(`#enemyMsg`,`Encryption Engaged`)
     return newDefense;
 }
 
@@ -175,10 +183,13 @@ async function nextTurn(gameId) {
     const game = await fetchGame(gameId);
     const enemyRandom = Math.floor(Math.random()*2); //50/50 chance of the enemy attacking or defending
     await resetEnemyDefend(gameId); //resets the enemy defense after the users turn
+    actionTaken.innerHTML = ""
     if(enemyRandom === 0) {
         await enemyAttack(gameId); //the random gives a number thats either 0 or 1 so if its 0 the enemy will attack
+        enemyHit();
     } else{
        await enemyDefend(gameId); //resets the enemy defense
+       enemyDGlow();
     }
     await resetUserDefend(gameId); //resets the users defense after the enemy attacks
 
@@ -295,7 +306,7 @@ async function renderBandwith(gameId) {
 
     setInterval(function() {
         document.getElementById("bandwidth").src = game.user_ap_img + "?" + new Date().valueOf();
-    }, 3000)
+    }, 10)
 }
 
 async function loadGameState() {

@@ -56,8 +56,17 @@ body{
 
   .start-menu li {
   list-style: none;
-
   }
+
+  .start-menu span{
+    writing-mode: vertical-rl;
+    text-orientation: upright;
+    font-size: 12px;
+    border: 1px solid black;
+    margin-left: 3px;
+    
+      }
+
 
   .start-menu img{
     left:60px;

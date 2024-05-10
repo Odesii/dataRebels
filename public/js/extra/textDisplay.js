@@ -1,23 +1,27 @@
 let printIndex = 0;
 const printDelay = 50; // adjust the speed of printing here
+let textToInsert;
 
-document.querySelector('#attack').addEventListener('click', (event) => {
-  event.preventDefault();
+function displayText(id, text){
 
-  const usernameElement = document.querySelector('#userMsg');
-  const textToInsert = ' Attack and dealt';
+  const usernameElement = document.querySelector(id);
+
+  let textToInsert= text
   
   if (usernameElement) {
     const existingText = usernameElement.textContent;
     const username = existingText.split(':')[0];
     const printText = textToInsert.trim(); 
     usernameElement.textContent = username + ': '; // clear existing text and set username
-    printLine(printText); 
+    printLine(id, printText); 
   }
-})
+}
 
-function printLine(text) {
-  const usernameElement = document.querySelector('#userMsg');
+function printLine(id, text) {
+  let printIndex = 0;
+const printDelay = 50;
+
+  const usernameElement = document.querySelector(id);
   let i = 0;
   const intervalId = setInterval(() => {
     if (i < text.length) {
@@ -29,3 +33,5 @@ function printLine(text) {
     }
   }, printDelay);
 }
+
+export {displayText, printLine}
