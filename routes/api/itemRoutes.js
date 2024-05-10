@@ -10,6 +10,17 @@ router.post('/', withAuth, async (req, res) => {
             }
         });
 
+        const zxcuserItemData = await UserItem.findAll({
+            where: {
+                user_id: req.session.user_id
+            },
+            raw: true,
+            order: [['item_id', 'ASC']]
+        });
+
+        console.log(zxcuserItemData);
+        zxcuserItemData.map(item => console.log(item.quantity));
+
         if (userData) {
            return res.status(200).json(userData);
         }

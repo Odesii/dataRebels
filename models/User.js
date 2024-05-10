@@ -39,7 +39,7 @@ User.init(
         key: 'id'
       }
     },
-    highest_level:{
+    highest_level: {
       type:DataTypes.INTEGER,
       allowNull:false
     }

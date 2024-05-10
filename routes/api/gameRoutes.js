@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { User, Character, Enemy, Game } = require('../../models');
+const { User, Character, Enemy, Game, UserItem } = require('../../models');
 const withAuth = require('../../utils/auth');
 
 router.get('/:id', withAuth, async (req, res) => { //gets specific game
@@ -48,12 +48,21 @@ router.post('/', withAuth, async (req, res) => {
             }
         });
 
+        const userItemData = await UserItem.findAll({
+            where: {
+                user_id: req.session.user_id
+            },
+            raw: true,
+            order: [['item_id', 'ASC']]
+        });
+
         const newGame = await Game.create({//created new row with chosen data
             user_id: req.session.user_id,
             enemy_id: enemyData.id,
-            user_hp: characterData.hp,
-            user_defense: characterData.defense,
-            user_ap: characterData.ap,
+            user_hp: characterData.hp + userItemData[0].quantity * 3,
+            user_attack: characterData.attack + userItemData[1].quantity,
+            user_defense: characterData.defense + userItemData[2].quantity,
+            user_ap: characterData.ap + userItemData[3].quantity * 2,
             user_ap_img: "/imgs/UI/ap/ap15.png",
             enemy_hp: enemyData.hp,
             enemy_ap: enemyData.ap,
