@@ -196,6 +196,21 @@ router.put('/:id', withAuth, async (req, res) => {
             res.status(200).json(updateGame);
         }
 
+        else if(req.body.enemy_hp !=undefined) {//1= undefined because 0 is a falsy value and it wont register
+            const updateGame=await Game.update(
+                {
+                    enemy_hp:req.body.enemy_hp
+                },
+                {
+                    where:{
+                        id:req.params.id
+                    }
+                }
+            );
+   
+            res.status(200).json(updateGame);
+        }
+
         else if (req.body.user_ap_img) {
             const img = renderBandwith(req.body.user_ap_img);
             const updateGame = await Game.update(
@@ -212,6 +227,20 @@ router.put('/:id', withAuth, async (req, res) => {
             res.status(200).json(updateGame);
         }
         
+    } catch (err) {
+        res.status(400).json(err);
+    }
+});
+
+router.delete('/:id', withAuth, async (req, res) => {
+    try {
+        const gameData = await Game.destroy({
+            where: {
+                id: req.params.id
+            }
+        });
+
+        res.status(200).json(gameData);
     } catch (err) {
         res.status(400).json(err);
     }

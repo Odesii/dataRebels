@@ -41,7 +41,7 @@ User.init(
     },
     highest_level: {
       type:DataTypes.INTEGER,
-      allowNull:false
+      allowNull: false
     }
   },
   {

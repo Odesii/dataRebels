@@ -23,6 +23,29 @@ router.put('/roll', withAuth, async (req, res) => {
     }
 });
 
+router.put('/level', withAuth, async(req, res) => {
+    const userData = await User.findOne({
+        where: {
+            id: req.session.user_id
+        }
+    });
+    
+    const userUpdate= await User.update(
+        {
+            credits: userData.credits + Math.floor(userData.highest_level * 50 * (Math.random() + 1)),
+            highest_level: userData.highest_level + 1
+        },
+        {
+            where:{
+                id: req.session.user_id
+            }
+        }
+    );
+
+    res.status(200).json(userUpdate);
+}
+)
+
 router.delete('/gameover', async (req, res) => {
     try {
         const userData = await User.destroy({
