@@ -251,6 +251,8 @@ function renderBandwith(userAp) {
             return "/imgs/UI/ap/ap1.png";
         case 0:
             return "/imgs/UI/ap/ap0.png";
+        default:
+            return "/imgs/UI/ap/ap15.png";
     }
 }
 
