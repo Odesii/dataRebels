@@ -1,4 +1,4 @@
-import {renderCard} from './3dRender/homePage.js'
+import {renderCardRoll} from './3dRender/homePage.js'
 
 const reRoll = document.querySelector('.roll')
 
@@ -21,7 +21,7 @@ if (!character.img){
 console.log('No IMAGE REROLLING')
 rollCharacter();
 }
-    renderCard(character.img)
+    renderCardRoll(character.img)
 
     
 
@@ -65,6 +65,6 @@ document
 
 window.addEventListener('load', () => {
     if(reRoll.dataset.img){
-   renderCard(reRoll.dataset.img)
+   renderCardRoll(reRoll.dataset.img)
     }
 })

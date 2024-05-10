@@ -47,7 +47,7 @@ camera.position.z = 5;
 
 
 let zDirection = 1; // 1 for forward, -1 for backward
-const zSpeed = 0.05; // Speed of movement
+const zSpeed = 0.02; // Speed of movement
 const zRange = 2.5; // Half the range 
 
 

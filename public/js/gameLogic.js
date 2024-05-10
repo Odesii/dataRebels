@@ -103,7 +103,6 @@ async function enemyAttack(gameId) {
     const damage = Math.max(actualDamage - game.enemy_defense, 0);
     const newUserHp = Math.max(game.user_hp - damage, 0);
     
-    console.log(`Enemy attacks for ${damage} damage`)
     displayText(`#enemyMsg`,`Hack received ... You took ${damage} damage`)
     await updateGame(gameId, {
         user_hp: newUserHp
@@ -119,7 +118,6 @@ async function enemyAttack(gameId) {
 
     await endGame(gameId);
 
-    console.log(`user took ${damage} damage`)
     return {
         damage: damage,
         isCriticalHit: isCriticalHit,
@@ -169,7 +167,6 @@ async function enemyDefend(gameId) {
         enemy_defense: newDefense,
         enemy_ap: game.enemy_ap - 2
     });
-    console.log(`Enemy defends`)
     displayText(`#enemyMsg`,`Encryption Engaged`)
     return newDefense;
 }
@@ -335,7 +332,7 @@ async function renderBandwith(gameId) {
     });
 
     setInterval(function() {
-        document.getElementById("bandwidth").src = game.user_ap_img + "?" + new Date().valueOf();
+        document.getElementById("bandwidth").src = game.user_ap_img
     }, 10)
 }
 
