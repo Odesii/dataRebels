@@ -53,7 +53,8 @@ Here’s a step-by-step guide to getting this monstrosity up and running, not th
 
 ## Link
 - Deployed on the Edge of Rebellion:
-    Data Rebels
+  
+    [Data Rebels](https://datarebels.onrender.com)
 
 # Contact
 ### DON'T
