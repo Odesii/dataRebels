@@ -71,7 +71,7 @@ let startPoint; // = new THREE.Vector3(card.position.x, card.position.y, card.po
 function renderCard(url) {
     console.log('NEW URL FROM TEST',url)
     // card texture
-    const cardTextureLoader = new THREE.TextureLoader();
+
 const cardTexture = cardTextureLoader.load(url)
 cardMaterial = new THREE.MeshStandardMaterial({
     map: cardTexture, 

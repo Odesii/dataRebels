@@ -7,55 +7,58 @@ Amidst this urban decay and digital despair, I carve my own path. I am not just 
 My ambition burns bright in this nocturnal world: to etch my name into the annals of this digital era, to rise above the squalor and become a beacon—an elite. Whether I bring down the towering mega-corporations that strangle our world in their iron grip, or simply carve out a lucrative slice of this cybernetic chaos, I intend to do it with style. The end game? To stand triumphant amid the ruins of corporate tyranny or bask in the glory of opulent anarchic success. Either way, I will be known, and I will be legendary.
 
 ## Description
-Datarebels is a turn based game based on the worlds of cyberpunk and hackers.  
+### Data Rebels is a turn-based game rooted in the worlds of cyberpunk and hackers, where your goal is simple: either carve your legend or perish trying.
 
 ## Installation
-Install nodeJS and postgresql to start, then using npm install pg, sequelize,express-session, express,handlebars,bcrypt,threeJS,nodemon,animeJS and dotenv.  The dependencies should be in the package.json file so the user can npm install in the terminal.
+Here’s a step-by-step guide to getting this monstrosity up and running, not that it deserves such diligent effort:
 
+- Install NodeJS and PostgreSQL—if they’re good enough for the digital overlords, they’re good enough for us.
+- Run `npm install` to load up on all the digital weaponry you’ll need, listed like a shopping list for anarchists in the `package.json`.
 ## Technologies
-Javascript
-nodeJS
-postresql
-pg
-sequelize
-dotenv
-express
-handlebars
-bcrypt
-express-session
-threeJS
-animeJS
+**For the tech nerds out there, here's what powers this beautiful mess:**
+- ![Postgres](https://img.shields.io/badge/Postgres-black?style=for-the-badge&logo=postgresql) 
+- ![JavaScript](https://img.shields.io/badge/JavaScript-black?style=for-the-badge&logo=Javascript) 
+- ![Node](https://img.shields.io/badge/Node-black?style=for-the-badge&logo=npm) 
+- ![Express JS](https://img.shields.io/badge/Express%20JS-black?style=for-the-badge&logo=express)
+- ![Dotenv](https://img.shields.io/badge/Dotenv-black?style=for-the-badge&logo=.env) 
+- ![Node-Postgres](https://img.shields.io/badge/Node--Postgres-black?style=for-the-badge&logo=npm)
+- ![Sequelize](https://img.shields.io/badge/Sequelize-black?style=for-the-badge&logo=sequelize)
+- ![HANDLEBARS](https://img.shields.io/badge/HANDLEBARS-black?style=for-the-badge&logo=handlebarsdotjs)
+- ![THREE JS](https://img.shields.io/badge/THREE%20JS-black?style=for-the-badge&logo=threedotjs)
+- ![ANIME JS](https://img.shields.io/badge/ANIME%20JS-black?style=for-the-badge&logo=npm)
+
 
 ## Usage
-To use this application you first need to sign in or sign up with a password that is at least 6 digits long. Once the user is logged in, they are met with a screen where they must roll for a character to play the game. After the random character is assigned to the user, click the play button to start the game.  To play the game click on the hack button on the bottom left, where a usual windows start button would be.  There the user can choose the attack(HACK) or defend (ENCRYPT), only one action is allowed per turn, then the user needs to click on the next turn button and the enemy turn will commence. Combat goes back and forth until either the enemy or user wins. Upon user loss, their account gets deleted and they will have to make a new one to play again.
 
-## license
-See repository for licensing information 
+**To play this chaotic symphony of cyber warfare:**
 
-## Credits
-Collaborators include: Kyle Vance, Drew Hoang
-Group members:
-Alicc Madd, Katriel Chiu, Reyn Takahashi
-resources used: MDN, W3 schools, google search
-
-## links
-
-github repo:
-https://github.com/Odesii/dataRebels
+1. **Log In or Sign Up: Security theater at its finest—six digits should do the trick.**
+2. **Roll the Dice: Because nothing says dystopian future like leaving your fate to chance.**
+3. **Choose Your Poison: Hack (ATTACK) or Encrypt (DEFEND). One catastrophic choice per turn, please.**
+4. **Survive or Die Trying: Combat's a dance, and you're either stepping on toes or getting your toes stepped on. Lose, and it’s digital oblivion. Win, and... well, still oblivion, but at least you’ll smile.**
 
 
-Alicc Madd:
-https://github.com/Odesii
+## Credits  
 
-Katriel Chiu:
-https://github.com/KitKatBar
+### Rogue AI:
 
-Reyn Takahashi:
-https://github.com/RTAKA808
+[![Odesii](https://img.shields.io/badge/Odesii-black?style=for-the-badge&logo=github&link=https://github.com/Odesii)](https://github.com/Odesii)
 
-deployed link:
+[![BigKat](https://img.shields.io/badge/BigKat-black?style=for-the-badge&logo=github&link=https://github.com/KitKatBar)](https://github.com/KitKatBar)
 
-https://datarebels.onrender.com
+[![Mr.Janitor](https://img.shields.io/badge/Mr.Janitor-black?style=for-the-badge&logo=github&link=https://github.com/RTAKA808)](https://github.com/RTAKA808)
+
+### Special Users
+- **Kyle & Drew** - *May their digital shadows never fade.*
+
+## Link
+- Deployed on the Edge of Rebellion:
+    Data Rebels
+
+# Contact
+### DON'T
+Honestly, it's better for all of us if you don't try to make contact. If you're desperate, scream into the void; it's just as effective and significantly less annoying for us.
+
 
 
 
