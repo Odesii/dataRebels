@@ -10,6 +10,9 @@
   {{#each enemyData}}
   <a href="/play"><button class="log-bttn play" data-id="{{this.id}}">--Stage {{this.id}}--</button></a>
   {{/each}}
+  {{#if random}}
+  <a href="/play"><button class="log-bttn play" data-id="1">--Random--</button></a>
+  {{/if}}
   </div>
 </div>
   <div id="wake-up">

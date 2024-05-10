@@ -35,6 +35,8 @@ router.post('/:id', withAuth, async (req, res) => {
             }
         });
 
+        const userLevel = userData.highest_level;
+
         const characterData = await Character.findOne({
             where: {
                 id: userData.character_id
@@ -55,22 +57,51 @@ router.post('/:id', withAuth, async (req, res) => {
             order: [['item_id', 'ASC']]
         });
 
-        const newGame = await Game.create({//created new row with chosen data
-            user_id: req.session.user_id,
-            enemy_id: enemyData.id,
-            user_hp: characterData.hp + userItemData[0].quantity * 3,
-            user_attack: characterData.attack + userItemData[1].quantity,
-            user_defense: characterData.defense + userItemData[2].quantity,
-            user_ap: characterData.ap + userItemData[3].quantity * 2,
-            user_ap_img: "/imgs/UI/ap/ap15.png",
-            enemy_hp: enemyData.hp,
-            enemy_ap: enemyData.ap,
-            enemy_defense: enemyData.defense,
-            action_taken: false,
-            turn: 0
-        });
+        if (userLevel < 6) {
+            const newGame = await Game.create({//created new row with chosen data
+                user_id: req.session.user_id,
+                enemy_id: enemyData.id,
+                user_hp: characterData.hp + userItemData[0].quantity * 3,
+                user_attack: characterData.attack + userItemData[1].quantity,
+                user_defense: characterData.defense + userItemData[2].quantity,
+                user_ap: characterData.ap + userItemData[3].quantity * 2,
+                user_ap_img: "/imgs/UI/ap/ap15.png",
+                enemy_hp: enemyData.hp,
+                enemy_ap: enemyData.ap,
+                enemy_defense: enemyData.defense,
+                action_taken: false,
+                turn: 0
+            });
+
+            res.status(200).json(newGame);
+        }
         
-        res.status(200).json(newGame);
+        else {
+            const enemies = await Enemy.findAll({});
+            const random = await Enemy.findOne({
+                where: {
+                    id: enemies[Math.floor(Math.random() * enemies.length)].id
+                }
+            })
+
+            const newGame = await Game.create({//created new row with chosen data
+                user_id: req.session.user_id,
+                enemy_id: random.id,
+                user_hp: characterData.hp + userItemData[0].quantity * 3,
+                user_attack: characterData.attack + userItemData[1].quantity,
+                user_defense: characterData.defense + userItemData[2].quantity,
+                user_ap: characterData.ap + userItemData[3].quantity * 2,
+                user_ap_img: "/imgs/UI/ap/ap15.png",
+                enemy_hp: random.hp,
+                enemy_ap: random.ap,
+                enemy_defense: random.defense,
+                action_taken: false,
+                turn: 0
+            });
+
+            res.status(200).json(newGame);
+        }
+        
     } catch (err) {
         res.status(400).json(err);
     }

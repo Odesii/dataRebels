@@ -40,8 +40,16 @@ router.get('/', withAuth,  async (req, res) => {
             }));
         }
 
+        if (userData.highest_level === 6) {
+            enemyData.pop();
+        }
+        
         const user = userData.get({ plain: true });
         const { character } = userData.get({ plain: true })
+
+        if (userData.highest_level > 5) {
+            return res.render('homepage', { user, character, enemyData, loggedIn: req.session.loggedIn, random: true })
+        }
 
         return res.render('homepage', { user, character, enemyData, loggedIn: req.session.loggedIn })
     }

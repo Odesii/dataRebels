@@ -30,7 +30,7 @@ router.put('/level/:id', withAuth, async(req, res) => {
         }
     });
 
-    if (userData.highest_level <= req.params.id && userData.highest_level !== 5) {
+    if (userData.highest_level <= req.params.id) {
         const userUpdate= await User.update(
             {
                 credits: userData.credits + Math.floor(userData.highest_level * 50 * (Math.random() + 1)),
