@@ -10,16 +10,6 @@ const renderer = new THREE.WebGLRenderer();
 renderer.setSize( window.innerWidth, window.innerHeight );
 document.body.appendChild( renderer.domElement );
 
-// main terminal
-const cubeTextureLoader = new THREE.TextureLoader();
-const cubeTexture = cubeTextureLoader.load('/imgs/UI/shop.png') 
-const geometry = new THREE.PlaneGeometry( 2.8, 2.5);
-const material = new THREE.MeshBasicMaterial( { 
-    transparent: true,
-    map: cubeTexture } );
-const cube = new THREE.Mesh( geometry, material );
-cube.position.set( 0,0,3)
-scene.add( cube );
 
 
 //wip 
