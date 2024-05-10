@@ -3,19 +3,19 @@
   <h2 class="color" id="current-Char">{{character.name}}</h2>
   <h2>FIND NEW HACK</h2>
   <button class="log-bttn roll" data-img={{character.img}}>--Roll--</button>
+  <h2>BLACK MARKET</h2>
+  <a href="/shop"><button class="log-bttn shop">--Shop--</button></a>
+  <div id="rounds">
   <h2 class="fight">FIGHT FOR YOUR DATA:  <span class="color" >LEVEL {{user.highest_level}}</span></h2>
   {{#each enemyData}}
   <a href="/play"><button class="log-bttn play" data-id="{{this.id}}">--Stage {{this.id}}--</button></a>
   {{/each}}
-  <h2>BLACK MARKET</h2>
-  <a href="/shop"><button class="log-bttn shop">--Shop--</button></a>
+  </div>
+</div>
+  <div id="wake-up">
   <h2>WAKE UP</h2>
   <button class="log-bttn" id="logout">(# ﾟДﾟ) ﾑｯ!</button>
-    {{!-- <audio controls loop autoplay preload="auto" class="">
-    <source src="./audio/hackMe.mp3" type="audio/mpeg">
-    Your browser does not support the audio element.
-    </audio> --}}
-</div>
+  </div>
 
 {{!-- <script src="../js/gameLogic.js"></script> --}}
 <script type="module" src="/js/play.js"></script>
