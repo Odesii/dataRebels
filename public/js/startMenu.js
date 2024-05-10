@@ -1,4 +1,4 @@
-import { renderCard } from "./render.js";
+import { renderCard, renderECard } from "./render.js";
 
 
 
@@ -31,5 +31,5 @@ document.addEventListener('DOMContentLoaded', () => {
 
 window.addEventListener('load', () => {
 renderCard(document.querySelector('#card-img').dataset.img)
-
+renderECard(document.querySelector('#enemy-card-img').dataset.img)
 })

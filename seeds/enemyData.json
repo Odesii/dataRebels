@@ -6,7 +6,7 @@
         "attack": 10,
         "defense": 10,
         "ap": 15,
-        "img": "/imgs/cards/SpriteSpider.png"
+        "img": "/imgs/cards/ILOVEYOU.png"
     },
     {
         "name":"PhantomPhreak",
@@ -22,7 +22,7 @@
         "attack": 12,
         "defense": 12,
         "ap": 17,
-        "img": "/imgs/cards/SpriteSpider.png"
+        "img": "/imgs/cards/myDOOM.png"
     },
     {
         "name":"LordNikon",
@@ -30,7 +30,7 @@
         "attack": 13,
         "defense": 13,
         "ap": 18,
-        "img": "/imgs/cards/SpriteSpider.png"
+        "img": "/imgs/cards/CODERED.png"
     },
     {
         "name":"ThePlague",
@@ -38,7 +38,7 @@
         "attack": 14,
         "defense": 14,
         "ap": 20,
-        "img": "/imgs/cards/SpriteSpider.png"
+        "img": "/imgs/cards/stuxnet.png"
     }
     
 ]

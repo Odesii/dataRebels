@@ -4,12 +4,15 @@ import { EffectComposer } from 'three/EffectComposer';
 import { RenderPass } from 'three/RenderPass';
 import { UnrealBloomPass } from 'three/UnrealBloomPass';
 import { CSS2DRenderer, CSS2DObject} from 'three/CSS2DRenderer';
-// import {renderCard} from './3dRender/homePage.js'
+
 
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
 
 let card;
+let Ecard;
+let cardMaterial;
+let EcardMaterial;
 //setting animation state
 let returning = false;
 
@@ -70,7 +73,7 @@ function renderCard(url) {
     // card texture
     const cardTextureLoader = new THREE.TextureLoader();
 const cardTexture = cardTextureLoader.load(url)
-const cardMaterial = new THREE.MeshStandardMaterial({
+cardMaterial = new THREE.MeshStandardMaterial({
     map: cardTexture, 
     emissive: 0x000000, // initially no emissive color
     emissiveIntensity: 0
@@ -85,7 +88,7 @@ card = new THREE.Mesh( cardGeometry, cardMaterial );
 card.position.set(  2.5,-1.5, 1,0)
 scene.add(card);
 startPoint = new THREE.Vector3(card.position.x, card.position.y, card.position.z)
-
+card.castShadow = true;
 // Setup DragControls
 const controls = new DragControls([card], camera, renderer.domElement);
 controls.addEventListener('dragend', event =>{
@@ -93,33 +96,18 @@ controls.addEventListener('dragend', event =>{
 })
 }
 
-// // card texture
-// const cardTextureLoader = new THREE.TextureLoader();
-// const cardTexture = cardTextureLoader.load('/imgs/cards/StomWorm.png')
-// const cardMaterial = new THREE.MeshToonMaterial({
-//     map: cardTexture, 
-//     emissive: 0x000000, // initially no emissive color
-//     emissiveIntensity: 0
-// });
-// cardMaterial.side = THREE.DoubleSide;
-// //card geo
-// const geometry = new THREE.BoxGeometry( 3.5, 4.5, 0.1 );
-// // card mesh
-// const card = new THREE.Mesh( geometry, cardMaterial );
-// // card position
-// card.position.set( 2.5,-1.5, 1,0)
-// const startPoint = new THREE.Vector3(card.position.x, card.position.y, card.position.z)
-// scene.add(card);
 
 
-// enemy card texture
+function renderECard(url){
+  // enemy card texture
 const EcardTextureLoader = new THREE.TextureLoader();
-const EcardTexture = EcardTextureLoader.load('/imgs/cards/stuxnet.png')
-const EcardMaterial = new THREE.MeshToonMaterial( {map: EcardTexture,  
-  emissive: 0x000000, // initially no emissive color
-  emissiveIntensity: 0}
+const EcardTexture = EcardTextureLoader.load(url)
 
-);
+EcardMaterial = new THREE.MeshToonMaterial({
+  map: EcardTexture,  
+  emissive: 0x000000, // initially no emissive color
+  emissiveIntensity: 0
+})
 EcardMaterial.side = THREE.DoubleSide;
 //card geo
 const Egeometry = new THREE.BoxGeometry( 3.5, 4.5, 0.1);
@@ -128,7 +116,9 @@ const Ecard = new THREE.Mesh( Egeometry, EcardMaterial );
 scene.add(Ecard);
 // card position
 Ecard.position.set( -5.5,-1.5, -10.0)
-const EstartPoint = new THREE.Vector3(Ecard.position.x, Ecard.position.y, Ecard.position.z)
+Ecard.castShadow = true;
+};
+// const EstartPoint = new THREE.Vector3(Ecard.position.x, Ecard.position.y, Ecard.position.z)
 
 
 scene.add( new THREE.AmbientLight( 0xcccccc, .15 ) );
@@ -139,18 +129,10 @@ scene.add( light );
 // Enable shadows
 light.castShadow = true;
 // renderCard.castShadow = true;
-Ecard.castShadow = true;
+// Ecard.castShadow = true;
 floor.receiveShadow = true;
 
 camera.position.z = 7.5;
-
-
-
-// // Setup DragControls
-// const controls = new DragControls([card], camera, renderer.domElement);
-// controls.addEventListener('dragend', event =>{
-//     returning = true;
-// })
 
 
 // // Enemy card move Logic
@@ -201,8 +183,8 @@ camera.position.z = 7.5;
 // // glow effect on attack click
 document.querySelector('#attack').addEventListener('click', (event) => {
     event.preventDefault();
-    const cardMat = card.material;
-    const EcardMat= Ecard.material;
+    const cardMat = cardMaterial;
+    const EcardMat= EcardMaterial;
     cardMat.emissive.set(0xffff)
     
     console.log('Animation started!')
@@ -242,8 +224,8 @@ document.querySelector('#attack').addEventListener('click', (event) => {
   });
 
 function enemyHit(cardMat, EcardMat){
-    cardMat = card.material;
-    EcardMat= Ecard.material;
+    cardMat = cardMaterial;
+    EcardMat= EcardMaterial;
     
     EcardMat.emissive.set(0xffff)
     
@@ -288,7 +270,7 @@ function enemyHit(cardMat, EcardMat){
 
   document.querySelector('#defend').addEventListener('click', (event) => {
     event.preventDefault();
-    const cardMat = card.material;
+    const cardMat = cardMaterial;
     cardMat.emissive.set(0xFFD700)
     anime({
       targets: cardMat,
@@ -311,7 +293,7 @@ function enemyHit(cardMat, EcardMat){
 
   })
 function enemyDGlow(EcardMat){
-    EcardMat = Ecard.material;
+    EcardMat = EcardMaterial;
     EcardMat.emissive.set(0xFFD700)
     anime({
       targets: EcardMat,
@@ -405,4 +387,4 @@ function animate() {
 
 animate();
 
-export {renderCard, enemyHit, enemyDGlow}
+export {renderCard, enemyHit, enemyDGlow, renderECard}

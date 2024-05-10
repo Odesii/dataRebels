@@ -34,7 +34,9 @@ const skybox = new THREE.Mesh(skyboxGeometry, skyboxMaterial);
 scene.add(skybox);
 
 let startPoint; // = new THREE.Vector3(card.position.x, card.position.y, card.position.z)
-function renderCard(url) {
+
+
+function renderCardRoll(url) {
     console.log('NEW URL FROM TEST',url)
     // card texture
     const cardTextureLoader = new THREE.TextureLoader();
@@ -93,4 +95,4 @@ function animate() {
 
 animate();
 
-export  {renderCard}
+export  {renderCardRoll}
