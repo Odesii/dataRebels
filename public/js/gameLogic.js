@@ -315,13 +315,14 @@ function playerTakeDamage(baseHp, playerHp) {
   }
 }
 
-async function updateLevel(gameId) {
+async function updateLevel(enemyId) {
   console.log("update level 1");
-  const response = await fetch(`/api/users/level`, {
+
+  const response = await fetch(`/api/users/level/${enemyId}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
-    },
+    }
   });
 
   const gameData = await response.json();
@@ -329,16 +330,19 @@ async function updateLevel(gameId) {
 }
 
 async function deleteGame(gameId) {
-  const response = await fetch(`/api/games/${gameId}`, {
-    method: "DELETE",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
+    const game = await fetchGame(gameId);
+    const enemyId = game.enemy_id;
+    await updateLevel(enemyId);
 
-  await updateLevel(gameId);
-  const gameData = await response.json();
-  return gameData;
+    const response = await fetch(`/api/games/${gameId}`, {
+        method: "DELETE",
+        headers: {
+        "Content-Type": "application/json",
+        },
+    });
+
+    const gameData = await response.json();
+    return gameData;
 }
 
 async function endGame(gameId) {

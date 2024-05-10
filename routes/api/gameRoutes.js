@@ -16,7 +16,7 @@ router.get('/:id', withAuth, async (req, res) => { //gets specific game
     }
 });
 
-router.post('/', withAuth, async (req, res) => {
+router.post('/:id', withAuth, async (req, res) => {
     try {
         const gameData = await Game.findOne({
             where: {
@@ -41,10 +41,9 @@ router.post('/', withAuth, async (req, res) => {
             }
         });
 
-        const enemies = await Enemy.findAll({});
         const enemyData = await Enemy.findOne({
             where: {
-                id: enemies[Math.floor(Math.random() * enemies.length)].id
+                id: req.params.id
             }
         });
 
@@ -70,7 +69,7 @@ router.post('/', withAuth, async (req, res) => {
             action_taken: false,
             turn: 0
         });
-  
+        
         res.status(200).json(newGame);
     } catch (err) {
         res.status(400).json(err);
