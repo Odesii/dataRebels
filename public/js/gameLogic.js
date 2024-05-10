@@ -302,7 +302,7 @@ async function renderBandwith(gameId) {
     });
 
     setInterval(function() {
-        document.getElementById("bandwidth").src = game.user_ap_img + "?" + new Date().valueOf();
+        document.getElementById("bandwidth").src = game.user_ap_img
     }, 10)
 }
 
