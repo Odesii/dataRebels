@@ -27,31 +27,35 @@ threeJS
 animeJS
 
 ## Usage
-To use this application you first need to sign in or sign up with a password that is at least 6 digits long.  If there are any previous posts they will be rendered on the home page.  Once the login is successful the user can go to their profile and enter a new blog or leave a comment.  If the user goes back to the homepage they should see their blog posts with the title and time it was posted as well as comments if there are any. The user can then click the logout link to logout and go back to the homepage.
+To use this application you first need to sign in or sign up with a password that is at least 6 digits long. Once the user is logged in, they are met with a screen where they must roll for a character to play the game. After the random character is assigned to the user, click the play button to start the game.  To play the game click on the hack button on the bottom left, where a usual windows start button would be.  There the user can choose the attack(HACK) or defend (ENCRYPT), only one action is allowed per turn, then the user needs to click on the next turn button and the enemy turn will commence. Combat goes back and forth until either the enemy or user wins. Upon user loss, their account gets deleted and they will have to make a new one to play again.
 
 ## license
 See repository for licensing information 
 
 ## Credits
 Collaborators include: Kyle Vance, Drew Hoang
+Group members:
+Alicc Madd, Katriel Chiu, Reyn Takahashi
 resources used: MDN, W3 schools, google search
-
-## Lessons Learned
-The interaction of the database routes and handlebars is hard to manage at this skill point.  Going step by step and using console logs and organization of micro tasks help very much.
 
 ## links
 
 github repo:
-https://github.com/RTAKA808/blogbars
-
-screenshot:
-![alt text](public/images/blogbarsss.JPG)
-
-Live link on render:
-https://blogbars.onrender.com/
+https://github.com/Odesii/dataRebels
 
 
+Alicc Madd:
+https://github.com/Odesii
 
+Katriel Chiu:
+https://github.com/KitKatBar
+
+Reyn Takahashi:
+https://github.com/RTAKA808
+
+deployed link:
+
+https://datarebels.onrender.com
 
 
 
