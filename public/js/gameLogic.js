@@ -381,7 +381,9 @@ async function loadGameState() {
 
   await playerTakeDamage(character.hp, game.user_hp);
   await enemyTakeDamage(enemy.hp, game.enemy_hp);
-  await renderBandwith(gameId);
+  const imgPath = await renderBandwith(game.user_ap);
+  console.log("PASSING AP IMG", imgPath);
+  document.getElementById("bandwidth").setAttribute("src", imgPath);
 }
 
 loadGameState();
