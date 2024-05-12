@@ -12,28 +12,28 @@ const seedDatabase = async () => {
       await sequelize.sync({ force: true });
   
       
-      const gamePromises=gameData.map(game=>Game.create({
+      const gamePromises=gameData.map(async (game) => await Game.create({
         ...game,
       }));
       await Promise.all(gamePromises);
  
 
-      const characterPromises = characterData.map(chars => Character.create({
+      const characterPromises = characterData.map(async (chars) => await Character.create({
         ...chars,
       }));
       await Promise.all(characterPromises);
   
-      const enemyPromises = enemyData.map(enemy => Enemy.create({
+      const enemyPromises = enemyData.map(async (enemy) => await Enemy.create({
         ...enemy
       }));
       await Promise.all(enemyPromises);
 
-      const itemPromises = itemData.map(item => Item.create({
+      const itemPromises = itemData.map(async (item) => await Item.create({
         ...item
       }));
       await Promise.all(itemPromises);
 
-      const userItemPromises = userItemData.map(userItem => UserItem.create({
+      const userItemPromises = userItemData.map(async (userItem) => await UserItem.create({
         ...userItem
       }));
       await Promise.all(userItemPromises);
