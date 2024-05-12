@@ -98,7 +98,7 @@ router.post('/register', async (req, res) => {
                 username: req.body.username,
                 password: req.body.password,
                 highest_level: 1,
-                credits: 100
+                credits: 300
             });
                     req.session.save(() => {
             req.session.user_id = newUserData.id;
