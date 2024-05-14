@@ -1,0 +1,44 @@
+<h1 class="welcome">HOW HIGH CAN YOU CLIMB OR HOW LOW WILL YOU FALL? 
+    <br>[WE ARE STILL UNDER CONSTRUCTION]
+</h1>
+<img class="inner" src="/imgs/UI/outershop.png">
+<div class="inner">
+<img  src="/imgs/UI/innershop.png">
+<div class="text">
+<div class="grid-container">
+<div>
+    &nbsp;&nbsp;Name&nbsp;&nbsp;
+</div>
+<div>
+    &nbsp;Earnings&nbsp;
+</div>
+<div>
+    ________
+</div>
+<div>
+    __________
+</div>
+{{#each userRankData}}
+<div>
+    {{this.username}}
+</div>
+<div>
+    {{this.total_earnings}}
+</div>
+{{/each}}
+
+</div>
+</div>
+</div>
+<div class="credits">
+    Your Rank: <span>{{rank}}</span>
+<div>
+{{#if addict}}
+<a href="/"><button class="log-bttn">RANK 1? GO TOUCH SOME GRASS YOU ADDICT</button></a>
+{{else}}
+<a href="/"><button class="log-bttn">COME BACK WHEN YOU'RE RANK 1</button></a>
+{{/if}}
+</div>
+</div>
+
+<script type="module" src="./js/3dRender/shop.js"></script>

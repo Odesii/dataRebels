@@ -30,10 +30,13 @@ router.put('/level/:id', withAuth, async(req, res) => {
         }
     });
 
+    const earnings = Math.round(req.params.id * 50 * (Math.random() + 1));
+    
     if (userData.highest_level <= req.params.id) {
         const userUpdate= await User.update(
             {
-                credits: userData.credits + Math.floor(userData.highest_level * 50 * (Math.random() + 1)),
+                credits: userData.credits + earnings + req.params.id * 100,
+                total_earnings: userData.total_earnings + earnings + req.params.id * 100,
                 highest_level: userData.highest_level + 1
             },
             {
@@ -50,7 +53,8 @@ router.put('/level/:id', withAuth, async(req, res) => {
         
         const userUpdate= await User.update(
             {
-                credits: userData.credits + Math.floor(req.params.id * 50 * (Math.random() + 1))
+                credits: userData.credits + Math.round(earnings / 2),
+                total_earnings: userData.total_earnings + Math.round(earnings / 2)
             },
             {
                 where:{
@@ -98,7 +102,8 @@ router.post('/register', async (req, res) => {
                 username: req.body.username,
                 password: req.body.password,
                 highest_level: 1,
-                credits: 300
+                credits: 300,
+                total_earnings: 0
             });
                     req.session.save(() => {
             req.session.user_id = newUserData.id;

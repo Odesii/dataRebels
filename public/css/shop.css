@@ -43,6 +43,7 @@
 .welcome {
     text-align: center;
     position:absolute;
+    color: white;
 }
 
 .credits {
@@ -50,6 +51,7 @@
     top: 30%;
     font-size: 25px;
     font-weight: 700;
+    color: white;
 }
 
 .credits span {

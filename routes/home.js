@@ -123,6 +123,38 @@ router.get('/shop', withAuth, async (req, res) => {
     }
 })
 
+router.get('/rankings', withAuth, async (req, res) => {
+    try {
+        const userRankData = await User.findAll({
+            raw: true,
+            order: [['total_earnings', 'DESC']]
+        });
+
+        const userData = await User.findOne({
+            where: {
+                id: req.session.user_id
+            }
+        });
+
+        const user = userData.get({ plain: true })
+        let rank = 0;
+        for (let i = 0; i < userRankData.length; i++) {
+            if (userRankData[i].username === user.username) {
+                rank = i + 1;
+            }
+        }
+
+        let addict = false;
+        if (rank === 1) {
+            addict = true;
+        }
+
+        res.render('rankings', { rank, userRankData, addict, loggedIn: req.session.loggedIn });
+    } catch (err) {
+        res.status(500).json(err);
+    }
+})
+
 router.get('/register', (req, res) => {
     // If the user is already logged in, redirect to the homepage
     if (req.session.loggedIn) {

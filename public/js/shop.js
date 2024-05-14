@@ -10,7 +10,7 @@ const initializeUserInventory = async (event) => {
     if (response.ok) {
         document.location.replace('/shop');
     } else if (response.status = 500) {
-        document.location.replace('/shop');
+        alert('FINISH YOUR GAME FIRST!');
     } else {
         alert('Failed to initialize your inventory.');
     }

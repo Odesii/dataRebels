@@ -32,6 +32,10 @@ User.init(
       type: DataTypes.INTEGER,
       allowNull: true
     },
+    total_earnings: {
+      type: DataTypes.INTEGER,
+      allowNull: true
+    },
     character_id: {
       type: DataTypes.INTEGER,
       references: {

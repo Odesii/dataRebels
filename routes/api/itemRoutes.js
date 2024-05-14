@@ -1,9 +1,19 @@
 const router = require('express').Router();
-const { User, Item, UserItem } = require('../../models');
+const { User, Item, UserItem, Game } = require('../../models');
 const withAuth = require('../../utils/auth');
 
 router.post('/', withAuth, async (req, res) => {
     try {
+        const gameData = await Game.findOne({
+            where: {
+                user_id: req.session.user_id
+            }
+        })
+
+        if (gameData) {
+            return res.status(500).json(gameData)
+        }
+        
         const userData = await UserItem.findOne({
             where: {
                 user_id: req.session.user_id
