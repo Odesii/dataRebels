@@ -39,12 +39,5 @@ Item.belongsToMany(User, {
     foreignKey: 'item_id'
 });
 
-// Game.hasMany(Item,{
-//     foreignKey:'item_id'
-// });
-
-// Item.belongsTo(Game,{
-//     foreignKey:'item_id'
-// });
 
 module.exports=  { User, Enemy, Character, Game, Item, UserItem }// not importing over items yet
