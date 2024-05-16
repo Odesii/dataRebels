@@ -65,7 +65,8 @@ Game.init(
                 model: 'enemy',
                 key: 'id',
             }
-        }
+        },
+
     },
     {
         sequelize,

@@ -37,6 +37,8 @@ Here’s a step-by-step guide to getting this monstrosity up and running, not th
 3. **Choose Your Poison: Hack (ATTACK) or Encrypt (DEFEND). One catastrophic choice per turn, please.**
 4. **Survive or Die Trying: Combat's a dance, and you're either stepping on toes or getting your toes stepped on. Lose, and it’s digital oblivion. Win, and... well, still oblivion, but at least you’ll smile.**
 
+## Screen Shots
+![Game](https://i.imgur.com/BkbQtRj.gif)
 
 ## Credits  
 
